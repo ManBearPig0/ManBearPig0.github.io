@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-
-	<title></title>
-</head>
-
 <body>
 	<iframe src="./includes/navbar.html" frameborder="0"></iframe>
+
+	<!-- Database migration -->
+	A simple way for creating your database structure is by using the migration system of laravel. 
+	By creating migrations that can either insert, update or delete table and columns, laravel will keep track of each new update to your database template.
+	In essence, this will provide you with a version control like system for keeping track of your database structure. 
+	You will be able to migrate or rollback from and to any migration in the list.
+
+	<!-- Laravel seeds -->
+	Seeding your database with either test or pre-defined data.
+
+	<!-- html blade syntax -->
+	Laravel's php syntax for easy to use logic within php, for authenticating, loops, sections and more!
+
+	<!-- Laravels Unit testing with PHPUnit -->
+	Extensive tests can be run using PHPUnit. Create your own html requests and assert if your pages give the output you want with any scenario.
+
+	<!-- Laravel Eloquent -->
+	SQL, what is that?
+	With laravel eloquent you will never have to manually create SQL queries to insert, update or delete data from your database. 
+	Laravel makes use of the Models that correspond with a table in the database. Via this model you can easily interact with all the records to retrieve or update data. 
+	Simply use laravel's default compact object-relational mapper (OMR) functionalities to handle the queries for you. Some examples are:
+	->first() [gets the first item from a model]
+	->where('attribute', $value) [search for specific values, you can also use logic as a second parameter like '>' and '!=']
+	->orderBy('attribute') 
+	->get()  [for retrieving multiple records from a model]
+	There are even advanced uses for searching different types of database relations: one to one, one to many or even many to many.
+	For example:
+	->whereHas('foreign_key', function($query) use $value {
+		$query->where('attribute', $value);
+	}); [With this you can use advanced logic within other models by using foreign_keys]
+
+	And if that isn't enough, on top of all this, you can also introduce your own query functions, theres are refered to as Scopes. 
+	First you create a function in the model with camelcase and 'scope' in the beginning. Then put the parameters with $query always as first parameter, 
+	and finally you need to return your own customly defined query.
+	
+	// This will return the last saved record from your table.
+	scopeLast($query) {
+		return $query->orderBy('created_at', 'ASC')->first();
+	} 
+
+	
+
+
 </body>
 
 </html>
