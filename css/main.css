@@ -4,6 +4,7 @@
 body {
     /* margin: 60px auto; */
     /* width: 100%; */
+    background-color: white;
 }
 
 a {
@@ -86,10 +87,3 @@ footer {
 }
 
 /* Contact Page */
-
-
-/* Tests */
-
-.text-blue {
-    color: blue;
-}
