@@ -29,21 +29,25 @@
 </head>
 
 <body>
-	<nav>
-		<ul>
-			<li><a href="../index.html" target="_top">home</a></li>
-			<li><a href="features.html" target="_top">features</a></li>
-			<li><a href="framework.html" target="_top">framework</a></li>
-			<li><a href="history.html" target="_top">history</a></li>
-			<li><a href="contact.html" target="_top">contact</a></li>
-			<li><a href="todo.html" target="_top">To-Do</a></li>
-		</ul>
-	</nav>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="../index.html" target="_top">home</a></li>
+				<li><a href="features.html" target="_top">features</a></li>
+				<li><a href="framework.html" target="_top">framework</a></li>
+				<li><a href="history.html" target="_top">history</a></li>
+				<li><a href="contact.html" target="_top">contact</a></li>
+				<li><a href="todo.html" target="_top">To-Do</a></li>
+			</ul>
+		</nav>
+		<h1>Homepage</h1>
+	</header>
 
-	<!-- set the main container with the content -->
+	<br/>
 
-	<div class="main-wrapper">
 
+	<main>
+		<h1>Main Content</h1>
 
 		<!-- Database migration -->
 		A simple way for creating your database structure is by using the migration system of laravel.
@@ -143,7 +147,7 @@
 		return $query->orderBy('created_at', 'ASC')->first();
 		}
 
-	</div>
+	</main>
 
 	<!-- Include the footer -->
 	<footer>
@@ -151,9 +155,6 @@
 			Footer copyright, text + <a href="#">links</a>
 		</h3>
 	</footer>
-
-
-
 </body>
 
 </html>

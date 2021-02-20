@@ -30,8 +30,25 @@ p {
 }
 
 
+/* Header styles */
+header{
+    background-color: brown;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    text-align: right;
+    padding: 0;
+    margin: 0;
+}
 
 /* Navbar styles */
+nav {
+    background-color: bisque;
+    position: absolute;
+    left: 0;
+    height: 100%;
+}
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
     padding: 0px;
@@ -40,7 +57,8 @@ nav ul, footer ul {
 }
 nav ul li, footer ul li {
     display: inline;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /* Main CSS elements */
@@ -61,8 +79,9 @@ footer {
 
 /* Main Layout css */
 
-.main-wrapper {
-    min-height: calc(100vh - 101px);
+main {
+    min-height: calc(100vh - 169px); /* Pushes Footer to the bottom */
+    padding-top: 100px;
 }
 
 /* Contact Page */
