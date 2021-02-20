@@ -23,7 +23,48 @@
 	SQL, what is that?
 	With laravel eloquent you will never have to manually create SQL queries to insert, update or delete data from your database. 
 	Laravel makes use of the Models that correspond with a table in the database. Via this model you can easily interact with all the records to retrieve or update data. 
-	Simply use laravel's default compact object-relational mapper (OMR) functionalities to handle the queries for you. Some examples are:
+	Simply use laravel's default compact object-relational mapper (OMR) functionalities to handle the queries for you.
+	<table>
+		<thead>
+			<tr>
+				<th colspan="2">Some examples of Laravel code</th>
+			</tr>
+			<tr>
+				<th>code</th>
+				<th>explanation</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th colspan="2"> basic uses</th>
+			</tr>
+			<tr>
+				<td>first() </td>
+				<td>gets the first item from a model</td>
+			</tr>
+			<tr>
+				<td>where('attribute', $value)</td>
+				<td>search for specific values, you can also use logic as a second parameter like '>' and '!='</td>
+			</tr>
+			<tr>
+				<td>orderBy('attribute') </td>
+				<td>order the querie by a certain attribute</td>
+			</tr>
+			<tr>
+				<td>get()</td>
+				<td>for retrieving multiple records from a model</td>
+			</tr>
+			<tr>
+				<th colspan="2"> complex uses</th>
+			</tr>
+			<tr>
+				<td>whereHas('foreign_key', function($query) use $value {
+					$query->where('attribute', $value);});</td>
+					<td>With this you can use advanced logic within other models by using foreign_keys</td>
+			</tr>
+		</tbody>
+	</table>
+	<p></p>
 	->first() [gets the first item from a model]
 	->where('attribute', $value) [search for specific values, you can also use logic as a second parameter like '>' and '!=']
 	->orderBy('attribute') 
