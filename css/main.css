@@ -4,6 +4,8 @@
 body {
     /* margin: 60px auto; */
     /* width: 100%; */
+    margin: 0;
+    padding: 0;
     background-color: white;
 }
 
@@ -27,14 +29,6 @@ p {
     color: #333;
 }
 
-ul.posts { 
-    margin: 20px auto 40px; 
-    font-size: 1.5em;
-}
-
-ul.posts li {
-    list-style: none;
-}
 
 
 /* Navbar styles */
@@ -57,7 +51,7 @@ footer {
     border-top: 1px solid #d5d5d5;
     font-size: .8em;
 
-    height: 33px;
+    height: 50px;
     /* margin-top: -33px; */
     
     background-color: #f8a8a4;
@@ -68,7 +62,7 @@ footer {
 /* Main Layout css */
 
 .main-wrapper {
-    min-height: calc(100vh - 33px);
+    min-height: calc(100vh - 101px);
 }
 
 /* Contact Page */
