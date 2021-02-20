@@ -1,28 +1,25 @@
+
+/* Main General CSS */
+
 body {
-    margin: 60px auto;
-    width: 70%;
+    /* margin: 60px auto; */
+    /* width: 100%; */
 }
-nav ul, footer ul {
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
-    padding: 0px;
-    list-style: none;
-    font-weight: bold;
-}
-nav ul li, footer ul li {
-    display: inline;
-    margin-right: 20px;
-}
+
 a {
     text-decoration: none;
-    color: #999;
+    /* color: #999; */
 }
+
 a:hover {
     text-decoration: underline;
 }
+
 h1 {
     font-size: 3em;
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
 }
+
 p {
     font-size: 1.5em;
     line-height: 1.4em;
@@ -39,11 +36,19 @@ ul.posts li {
 }
 
 
-/* Main CSS elements */
-.wrapper {
-    min-height: calc(100vh - 33px);
+/* Navbar styles */
+nav ul, footer ul {
+    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    padding: 0px;
+    list-style: none;
+    font-weight: bold;
+}
+nav ul li, footer ul li {
+    display: inline;
+    margin-right: 20px;
 }
 
+/* Main CSS elements */
 footer {
     -ms-flex: 1; /* IE 10 */
     flex: 1;
@@ -58,8 +63,18 @@ footer {
     text-align: center;
 }
 
-.text-blue {
-    color: blue;
+
+/* Main Layout css */
+
+.main-wrapper {
+    min-height: calc(100vh - 33px);
 }
 
 /* Contact Page */
+
+
+/* Tests */
+
+.text-blue {
+    color: blue;
+}
