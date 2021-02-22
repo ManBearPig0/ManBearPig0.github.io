@@ -1,3 +1,4 @@
+// Ignore the javascript for now. Not needed for assignment 1
 const express = require('express')
 const app = express()
 const port = 3000
