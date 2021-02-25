@@ -47,21 +47,6 @@ header {
     font-size: 12px;
 }
 
-@media only screen and (min-width:640px) {
-    header {
-        font-size: 12px;
-        padding-left: 130px;
-    }
-}
-
-@media only screen and (min-width:900px) {
-    header {
-        justify-content: center;
-        padding-left: 220px;
-    }
-    #logo {}
-}
-
 
 /* Navbar styles */
 
@@ -123,44 +108,10 @@ nav a:hover {
     color: #fff;
 }
 
-.toggle,
-[id^=drop] {
-    display: none;
-}
-
 
 /* li>a:only-child:after {
     content: '';
 } */
-
-@media all and (max-width:900px) {
-    .toggle+a,
-    .menu {
-        display: none;
-    }
-    .toggle {
-        display: block;
-        background-color: bisque;
-        padding: 0 20px;
-        /* width: 100%; */
-        color: rgb(0, 0, 0);
-        font-size: 20px;
-        line-height: 60px;
-        text-decoration: none;
-        border: none;
-    }
-    .toggle:hover {
-        background-color: rgb(40, 40, 40);
-        color: #fff;
-    }
-    [id^=drop]:checked+ul {
-        display: block;
-    }
-    nav ul li {
-        display: block;
-        width: 100%;
-    }
-}
 
 
 /* Main CSS elements */
@@ -177,26 +128,68 @@ footer {
     text-align: center;
 }
 
-
-/* Main Layout css */
-
 main {
-    min-height: calc(100vh - 169px);
     /* Pushes Footer to the bottom */
+    min-height: calc(100vh - 164px);
     padding-top: 40px;
+    margin: 10px 10% 10px 10%;
+    font: 12px Arial, sans-serif;
+    color: #313131;
 }
 
-@media all and (min-width: 640px) {
+.menu-dropdown--toggle,
+[id^=menu-dropdown] {
+    display: none;
+}
+
+@media only screen and (min-width: 640px) {
     main {
         padding-top: 75px;
+        font-size: 14px;
+    }
+    header {
+        font-size: 12px;
+        padding-left: 130px;
     }
 }
 
-@media all and (min-width: 900px) {
+@media only screen and (min-width: 900px) {
     main {
         padding-top: 75px;
+        font-size: 16px;
     }
+    header {
+        justify-content: center;
+        padding-left: 220px;
+    }
+    #logo {}
 }
 
-
-/* Contact Page */
+@media all and (max-width:900px) {
+    .menu-dropdown--toggle+a,
+    .menu {
+        display: none;
+    }
+    .menu-dropdown--toggle {
+        display: block;
+        background-color: bisque;
+        padding: 0 20px;
+        /* width: 100%; */
+        color: rgb(0, 0, 0);
+        font-size: 20px;
+        line-height: 60px;
+        text-decoration: none;
+        border: none;
+    }
+    .menu-dropdown--toggle:hover {
+        background-color: rgb(40, 40, 40);
+        color: #fff;
+    }
+    [id^=menu-dropdown]:checked+ul {
+        display: block;
+    }
+    nav ul li {
+        display: block;
+        width: 100%;
+    }
+}
