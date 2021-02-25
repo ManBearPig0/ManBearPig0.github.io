@@ -230,6 +230,7 @@ nav a:hover {
     main {
         padding-top: 75px;
         font-size: 10px;
+        min-height: calc(100vh - 164px);
     }
     header {
         padding-left: 10%;
@@ -240,7 +241,6 @@ nav a:hover {
     main {
         padding-top: 75px;
         font-size: 12px;
-        /* min-height: calc(100vh - 164px); */
     }
     nav a {
         font-size: 24px;
