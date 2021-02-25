@@ -1,16 +1,28 @@
 /* Main General CSS */
 
+main {
+    /* Pushes Footer to the bottom */
+    min-height: calc(100vh - 164px);
+    padding-top: 40px;
+    margin: 10px 10% 10px 10%;
+    font: 8px Arial, sans-serif;
+    color: #313131;
+}
+
 body {
-    /* margin: 60px auto; */
-    /* width: 100%; */
     margin: 0;
     padding: 0;
     background-color: white;
 }
 
+code {
+    font: 16px Lucida, sans-serif;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
 a {
     text-decoration: none;
-    /* color: #999; */
 }
 
 a:hover {
@@ -23,13 +35,15 @@ h1 {
 }
 
 p {
-    font-size: 1.5em;
+    font-size: 1.25em;
     line-height: 1.4em;
     color: #333;
 }
 
 
-/* Header styles */
+/* 
+    Header and Footer styles 
+*/
 
 header {
     background-color: brown;
@@ -37,47 +51,64 @@ header {
     position: fixed;
     justify-content: left;
     width: 100%;
-    padding-left: 120px;
-    font-size: 8px;
+    /* height: 80px; */
+    padding-left: 30%;
+    font-size: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
-#logo {
+header h1 {
+    top: 50%;
+    vertical-align: middle;
+    color: white;
+}
+
+header img {
     text-align: center;
     float: none;
-    font-size: 12px;
+    height: 60px;
+    margin: 10px 10px 10px 10px;
+}
+
+footer {
+    -ms-flex: 1;
+    /* IE 10 */
+    flex: 1;
+    border-top: 1px solid #d5d5d5;
+    font-size: .8em;
+    height: 50px;
+    /* margin-top: -33px; */
+    background-color: #f8a8a4;
+    text-align: center;
 }
 
 
-/* Navbar styles */
+/* 
+    Navbar styles 
+*/
 
 nav {
     background-color: bisque;
     position: absolute;
     left: 0;
     height: 100%;
-    /* new */
     margin: 0;
-    padding: 0;
 }
 
 nav ul {
     font-family: 'Helvetica', 'Arial', 'Sans-Serif';
-    padding: 0px;
-    list-style: none;
-    font-weight: bold;
-    /* new */
-    float: right;
     padding: 0;
+    margin: 0;
+    top: 25%;
     list-style: none;
+    float: right;
     position: relative;
 }
 
 nav ul li {
     /* display: inline; */
-    margin-left: 10px;
-    margin-right: 10px;
-    /* new */
-    margin: 0px;
+    margin-right: 5;
     display: inline-block;
     float: left;
     background-color: bisque;
@@ -91,10 +122,11 @@ nav:after {
 
 nav a {
     display: block;
-    padding: 0 20px;
+    padding: 15px;
     color: rgb(40, 40, 40);
-    font-size: 20px;
-    line-height: 60px;
+    font-size: 16px;
+    font-weight: bold;
+    /* line-height: 60px; */
     text-decoration: none;
 }
 
@@ -114,28 +146,81 @@ nav a:hover {
 }
 
 
+/* 
+    Per page!
+*/
+
+.features__table-small {
+    margin: 0 auto 0 auto;
+    font-size: 10px;
+    border: 1px solid rgb(104, 104, 104);
+    border-spacing: 0;
+    border-radius: 6px;
+}
+
+.features__table-small h3 {
+    font-size: 14px;
+}
+
+.features__table-small td {
+    padding: 5px;
+}
+
+.features__table-small tr td,
+.features__table-small tr th {
+    border: 1px solid rgb(104, 104, 104);
+}
+
+.features__code-block {
+    margin: 5px auto 5px auto;
+    border: 1px solid rgb(40, 40, 40);
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+    width: auto;
+}
+
+
+/* Color coded text */
+
+.text-code-sematics {
+    color: #292929;
+}
+
+.text-code-expression {
+    color: #981D15;
+}
+
+.text-code-function {
+    color: #CA473F;
+}
+
+.text-code-statement {
+    color: #055472;
+}
+
+.text-code-variable {
+    color: #1E8DB8;
+}
+
+.text-code-string {
+    color: #669900;
+}
+
+.text-code-comment {
+    color: #49680c;
+}
+
+
+/* Margins and Paddings */
+
+.mt-4 {
+    margin-top: 4px;
+    padding-top: 4px;
+}
+
+
 /* Main CSS elements */
-
-footer {
-    -ms-flex: 1;
-    /* IE 10 */
-    flex: 1;
-    border-top: 1px solid #d5d5d5;
-    font-size: .8em;
-    height: 50px;
-    /* margin-top: -33px; */
-    background-color: #f8a8a4;
-    text-align: center;
-}
-
-main {
-    /* Pushes Footer to the bottom */
-    min-height: calc(100vh - 164px);
-    padding-top: 40px;
-    margin: 10px 10% 10px 10%;
-    font: 8px Arial, sans-serif;
-    color: #313131;
-}
 
 .menu-dropdown--toggle,
 [id^=menu-dropdown] {
@@ -147,9 +232,14 @@ main {
         padding-top: 75px;
         font-size: 10px;
     }
+    nav a {
+        font-size: 20px;
+    }
     header {
         font-size: 12px;
-        padding-left: 130px;
+    }
+    header img {
+        height: 80px;
     }
 }
 
@@ -158,11 +248,15 @@ main {
         padding-top: 75px;
         font-size: 12px;
     }
-    header {
-        justify-content: center;
-        padding-left: 220px;
+    nav a {
+        font-size: 24px;
     }
-    #logo {}
+    header {
+        font-size: 14px;
+    }
+    header img {
+        height: 100px;
+    }
 }
 
 @media all and (max-width:900px) {
