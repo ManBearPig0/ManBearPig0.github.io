@@ -34,6 +34,11 @@ h1 {
     font-family: 'Helvetica', 'Arial', 'Sans-Serif';
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 p {
     font-size: 1.25em;
     line-height: 1.4em;
