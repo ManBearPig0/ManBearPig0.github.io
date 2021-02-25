@@ -108,10 +108,10 @@ nav a:hover {
     color: #fff;
 }
 
-
-/* li>a:only-child:after {
-    content: '';
-} */
+.text-laravel {
+    font-weight: bold;
+    color: #FF2D20;
+}
 
 
 /* Main CSS elements */
