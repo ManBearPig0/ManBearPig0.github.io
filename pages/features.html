@@ -34,11 +34,11 @@
             <label for="menu-dropdown" class="menu-dropdown--toggle">Menu</label>
             <input type="checkbox" id="menu-dropdown" />
             <ul class="menu">
-                <li><a href="../index.html" target="_top">home</a></li>
-                <li><a href="history.html" target="_top">history</a></li>
-                <li><a href="features.html" target="_top">features</a></li>
-                <li><a href="installation.html" target="_top">installation</a></li>
-                <li><a href="contact.html" target="_top">contact</a></li>
+                <li><a href="../index.html" target="_top">Home</a></li>
+                <li><a href="history.html" target="_top">History</a></li>
+                <li><a href="features.html" target="_top">Features</a></li>
+                <li><a href="installation.html" target="_top">Installation</a></li>
+                <li><a href="contact.html" target="_top">Contact</a></li>
                 <li><a href="todo.html" target="_top">To-Do</a></li>
             </ul>
         </nav>
@@ -50,116 +50,134 @@
 
 
     <main>
-        <h1>Main Content</h1>
 
-        <h2>Database migration</h2>
-        <p>
-            A simple way for creating your database structure is by using the migration system of laravel. By creating migrations that can either insert, update or delete table and columns, laravel will keep track of each new update to your database template. In
-            essence, this will provide you with a version control like system for keeping track of your database structure. You will be able to migrate or rollback from and to any migration in the list.
-        </p>
+        <article class="mt-4">
+            <h2>Database migration</h2>
+            <p>
+                A simple way for creating your database structure is by using the migration system of laravel. By creating migrations that can either insert, update or delete table and columns, laravel will keep track of each new update to your database template. In
+                essence, this will provide you with a version control like system for keeping track of your database structure. You will be able to migrate or rollback from and to any migration in the list.
+            </p>
+        </article>
 
-        <h2>Seeding</h2>
-        <p>
-            Seeding your database with either test or pre-defined data.
-        </p>
+        <article class="mt-4">
+            <h2>Seeding</h2>
+            <p>
+                Seeding your database with either test or pre-defined data.
+            </p>
+        </article>
 
-        <h2>Html Blade Syntax</h2>
-        <p>
-            Laravel's php syntax for easy to use logic within php, for authenticating, loops, sections and more!
-        </p>
+        <article class="mt-4">
+            <h2>Html Blade Syntax</h2>
+            <p>
+                Laravel's php syntax for easy to use logic within php, for authenticating, loops, sections and more!
+            </p>
+        </article>
 
-        <h2>Unit Testing with PHPUnit</h2>
-        <p>
-            Extensive tests can be run using PHPUnit. Create your own html requests and assert if your pages give the output you want with any scenario.
-        </p>
 
-        <h2>Laravel Eloquent</h2>
+        <article class="mt-4">
+            <h2>Unit Testing with PHPUnit</h2>
+            <p>
+                Extensive tests can be run using PHPUnit. Create your own html requests and assert if your pages give the output you want with any scenario.
+            </p>
+        </article>
 
-        <p>
-            SQL, what is that? With laravel eloquent you will never have to manually create SQL queries to insert, update or delete data from your database. Laravel makes use of the Models that correspond with a table in the database. Via this model you can easily
-            interact with all the records to retrieve or update data. Simply use laravel's default compact object-relational mapper (OMR) functionalities to handle the queries for you.
-        </p>
 
-        <table class="features__table-small">
-            <thead>
-                <tr>
-                    <th colspan="2">
-                        <h3>Some examples of Laravel code</h3>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <p>Code</p>
-                    </th>
-                    <th>
-                        <p>Explanation</p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th colspan="2">
-                        <h3>basic uses</h3>
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <p><code>first()</code></p>
-                    </td>
-                    <td>
-                        <p>gets the first item from a model</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p><code>where('attribute', $value)</code></p>
-                    </td>
-                    <td>
-                        <p>search for specific values, you can also use logic as a second parameter like '>' and '!='</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p><code>orderBy('attribute') </code></p>
-                    </td>
-                    <td>
-                        <p>order the querie by a certain attribute</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p><code>get()</code></p>
-                    </td>
-                    <td>
-                        <p>for retrieving multiple records from a model</p>
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="2">
-                        <h3>Complex Uses</h3>
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <code>
-                            <span class="text-code-semantics">Model::</span><span class="text-code-function">whereHas</span>(<span class="text-code-string">'foreign_key'</span><span class="text-code-semantics">, </span> <span class="text-code-statement">function</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) </span><span class="text-code-statement">use</span> <span class="text-code-variable">$value</span> <span class="text-code-semantics"> { </span>
-                            <br/>
-                            <span class="text-code-variable">&nbsp;&nbsp;&nbsp;$query</span><span class="text-code-semantics">-></span><span class="text-code-function">where</span>(<span class="text-code-string">'attribute'</span>, <span class="text-code-variable">$value</span>);
-                            <br/>
-                            <span class="text-code-semantics">});</span>
-                        </code>
-                    </td>
-                    <td>
-                        <p>With this you can use advanced logic within other models by using foreign_keys</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <article class="mt-4">
+            <h2>Laravel Eloquent</h2>
 
-        <p>
-            And if that isn't enough, on top of all this, you can also introduce your own query functions, theres are refered to as Scopes. First you create a function in the model with camelcase and 'scope' in the beginning. Then put the parameters with $query always
-            as first parameter, and finally you need to return your own customly defined query. // This will return the last saved record from your table. scopeLast($query) { return $query->orderBy('created_at', 'ASC')->first(); }
-        </p>
+            <p>
+                SQL, what is that? With laravel eloquent you will never have to manually create SQL queries to insert, update or delete data from your database. Laravel makes use of the Models that correspond with a table in the database. Via this model you can easily
+                interact with all the records to retrieve or update data. Simply use laravel's default compact object-relational mapper (OMR) functionalities to handle the queries for you.
+            </p>
+
+            <h3 style="text-align: center;">Some examples of Laravel code</h3>
+            <table class="features__table-small">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>Code</p>
+                        </th>
+                        <th>
+                            <p>Explanation</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="2">
+                            <h3>basic uses</h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code><span class="text-code-semantics">-></span><span class="text-code-function">first</span><span class="text-code-semantics">()</span></code>
+                        </td>
+                        <td>
+                            <p>gets the first item from a model</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><code><span class="text-code-semantics">-></span><span class="text-code-function">where</span><span class="text-code-semantics">(</span><span class="text-code-string">'attribute'</span><span class="text-code-semantics">, </span><span class="text-code-variable">$value</span><span class="text-code-semantics">)</span></code></p>
+                        </td>
+                        <td>
+                            <p>search for specific values, you can also use logic as a second parameter like '>' and '!='</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code><span class="text-code-semantics">-></span><span class="text-code-function">orderBy</span><span class="text-code-semantics">(</span><span class="text-code-string">'attribute'</span><span class="text-code-semantics">)</span> </code>
+                        </td>
+                        <td>
+                            <p>order the querie by a certain attribute</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code><span class="text-code-semantics">-></span><span class="text-code-function">get</span><span class="text-code-semantics">()</span></code>
+                        </td>
+                        <td>
+                            <p>for retrieving multiple records from a model</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">
+                            <h3>Complex Uses</h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>
+                                <span class="text-code-semantics">-></span><span class="text-code-function">whereHas</span>(<span class="text-code-string">'foreign_key'</span><span class="text-code-semantics">, </span> <span class="text-code-statement">function</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) </span><span class="text-code-statement">use</span> <span class="text-code-variable">$value</span> <span class="text-code-semantics"> { </span>
+                                <br/>
+                                <span class="text-code-variable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$query</span><span class="text-code-semantics">-></span><span class="text-code-function">where</span>(<span class="text-code-string">'attribute'</span>, <span class="text-code-variable">$value</span>);
+                                <br/>
+                                <span class="text-code-semantics">});</span>
+                            </code>
+                        </td>
+                        <td>
+                            <p>With this you can use advanced logic within other models by using foreign_keys</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                And if that isn't enough, on top of all this, you can also introduce your own query functions, theres are refered to as Scopes. First you create a function in the model with camelcase and 'scope' in the beginning. Then put the parameters with
+                <span class="text-code-variable">$query</span> always as first parameter, and finally you need to return your own customly defined query.
+                <div class="features__code-block">
+                    <code>
+                        <span class="text-code-comment">// This will return the last saved record from your table.</span>
+                        <br/><span class="text-code-function">scopeLast</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) {</span>
+                        <br/><span class="text-code-expression">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return </span> <span class="text-code-variable">$query</span><span class="text-code-semantics">-></span><span class="text-code-function">orderBy</span><span class="text-code-semantics">(</span><span class="text-code-string">'created_at'</span>
+                                <span class="text-code-semantics">, </span><span class="text-code-string">'ASC'</span><span class="text-code-semantics">)-></span><span class="text-code-function">first</span><span class="text-code-semantics">();</span>
+                        <br/><span class="text-code-semantics">}</span>
+                    </code>
+                </div>
+
+            </p>
+        </article>
+
 
 
     </main>

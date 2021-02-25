@@ -15,6 +15,12 @@ body {
     background-color: white;
 }
 
+code {
+    font: 16px Lucida, sans-serif;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
 a {
     text-decoration: none;
 }
@@ -29,7 +35,7 @@ h1 {
 }
 
 p {
-    font-size: 1.5em;
+    font-size: 1.25em;
     line-height: 1.4em;
     color: #333;
 }
@@ -57,7 +63,7 @@ header h1 {
     color: white;
 }
 
-.header-logo {
+header img {
     text-align: center;
     float: none;
     font-size: 24px;
@@ -147,7 +153,7 @@ nav a:hover {
 .features__table-small {
     margin: 0 auto 0 auto;
     font-size: 10px;
-    border: 2px solid rgb(104, 104, 104);
+    border: 1px solid rgb(104, 104, 104);
     border-spacing: 0;
     border-radius: 6px;
 }
@@ -160,13 +166,18 @@ nav a:hover {
     padding: 5px;
 }
 
-.features__table-small code {
-    font: 16px Lucida, sans-serif;
+.features__table-small tr td,
+.features__table-small tr th {
+    border: 1px solid rgb(104, 104, 104);
 }
 
-.features__table-small tbody tr td,
-.features__table-small tbody tr th {
-    border: 1px solid rgb(104, 104, 104);
+.features__code-block {
+    margin: 5px auto 5px auto;
+    border: 1px solid rgb(40, 40, 40);
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+    width: auto;
 }
 
 
@@ -174,6 +185,10 @@ nav a:hover {
 
 .text-code-sematics {
     color: #292929;
+}
+
+.text-code-expression {
+    color: #981D15;
 }
 
 .text-code-function {
@@ -192,8 +207,16 @@ nav a:hover {
     color: #669900;
 }
 
-.text-code-expression {
-    color: #981D15;
+.text-code-comment {
+    color: #49680c;
+}
+
+
+/* Margins and Paddings */
+
+.mt-4 {
+    margin-top: 4px;
+    padding-top: 4px;
 }
 
 
@@ -224,7 +247,6 @@ nav a:hover {
         justify-content: center;
         padding-left: 220px;
     }
-    #logo {}
 }
 
 @media all and (max-width:900px) {
