@@ -52,12 +52,13 @@ header {
     justify-content: left;
     width: 100%;
     /* height: 80px; */
-    padding-left: 120px;
-    font-size: 24px;
+    padding-left: 30%;
+    font-size: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 header h1 {
-    background-color: black;
     top: 50%;
     vertical-align: middle;
     color: white;
@@ -66,8 +67,7 @@ header h1 {
 header img {
     text-align: center;
     float: none;
-    font-size: 24px;
-    height: 100px;
+    height: 60px;
     margin: 10px 10px 10px 10px;
 }
 
@@ -102,7 +102,6 @@ nav ul {
     margin: 0;
     top: 25%;
     list-style: none;
-    font-weight: bold;
     float: right;
     position: relative;
 }
@@ -125,7 +124,8 @@ nav a {
     display: block;
     padding: 15px;
     color: rgb(40, 40, 40);
-    font-size: 24px;
+    font-size: 16px;
+    font-weight: bold;
     /* line-height: 60px; */
     text-decoration: none;
 }
@@ -232,9 +232,14 @@ nav a:hover {
         padding-top: 75px;
         font-size: 10px;
     }
+    nav a {
+        font-size: 20px;
+    }
     header {
         font-size: 12px;
-        padding-left: 130px;
+    }
+    header img {
+        height: 80px;
     }
 }
 
@@ -243,9 +248,14 @@ nav a:hover {
         padding-top: 75px;
         font-size: 12px;
     }
+    nav a {
+        font-size: 24px;
+    }
     header {
-        justify-content: center;
-        padding-left: 220px;
+        font-size: 14px;
+    }
+    header img {
+        height: 100px;
     }
 }
 
