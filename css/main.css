@@ -46,6 +46,7 @@ p {
 }
 
 
+
 /* 
     Header and Footer styles 
 */
@@ -156,23 +157,24 @@ nav a:hover {
 
 .features__table-small {
     margin: 0 auto 0 auto;
-    font-size: 10px;
-    border: 1px solid rgb(104, 104, 104);
-    border-spacing: 0;
-    border-radius: 6px;
+    font-size: 1.25em;
+    border: 2px solid rgb(104, 104, 104);
+    border-collapse: collapse;
 }
 
-.features__table-small h3 {
-    font-size: 14px;
+.features__table-small th {
+    font-size: 1.3em;
 }
 
-.features__table-small td {
-    padding: 5px;
+.features__table-small caption,
+.features__table-small td,
+.features__table-small th {
+    padding: 15px;
 }
 
-.features__table-small tr td,
-.features__table-small tr th {
-    border: 1px solid rgb(104, 104, 104);
+.features__table-small td,
+.features__table-small th {
+    border: 2px solid rgb(104, 104, 104);
 }
 
 .features__code-block {
