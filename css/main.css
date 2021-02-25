@@ -2,7 +2,7 @@
 
 main {
     /* Pushes Footer to the bottom */
-    min-height: calc(100vh - 164px);
+    min-height: calc(100vh - 129px);
     padding-top: 40px;
     margin: 10px 10% 10px 10%;
     font: 8px Arial, sans-serif;
@@ -52,7 +52,7 @@ header {
     justify-content: left;
     width: 100%;
     /* height: 80px; */
-    padding-left: 30%;
+    padding-left: 20%;
     font-size: 10px;
     align-items: center;
     justify-content: center;
@@ -231,14 +231,8 @@ nav a:hover {
         padding-top: 75px;
         font-size: 10px;
     }
-    nav a {
-        font-size: 20px;
-    }
     header {
-        font-size: 12px;
-    }
-    header img {
-        height: 80px;
+        padding-left: 10%;
     }
 }
 
@@ -246,15 +240,23 @@ nav a:hover {
     main {
         padding-top: 75px;
         font-size: 12px;
+        /* min-height: calc(100vh - 164px); */
     }
     nav a {
         font-size: 24px;
     }
     header {
         font-size: 14px;
+        padding-left: 35%;
     }
     header img {
         height: 100px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    header {
+        padding-left: 30%;
     }
 }
 
