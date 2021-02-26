@@ -186,6 +186,10 @@ th {
 .features__table-small th {
     font-size: 1.3em;
 }
+.features__table-small caption{
+    font-size: 1.5em;
+    font-weight: bold;
+}
 
 .features__table-small td,
 .features__table-small th {
