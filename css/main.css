@@ -150,26 +150,29 @@ nav a:hover {
     color: #FF2D20;
 }
 
+table { 
+    margin: 0 auto 0 auto;
+    border: 2px solid rgb(0, 0, 0);
+    font-size: 1.25em;
+    border-collapse: collapse;
+}
+caption,
+td,
+th {
+    padding: 15px;
+    border: 2px solid rgb(0, 0, 0);
+}
 
 /* 
     Per page!
 */
 
 .features__table-small {
-    margin: 0 auto 0 auto;
-    font-size: 1.25em;
     border: 2px solid rgb(104, 104, 104);
-    border-collapse: collapse;
 }
 
 .features__table-small th {
     font-size: 1.3em;
-}
-
-.features__table-small caption,
-.features__table-small td,
-.features__table-small th {
-    padding: 15px;
 }
 
 .features__table-small td,
