@@ -49,46 +49,109 @@
     <br/>
 
     <main>
-        <br />
-
-        <!-- Set up different links to resources on how to install laravel manually on linux or windows, or via Composer -->
-        <!-- Also link the actual laravel page... maybe? -->
         <h1 style="color: rgb(199, 29, 29);">Getting Started!</h1>
 
         <article>
             <h2>Composer</h2>
-            <p>Install composer</p>
+            <p>Composer is a Dependency management tool for PHP. You can use it to easily install and keep track of 'packages', like Laravel.
+                <br/> To install composer, first visit <a rel="external" target="_blank" href="https://getcomposer.org/download/">Download Composer</a> and install the program on your computer. Either use the windows installer from <a rel="external" target="_blank"
+                    href="https://getcomposer.org/Composer-Setup.exe">here</a> or install it manually.
+            </p>
+
         </article>
+        <br/>
 
         <article>
             <h2>Installing laravel with Composer</h2>
-            <p>laravel</p>
+            <p>
+                We can now use Composer to automatically install laravel for us. Open a console panel and go the the directory where you wish to install Laravel. This can be done using the
+                <span class="code-block">cd</span> command. Then execute these commands for creating your first Laravel project:
+            </p>
+            <p class="code-block">
+                composer create-project laravel/laravel [project name]
+                <br/>cd [project name]
+            </p>
+            <p>
+                Now that your project has been created, you can use the
+                <span class="code-block text-code-expression">serve</span> command to start Laravel's local development server.
+            </p>
+            <p class="code-block">
+                php artisan serve
+            </p>
+            <br />
+            <p class="text-larger text-center">
+                Further information can be found at Laravel's own installation page:
+                <br/>
+                <a class="text-bold" rel="external" target="_blank" href="https://laravel.com/docs/8.x/installation">Laravel Installation</a>
+            </p>
         </article>
 
+        <br />
         <br />
         <br />
         <article class="text-center">
             <h2 class="text-larger">
                 <p>Tutorials for Laravel</p>
             </h2>
+            <p style="margin-left: 30%; margin-right: 30%;">Laravel is a widely known framework with many people having resources to help you learn the framework. The best tutorials that we can recommend are from <a class="text-bold" rel="external" target="_blank" href="https://laracasts.com/topics/laravel">Laracast</a></p>
             <div class="row">
-                <div class="col">
+                <div class="col-6">
                     <div class="center">
                         <h3 class="text-bold">
                             <p>Installation Tutorial</p>
                         </h3>
-                        <p>You can find this video <a href="https://www.youtube.com/watch?v=3uYXAcit_Sg&list=PL3VM-unCzF8iPERY07XRw0JXG_c50CapR">here</a>.</p>
+                        <p>You can find this playlist <a class="text-bold" rel="external" target="_blank" href="https://youtube.com/playlist?list=PL3VM-unCzF8iPERY07XRw0JXG_c50CapR">here</a>.</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                     <div style="width:560px; height:400px;">
                         <div class="center">
                             <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube-nocookie.com/embed/3uYXAcit_Sg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
+                </div>
+                <div class="col-6">
+                    <div style="width:560px; height:400px;">
+                        <div class="center">
+                            <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/kqMiT8DsJjc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                            </div>
+                    </div>
 
                 </div>
+                <div class="col-6">
+                    <div class="center">
+                        <h3 class="text-bold">
+                            <p>Basics of Routing and Views</p>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="center">
+                        <h3 class="text-bold">
+                            <p>Sending data to your Views</p>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div style="width:560px; height:400px;">
+                        <div class="center">
+                            <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/0NeGELwdD9k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                            </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div style="width:560px; height:400px;">
+                        <div class="center">
+                            <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/Gemrp2EULOk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-6">
+                    <div class="center">
+                        <h3 class="text-bold">
+                            <p>Learning Eloquent 101</p>
+                        </h3>
+                    </div>
+                </div>
         </article>
 
         <br />

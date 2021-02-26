@@ -42,8 +42,13 @@ h1 {
 }
 
 img {
+    margin: 8px;
     max-width: 100%;
     height: auto;
+}
+
+h1 {
+    padding-top: 12px;
 }
 
 p {
@@ -68,6 +73,7 @@ header {
     font-size: 10px;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 
 header h1 {
