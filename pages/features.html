@@ -74,11 +74,11 @@
                 Seeders are classes that make it easier to fill your database with data, seeding your database with either test or pre-defined data. With existing models and if your database connection has been correctly set-up. After migrating the tables, you can run
                 the command:
             </p>
-            <pre><div class="code-block"><code>php artisan make:seeder SeederName</code></div></pre>
+            <div class="code-block"><code>php artisan make:seeder SeederName</code></div>
             <p>
                 to create a new seeder class. Then add this seeder to be called within the <span class="code-block text-code-expression">DatabaseSeeder</span> class. Then use the command:
             </p>
-            <pre><div class="code-block"><code>php artisan db:seed</code></div></pre>
+            <div class="code-block"><code>php artisan db:seed</code></div>
             <p>
                 to run, and easily fill your database with the data you want.
             </p>
@@ -222,12 +222,10 @@
                         <span class="text-code-comment">// This will return the last saved record from your table.</span>
                         <br/><span class="text-code-function">scopeLast</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) {</span>
                         <br/><span class="text-code-expression">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return </span> <span class="text-code-variable">$query</span><span class="text-code-semantics">-></span><span class="text-code-function">orderBy</span><span class="text-code-semantics">(</span><span class="text-code-string">'created_at'</span>
-                                <span class="text-code-semantics">, </span><span class="text-code-string">'ASC'</span><span class="text-code-semantics">)-></span><span class="text-code-function">first</span><span class="text-code-semantics">();</span>
+                        <span class="text-code-semantics">, </span><span class="text-code-string">'ASC'</span><span class="text-code-semantics">)-></span><span class="text-code-function">first</span><span class="text-code-semantics">();</span>
                         <br/><span class="text-code-semantics">}</span>
                     </code>
                 </div>
-
-
             </p>
         </article>
     </main>
