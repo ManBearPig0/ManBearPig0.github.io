@@ -53,7 +53,6 @@ p {
 }
 
 
-
 /* 
     Header and Footer styles 
 */
@@ -194,7 +193,65 @@ nav a:hover {
 }
 
 
-/* Color coded text */
+/* Seperate elements */
+
+.shadow-sm {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.09);
+}
+
+.shadow-md {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
+}
+
+.shadow-lg {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3), 0 8px 20px 0 rgba(0, 0, 0, 0.29);
+}
+
+.border {
+    border: 1px solid black;
+}
+
+.hcenter {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.vcenter {
+    margin-top: auto;
+    margin-bottom: auto;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.center {
+    margin: auto;
+    /* vertical-align: middle;
+    align-items: center; */
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-larger {
+    font-size: 1.2rem;
+}
+
+.text-smaller {
+    font-size: 0.8rem;
+}
+
+.text-bold {
+    font-weight: bold;
+}
 
 .text-code-sematics {
     color: #292929;
@@ -225,7 +282,7 @@ nav a:hover {
 }
 
 
-/* Margins and Paddings */
+/* Bootstrap-like css*/
 
 .row {
     display: flex;
@@ -247,10 +304,6 @@ nav a:hover {
 .col-12 {
     position: relative;
     width: 100%;
-}
-
-.border {
-    border: 1px solid black;
 }
 
 .col {
@@ -323,6 +376,26 @@ nav a:hover {
 .col-12 {
     flex: 0 0 99.95%;
     max-width: 99.95%
+}
+
+.col-valign-start {
+    align-items: baseline;
+}
+
+.col-valign-start {
+    align-items: flex-end;
+}
+
+.col-halign-left {
+    justify-content: left;
+}
+
+.col-halign-center {
+    justify-content: center;
+}
+
+.col-halign-right {
+    justify-content: right;
 }
 
 .order-first {
