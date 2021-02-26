@@ -179,6 +179,11 @@ th {
     Per page!
 */
 
+#taylor-headshot {
+    float: left;
+    height: 25em;
+}
+
 .features__table-small {
     border: 2px solid rgb(104, 104, 104);
 }
