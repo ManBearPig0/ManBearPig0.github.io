@@ -16,7 +16,7 @@ body {
 }
 
 code {
-    font: 16px Lucida, sans-serif;
+    font: 1.1em Lucida, sans-serif;
     letter-spacing: 0.5px;
     line-height: 1.2;
 }
@@ -79,8 +79,8 @@ header {
     justify-content: left;
     width: 100%;
     /* height: 80px; */
-    padding-left: 20%;
-    font-size: 10px;
+    padding-left: 10%;
+    font-size: 8px;
     align-items: center;
     justify-content: center;
     z-index: 10;
@@ -222,6 +222,11 @@ th {
 /* 
     Per page!
 */
+
+#taylor-headshot {
+    float: left;
+    height: 25em;
+}
 
 #code_table {
     border: 2px solid rgb(104, 104, 104);
