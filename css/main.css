@@ -223,6 +223,10 @@ th {
 #code_table th {
     font-size: 1.3em;
 }
+.features__table-small caption{
+    font-size: 1.5em;
+    font-weight: bold;
+}
 
 #code_table td,
 #code_table th {
@@ -242,6 +246,7 @@ th {
 
 .shadow-lg {
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3), 0 8px 20px 0 rgba(0, 0, 0, 0.29);
+    border:0
 }
 
 .border {
