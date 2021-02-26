@@ -149,14 +149,22 @@ nav {
     margin: 0;
 }
 
-nav ul {
+nav label {
+    top: 10px;
+}
+
+nav ul,
+nav label {
     font-family: 'Helvetica', 'Arial', 'Sans-Serif';
+    position: relative;
+}
+
+nav ul {
     padding: 0;
     margin: 0;
     top: 25%;
     list-style: none;
     float: right;
-    position: relative;
 }
 
 nav ul li {
