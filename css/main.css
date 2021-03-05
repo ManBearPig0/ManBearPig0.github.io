@@ -175,9 +175,7 @@ nav ul {
 
 nav ul li {
     /* display: inline; */
-    margin-right: 5px;
     display: block;
-    float: left;
     background-color: bisque;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
 }
@@ -500,6 +498,10 @@ th {
     }
     nav a {
         font-size: 24px;
+    }
+    nav ul li {
+        float: left;
+        margin: 0px 5px 0px 5px;
     }
     header {
         font-size: 14px;
