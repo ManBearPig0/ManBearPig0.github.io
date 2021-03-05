@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- required meta tags -->
+    <meta charset="utf-8">
+
+    <!-- using libraries -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+    <!-- Additional meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A guide to installing laravel" />
+    <meta name="author" content="Simon Oliehoek, Herman Rimm, Gust Verhees" />
+    <meta name="keywords" content="laravel, php, framework, programming, website technology, installation">
+
+    <!-- No idea -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="icon" href="../assets/1200px-Laravel.png" />
+    <link rel="stylesheet" href="../css/main.css" />
+
+    <!-- <style type="text/css" href="/css/main.css"></style> -->
+
+    <title>Installation</title>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <label for="menu-dropdown" class="menu-dropdown--toggle">Menu</label>
+            <input type="checkbox" id="menu-dropdown" />
+            <ul class="menu">
+                <li><a href="../index.html" target="_top">Home</a></li>
+                <li><a href="history.html" target="_top">History</a></li>
+                <li><a href="features.html" target="_top">Features</a></li>
+                <li><a href="installation.html" target="_top" class="active">Installation</a></li>
+                <li><a href="contact.html" target="_top">Contact</a></li>
+            </ul>
+        </nav>
+        <h1>Laravel Installation</h1>
+        <img src="../assets/1200px-Laravel-white.png" alt="Laravel Logo">
+    </header>
+
+    <br/>
+
+    <main>
+        <h1>Getting Started!</h1>
+
+        <article>
+            <h2>Composer</h2>
+            <p>Composer is a Dependency management tool for PHP. You can use it to easily install and keep track of 'packages', like Laravel.
+                <br/> To install composer, first visit <a rel="external" target="_blank" href="https://getcomposer.org/download/">Download Composer</a> and install the program on your computer. Either use the windows installer from <a rel="external" target="_blank"
+                    href="https://getcomposer.org/Composer-Setup.exe">here</a> or install it manually.
+            </p>
+
+        </article>
+        <br/>
+
+        <article>
+            <h2>Installing laravel with Composer</h2>
+            <p>
+                We can now use Composer to automatically install laravel for us. Open a console panel and go the the directory where you wish to install Laravel. This can be done using the
+                <span class="code-block">cd</span> command. Then execute these commands for creating your first Laravel project:
+            </p>
+            <p class="code-block">
+                composer create-project laravel/laravel [project name]
+                <br/>cd [project name]
+            </p>
+            <p>
+                Now that your project has been created, you can use the
+                <span class="code-block text-code-expression">serve</span> command to start Laravel's local development server.
+            </p>
+            <p class="code-block">
+                php artisan serve
+            </p>
+            <br />
+            <p class="text-larger text-center">
+                Further information can be found at Laravel's own installation page:
+                <br/>
+                <a class="text-bold" rel="external" target="_blank" href="https://laravel.com/docs/8.x/installation">Laravel Installation</a>
+            </p>
+        </article>
+
+        <br />
+        <br />
+        <br />
+        <article class="text-center">
+            <h2 class="text-larger">Tutorials for Laravel</h2>
+            <p style="margin-left: 30%; margin-right: 30%;">Laravel is a widely known framework with many people having resources to help you learn the framework. The best tutorials that we can recommend are from <a class="text-bold" rel="external" target="_blank" href="https://laracasts.com/topics/laravel">Laracast</a></p>
+            <div class="row">
+                <div class="col-12 col-md-6">
+
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="iframe-container">
+                        <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube-nocookie.com/embed/3uYXAcit_Sg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="hcenter">
+                        <h3 class="text-bold">Installation Tutorial</h3>
+                        <p>You can find this playlist <a class="text-bold" rel="external" target="_blank" href="https://youtube.com/playlist?list=PL3VM-unCzF8iPERY07XRw0JXG_c50CapR">here</a>.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="iframe-container">
+                        <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/kqMiT8DsJjc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="hcenter">
+                        <h3 class="text-bold">Basics of Routing and Views</h3>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+
+                </div>
+                <div class="col-12 col-md-6">
+
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="iframe-container">
+                        <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/0NeGELwdD9k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="hcenter">
+                        <h3 class="text-bold">Sending data to your Views</h3>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="iframe-container">
+                        <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/Gemrp2EULOk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="hcenter">
+                        <h3 class="text-bold">Learning Eloquent 101</h3>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+
+                </div>
+            </div>
+
+        </article>
+
+        <br />
+        <br />
+
+    </main>
+
+    <!-- Include the footer -->
+    <footer>
+        <div class="row">
+            <div class="col-12 footer__upper">
+                <p>
+                    <span>The Framework - <a rel="external" target="_blank" class="text-link-silent" href="https://laravel.com/">Laravel</a></span>
+                    <br />
+                    <small>Laravel is a web application framework with expressive, elegant syntax.</small>
+                </p>
+            </div>
+            <div class="col-12 footer__lower">
+                <p>
+                    Copyright &copy; 2021 - <a rel="external" target="_blank" class="text-link-silent" href="https://github.com/ManBearPig0/laravel">source code</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
