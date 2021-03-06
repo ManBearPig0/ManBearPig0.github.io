@@ -20,19 +20,6 @@ header {
     font-size: 7px;
 }
 
-header h1 {
-    top: 50%;
-    vertical-align: middle;
-    color: white;
-}
-
-header img {
-    text-align: center;
-    float: none;
-    height: 60px;
-    margin: 10px 10px 10px 10px;
-}
-
 footer {
     border-top: 2px solid #f8a8a4;
     text-align: center;
@@ -229,10 +216,9 @@ h1 {
     font-family: 'Helvetica', 'Arial', 'Sans-Serif';
 }
 
-img {
+main img {
     margin: 8px;
     max-width: 100%;
-    height: auto;
 }
 
 iframe {
@@ -245,14 +231,26 @@ iframe {
     height: auto;
 }
 
-h1 {
-    padding-top: 12px;
-}
-
 p {
     font-size: 1.25em;
     line-height: 1.4em;
     color: #333;
+}
+
+#title-logo {
+    display: flex;
+    margin: auto;
+}
+
+#title-logo img {
+    height: 60px;
+    margin: 10px;
+}
+
+#title-logo h1 {
+    color: white;
+    align-self: center;
+    margin: 0;
 }
 
 #taylor-headshot {
@@ -458,7 +456,7 @@ p {
         font-size: 14px;
         height: 120px;
     }
-    header img {
+    #title-logo img {
         height: 100px;
     }
     .iframe-lg-center {
