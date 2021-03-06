@@ -1,84 +1,23 @@
-/* Main General CSS */
+body {
+    margin: 0;
+}
 
 main {
-    /* Pushes Footer to the bottom */
-    min-height: calc(100vh - 218px);
-    padding-top: 40px;
-    margin: 10px 10% 10px 10%;
+    /* Pushes footer to the bottom. */
+    min-height: calc(100vh - 259px);
+    margin: 0px 10% 0px 10%;
+    padding-top: 100px;
     font: 8px Arial, sans-serif;
     color: #313131;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    background-color: white;
-}
-
-code {
-    font: 1.1em Lucida, sans-serif;
-    letter-spacing: 0.5px;
-    line-height: 1.2;
-}
-
-.code-block {
-    background-color: rgb(245, 245, 245);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.09);
-    padding: 4px 8px 4px 8px;
-    border-radius: 3px;
-}
-
-a {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-h1 {
-    font-size: 3em;
-    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
-}
-
-img {
-    margin: 8px;
-    max-width: 100%;
-    height: auto;
-}
-
-iframe {
-    margin: 8px;
-    max-width: 100%;
-}
-
-.iframe-container {
-    width: 100%;
-    height: auto;
-}
-
-h1 {
-    padding-top: 12px;
-}
-
-p {
-    font-size: 1.25em;
-    line-height: 1.4em;
-    color: #333;
-}
-
-
-/* 
-    Header and Footer styles 
-*/
-
+/* Header and Footer */
 header {
     background-color: rgb(216, 73, 73);
     display: flex;
     position: fixed;
     justify-content: left;
     width: 100%;
-    /* height: 80px; */
     padding-left: 10%;
     font-size: 7px;
     align-items: center;
@@ -142,11 +81,7 @@ footer .footer__lower {
     background-color: #f8a8a4;
 }
 
-
-/* 
-    Navbar styles 
-*/
-
+/* Navbar and Menu */
 nav {
     background-color: bisque;
     position: absolute;
@@ -174,7 +109,7 @@ nav ul {
 }
 
 nav ul li {
-    /* display: inline; */
+    margin-right: 5px;
     display: block;
     background-color: bisque;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
@@ -191,7 +126,6 @@ nav a {
     padding: 15px;
     color: rgb(40, 40, 40);
     font-size: 16px;
-    text-decoration: none;
 }
 
 nav a.active {
@@ -205,11 +139,54 @@ nav a:hover {
     color: #fff;
 }
 
-.text-laravel {
-    font-weight: bold;
-    color: #FF2D20;
+.menu-dropdown--toggle,
+[id^=menu-dropdown] {
+    display: none;
 }
 
+/* Code */
+code {
+    font: 1.1em Lucida, sans-serif;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+.code-block {
+    background-color: rgb(245, 245, 245);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.09);
+    padding: 4px 8px 4px 8px;
+    border-radius: 3px;
+}
+
+.text-code-sematics {
+    color: #292929;
+}
+
+.text-code-expression {
+    color: #981D15;
+}
+
+.text-code-function {
+    color: #CA473F;
+}
+
+.text-code-statement {
+    color: #055472;
+}
+
+.text-code-variable {
+    color: #1E8DB8;
+}
+
+.text-code-string {
+    color: #669900;
+}
+
+.text-code-comment {
+    color: #49680c;
+}
+
+/* Tables */
 table {
     margin: 0 auto 0 auto;
     border: 2px solid rgb(0, 0, 0);
@@ -222,16 +199,6 @@ td,
 th {
     padding: 15px;
     border: 2px solid rgb(0, 0, 0);
-}
-
-
-/* 
-    Per page!
-*/
-
-#taylor-headshot {
-    float: left;
-    height: 25em;
 }
 
 #code_table {
@@ -252,8 +219,55 @@ th {
     border: 2px solid rgb(104, 104, 104);
 }
 
+/* Misc */
+.text-laravel {
+    font-weight: bold;
+    color: #FF2D20;
+}
 
-/* Seperate elements */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 3em;
+    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
+}
+
+img {
+    margin: 8px;
+    max-width: 100%;
+    height: auto;
+}
+
+iframe {
+    margin: 8px;
+    max-width: 100%;
+}
+
+.iframe-container {
+    width: 100%;
+    height: auto;
+}
+
+h1 {
+    padding-top: 12px;
+}
+
+p {
+    font-size: 1.25em;
+    line-height: 1.4em;
+    color: #333;
+}
+
+#taylor-headshot {
+    float: left;
+    height: 25em;
+}
 
 .shadow-sm {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.09);
@@ -323,37 +337,7 @@ th {
     margin-right: 4px;
 }
 
-.text-code-sematics {
-    color: #292929;
-}
-
-.text-code-expression {
-    color: #981D15;
-}
-
-.text-code-function {
-    color: #CA473F;
-}
-
-.text-code-statement {
-    color: #055472;
-}
-
-.text-code-variable {
-    color: #1E8DB8;
-}
-
-.text-code-string {
-    color: #669900;
-}
-
-.text-code-comment {
-    color: #49680c;
-}
-
-
-/* Bootstrap-like css*/
-
+/* Bootstrap-Inspired Alignment */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -472,19 +456,10 @@ th {
     order: -1
 }
 
-
-/* Main CSS elements */
-
-.menu-dropdown--toggle,
-[id^=menu-dropdown] {
-    display: none;
-}
-
+/* Responsive Web Design */
 @media (min-width: 640px) {
     main {
-        padding-top: 75px;
         font-size: 10px;
-        min-height: calc(100vh - 253px);
     }
     header {
         padding-left: 10%;
@@ -493,7 +468,6 @@ th {
 
 @media (min-width: 900px) {
     main {
-        padding-top: 75px;
         font-size: 12px;
     }
     nav a {
@@ -505,7 +479,7 @@ th {
     }
     header {
         font-size: 14px;
-        padding-left: 35%;
+        padding-left: 30%;
     }
     header img {
         height: 100px;
@@ -562,12 +536,6 @@ th {
     .col-md-12 {
         flex: 0 0 99.95%;
         max-width: 99.95%
-    }
-}
-
-@media (min-width: 1200px) {
-    header {
-        padding-left: 30%;
     }
 }
 
