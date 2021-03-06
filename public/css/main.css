@@ -5,8 +5,7 @@ body {
 main {
     /* Pushes footer to the bottom. */
     min-height: calc(100vh - 259px);
-    margin: 0px 10% 0px 10%;
-    padding-top: 100px;
+    margin: 0px 10% 10px 10%;
     font: 8px Arial, sans-serif;
     color: #313131;
 }
@@ -15,14 +14,10 @@ main {
 header {
     background-color: rgb(216, 73, 73);
     display: flex;
-    position: fixed;
-    justify-content: left;
-    width: 100%;
-    padding-left: 10%;
+    position: sticky;
+    top: 0;
+    height: 80px;
     font-size: 7px;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
 }
 
 header h1 {
@@ -84,10 +79,6 @@ footer .footer__lower {
 /* Navbar and Menu */
 nav {
     background-color: bisque;
-    position: absolute;
-    left: 0;
-    height: 100%;
-    margin: 0;
 }
 
 nav label {
@@ -97,19 +88,14 @@ nav label {
 nav ul,
 nav label {
     font-family: 'Helvetica', 'Arial', 'Sans-Serif';
-    position: relative;
 }
 
 nav ul {
     padding: 0;
     margin: 0;
-    top: 25%;
-    list-style: none;
-    float: right;
 }
 
 nav ul li {
-    margin-right: 5px;
     display: block;
     background-color: bisque;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
@@ -123,9 +109,10 @@ nav:after {
 
 nav a {
     display: block;
-    padding: 15px;
+    padding: 0px 15px;
     color: rgb(40, 40, 40);
     font-size: 16px;
+    line-height: 40px;
 }
 
 nav a.active {
@@ -343,23 +330,6 @@ p {
     flex-wrap: wrap;
 }
 
-.col,
-.col-1,
-.col-2,
-.col-3,
-.col-4,
-.col-5,
-.col-6,
-.col-7,
-.col-8,
-.col-9,
-.col-10,
-.col-11,
-.col-12 {
-    position: relative;
-    width: 100%;
-}
-
 .col {
     flex-basis: 0;
     flex-grow: 1;
@@ -461,9 +431,6 @@ p {
     main {
         font-size: 10px;
     }
-    header {
-        padding-left: 10%;
-    }
 }
 
 @media (min-width: 900px) {
@@ -472,6 +439,12 @@ p {
     }
     nav a {
         font-size: 24px;
+        line-height: 60px;
+    }
+    nav ul {
+        height: 100%;
+        width: max-content;
+        margin: 30px 0;
     }
     nav ul li {
         float: left;
@@ -479,7 +452,7 @@ p {
     }
     header {
         font-size: 14px;
-        padding-left: 30%;
+        height: 120px;
     }
     header img {
         height: 100px;
@@ -546,14 +519,9 @@ p {
     }
     .menu-dropdown--toggle {
         display: block;
-        background-color: bisque;
-        padding: 0 20px;
-        /* width: 100%; */
-        color: rgb(0, 0, 0);
+        padding: 0px 30px;
         font-size: 20px;
-        line-height: 60px;
-        text-decoration: none;
-        border: none;
+        line-height: 80px;
     }
     .menu-dropdown--toggle:hover {
         background-color: rgb(40, 40, 40);
