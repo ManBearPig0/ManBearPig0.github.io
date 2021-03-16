@@ -1,23 +1,14 @@
-class question {
-    constructor() {
-
-        window.onload += this.load();
+class Question {
+    problemStart = "";
+    constructor(title, problem, awnser) {
+        this.title = title.toString();
+        this.problem = this.problemStart + problem;
+        this.awnser = awnser;
     }
-
-    load() {
-        let elems = document.querySelector('p');
-        // Create a new text node called "Water"
-        var test = document.createTextNode("testing");
-
-        console.log("loading...");
-
-        elems.forEach(e => {
-            e.replaceChild(test, e.childNodes[0])
-        });
+    display() {
+        title = document.getElementsById("questiontitle")[0].setAttribute("text", this.title);
     }
+    check() {
 
-    onClick() {
-        // Handle the click
     }
-
 }
