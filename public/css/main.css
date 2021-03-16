@@ -58,9 +58,6 @@ footer .footer__upper {
     top: 50%;
     vertical-align: middle;
     background-color: #facfcc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 footer button {
