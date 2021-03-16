@@ -187,7 +187,8 @@
                     </tr>
                 </tbody>
             </table>
-            <p>And if that isn't enough, on top of all this, you can also introduce your own query functions, theres are refered to as Scopes. First you create a function in the model with camelcase and 'scope' in the beginning. Then put the parameters with <span class="text-code-variable">$query</span> always as first parameter, and finally you need to return your own customly defined query.</p>
+            <p>And if that isn't enough, on top of all this, you can also introduce your own query functions, theres are refered to as Scopes. First you create a function in the model with camelcase and 'scope' in the beginning. Then put the parameters with
+                <span class="text-code-variable">$query</span> always as first parameter, and finally you need to return your own customly defined query.</p>
             <div class="code-block">
                 <code>
                     <span class="text-code-comment">// This will return the last saved record from your table.</span><br>
@@ -202,22 +203,22 @@
     <!-- Include the footer -->
     <footer>
         <div class="row">
-            <div class="col-12 footer__upper">
-                <div>
-                    <label for="element-select">Choose an element:</label>
-                    <select name="elements" id="element-select">
-                    </select>
-                    <br>
-                    <label for="style-select">Modify the style:</label>
-                    <select name="styles" id="style-select">
-                    </select>
-                    <br>
-                    <input type="text" id="style-input" name="style">
-                </div>
+            <div class="col-6 footer__upper">
                 <p>
                     <span>The Framework - <a rel="external" target="_blank" class="text-link-silent" href="https://laravel.com/">Laravel</a></span>
                     <br><small>Laravel is a web application framework with expressive, elegant syntax.</small>
                 </p>
+            </div>
+            <div class="col-6 footer__upper">
+                <label for="element-select">Choose an element:</label>
+                <select name="elements" id="element-select">
+                </select>
+                <br>
+                <label for="style-select">Modify the style:</label>
+                <select name="styles" id="style-select">
+                </select>
+                <br>
+                <input type="text" id="style-input" name="style">
             </div>
             <div class="col-12 footer__lower">
                 <p>
