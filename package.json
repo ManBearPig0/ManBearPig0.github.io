@@ -11,8 +11,11 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "ajax": "0.0.4",
         "cors": "^2.8.5",
         "express": "^4.17.1",
-        "react": "^17.0.1"
+        "express-generator": "^4.16.1",
+        "react": "^17.0.1",
+        "sqlite3": "^5.0.2"
     }
 }
