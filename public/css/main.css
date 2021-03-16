@@ -10,7 +10,9 @@ main {
     color: #313131;
 }
 
+
 /* Header and Footer */
+
 header {
     background-color: rgb(216, 73, 73);
     display: flex;
@@ -23,6 +25,17 @@ header {
 footer {
     border-top: 2px solid #f8a8a4;
     text-align: center;
+}
+
+footer .footer__upper {
+    height: 75px;
+    top: 50%;
+    vertical-align: middle;
+    background-color: #facfcc;
+}
+
+footer .footer__upper div {
+    float: left;
 }
 
 footer .footer__upper p {
@@ -45,6 +58,27 @@ footer .footer__upper {
     top: 50%;
     vertical-align: middle;
     background-color: #facfcc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer button {
+    /* right: 200px; */
+    /* border: solid black 2px;  */
+    /* border-radius: 30%; */
+    float: right;
+    display: flex;
+    right: 20px;
+    align-items: baseline;
+    justify-content: end;
+    /* display: absolute; */
+}
+
+footer .footer__lower {
+    padding-top: 8px;
+    height: 55px;
+    background-color: #f8a8a4;
 }
 
 footer .footer__lower p {
@@ -57,13 +91,9 @@ footer .footer__lower p a {
     color: rgb(101, 150, 207);
 }
 
-footer .footer__lower {
-    padding-top: 8px;
-    height: 55px;
-    background-color: #f8a8a4;
-}
 
 /* Navbar and Menu */
+
 nav {
     background-color: bisque;
 }
@@ -118,7 +148,9 @@ nav a:hover {
     display: none;
 }
 
+
 /* Code */
+
 code {
     font: 1.1em Lucida, sans-serif;
     letter-spacing: 0.5px;
@@ -160,7 +192,9 @@ code {
     color: #49680c;
 }
 
+
 /* Tables */
+
 table {
     margin: 0 auto 0 auto;
     border: 2px solid rgb(0, 0, 0);
@@ -193,7 +227,9 @@ th {
     border: 2px solid rgb(104, 104, 104);
 }
 
+
 /* Misc */
+
 .text-laravel {
     font-weight: bold;
     color: #FF2D20;
@@ -256,6 +292,7 @@ p {
 #taylor-headshot {
     float: left;
     height: 25em;
+    border: ridge rgb(158, 158, 158) 12px;
 }
 
 .shadow-sm {
@@ -326,7 +363,9 @@ p {
     margin-right: 4px;
 }
 
+
 /* Bootstrap-Inspired Alignment */
+
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -428,7 +467,9 @@ p {
     order: -1
 }
 
+
 /* Responsive Web Design */
+
 @media (min-width: 640px) {
     main {
         font-size: 10px;
