@@ -4,33 +4,24 @@
 <head>
     <!-- required meta tags -->
     <meta charset="utf-8">
-
     <!-- using libraries -->
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-
     <!-- Additional meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="" />
     <meta name="author" content="" />
     <meta name="keywords" content="laravel, php, framework, programming, website technology">
-
     <!-- No idea -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
     <link rel="icon" href="assets/1200px-Laravel.png" />
     <link rel="stylesheet" href="css/main.css" />
-
-
     <script src=""></script>
-
     <title>Home</title>
-
 </head>
 
 <body>
-
     <header>
         <nav>
             <label for="menu-dropdown" class="menu-dropdown--toggle">Menu</label>
@@ -43,23 +34,20 @@
                 <li><a href="pages/contact.html" target="_top">Contact</a></li>
             </ul>
         </nav>
-        <h1>Home</h1>
-        <img src="assets/1200px-Laravel-white.png" alt="Laravel Logo">
+        <div id="title-logo">
+            <h1>Home</h1>
+            <img src="assets/1200px-Laravel-white.png" alt="Laravel Logo">
+        </div>
     </header>
-
-
-    <br/>
-
     <!-- set the main container with the content -->
     <main>
         <h1>Homepage</h1>
-
         <!-- General intro. -->
-        <p>
-            <span class="text-laravel">Laravel</span> is an easy to use, hard to master framework based on PHP. This framework can serve as a tutorial for learning proper website coding structures and all the features that come with it.
-        </p>
-
-        <br />
+        <article>
+            <p>
+                <span class="text-laravel">Laravel</span> is an easy to use, hard to master framework based on PHP. This framework can serve as a tutorial for learning proper website coding structures and all the features that come with it.
+            </p>
+        </article>
         <!-- But what is a framework and how does it work? -->
         <article>
             <h2>What is a framework?</h2>
@@ -68,9 +56,6 @@
                 an example of a framework that provides a foundation ontop of PHP with a predefined structure, classes en functions to make coding websites a lot quicker, less error prone, safer and with more functionalities.
             </p>
         </article>
-
-
-        <br />
         <!-- Laravels framework -->
         <article>
             <h2><span class="text-laravel">Laravel's</span> Framework</h2>
@@ -81,8 +66,6 @@
                 help you, with easy to follow tutorials to guide you. With neatly structured directories, <span class="text-laravel">Laravel</span> has a separate, easy to find, place for each feature.
             </p>
         </article>
-        <br />
-
         <!-- Laravel's MVC architecture -->
         <article>
             <h2>Model View Controller</h2>
@@ -99,30 +82,18 @@
                     <img src="assets/mvc-diagram-501x300.png" alt="Picture of the scematics of the Model, View, Controller layout: three ellipses with the names 'model', 'controller', 'view' all pointing arrows at eachother except between model and view.">
                 </div>
             </div>
-
         </article>
-
-
-        <br/>
-
         <div class="iframe-container iframe-lg-center">
             <iframe class="shadow-lg" width="790" height="474" src="https://laracasts.com/series/laravel-6-from-scratch/episodes/1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-
-        <br/>
-
-
     </main>
-
-
     <!-- Include the footer -->
     <footer>
         <div class="row">
             <div class="col-12 footer__upper">
                 <p>
                     <span>The Framework - <a rel="external" target="_blank" class="text-link-silent" href="https://laravel.com/">Laravel</a></span>
-                    <br />
-                    <small>Laravel is a web application framework with expressive, elegant syntax.</small>
+                    <br><small>Laravel is a web application framework with expressive, elegant syntax.</small>
                 </p>
             </div>
             <div class="col-12 footer__lower">

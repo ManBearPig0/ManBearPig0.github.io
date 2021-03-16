@@ -4,28 +4,21 @@
 <head>
     <!-- required meta tags -->
     <meta charset="utf-8">
-
     <!-- using libraries -->
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-
     <!-- Additional meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Listing of all the features of laravel as well as some code applications" />
     <meta name="author" content="Simon Oliehoek, Herman Rimm, Gust Verhees" />
     <meta name="keywords" content="laravel, php, framework, programming, website technology">
-
     <!-- No idea -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
     <link rel="icon" href="../assets/1200px-Laravel.png" />
     <link rel="stylesheet" href="../css/main.css" />
-
     <!-- <style type="text/css" href="/css/main.css"></style> -->
-
     <title>Features</title>
-
 </head>
 
 <body>
@@ -41,13 +34,11 @@
                 <li><a href="contact.html" target="_top">Contact</a></li>
             </ul>
         </nav>
-        <h1>Laravel Features</h1>
-        <img src="../assets/1200px-Laravel-white.png" alt="Laravel Logo">
+        <div id="title-logo">
+            <h1>Laravel Features</h1>
+            <img src="../assets/1200px-Laravel-white.png" alt="Laravel Logo">
+        </div>
     </header>
-
-    <br/>
-
-
     <main>
         <h1>Laravel Features</h1>
         <article>
@@ -56,8 +47,6 @@
                 Laravel has many features that we will discuss on this page, you will also find <a href="features.html#code_table" target="_top" class="active"> code applications</a> of laravel here.
             </p>
         </article>
-
-        <br/>
         <article>
             <h2>Database migration</h2>
             <p>
@@ -65,8 +54,6 @@
                 essence, this will provide you with a version control like system for keeping track of your database structure. You will be able to migrate or rollback from and to any migration in the list.
             </p>
         </article>
-
-        <br/>
         <article>
             <h2>Seeding</h2>
             <p>
@@ -82,8 +69,6 @@
                 to run, and easily fill your database with the data you want.
             </p>
         </article>
-
-        <br/>
         <article>
             <h2>Html Blade Syntax</h2>
             <p>
@@ -92,8 +77,8 @@
             <div class="code-block">
                 <code>
                     <span class="text-code-semantics">@if(</span><span class="text-code-variable">$condition</span><span class="text-code-semantics"> == </span><span class="text-code-expression">true</span><span class="text-code-semantics">)</span>
-                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&GT; Your HTML here! &lt;/p&GT;
-                    <br/><span class="text-code-semantics">@endif</span>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&GT; Your HTML here! &lt;/p&GT;<br>
+                    <span class="text-code-semantics">@endif</span>
                 </code>
             </div>
             <p>
@@ -104,8 +89,8 @@
             <div class="code-block">
                 <code>
                     <span class="text-code-semantics">@for(</span><span class="text-code-variable">$i</span><span class="text-code-semantics"> = </span><span class="text-code-expression">0</span><span class="text-code-semantics">; </span><span class="text-code-variable">$i</span><span class="text-code-semantics"> &lt; </span><span class="text-code-expression">10</span><span class="text-code-semantics">; </span><span class="text-code-variable">$i</span><span class="text-code-semantics">++)</span>
-                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&GT; Creating <span class="text-code-semantics">{{ </span><span class="text-code-variable">$i</span><span class="text-code-semantics"> }}</span> of 10 text fields! &lt;/p&GT;
-                    <br/><span class="text-code-semantics">@endfor</span>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&GT; Creating <span class="text-code-semantics">{{ </span><span class="text-code-variable">$i</span><span class="text-code-semantics"> }}</span> of 10 text fields! &lt;/p&GT;<br>
+                    <span class="text-code-semantics">@endfor</span>
                 </code>
             </div>
             <p>
@@ -114,29 +99,23 @@
             <div class="code-block">
                 <code>
                     <span class="text-code-semantics">@foreach(</span><span class="text-code-variable">$array</span><span class="text-code-expression"> as </span><span class="text-code-variable">$item</span><span class="text-code-semantics">)</span>
-                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&GT; Placing each <span class="text-code-semantics">{{ </span><span class="text-code-variable">$item</span><span class="text-code-semantics"> }}</span> in this list! &lt;/p&GT;
-                    <br/><span class="text-code-semantics">@endforeach</span>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&GT; Placing each <span class="text-code-semantics">{{ </span><span class="text-code-variable">$item</span><span class="text-code-semantics"> }}</span> in this list! &lt;/p&GT;<br>
+                    <span class="text-code-semantics">@endforeach</span>
                 </code>
             </div>
         </article>
-
-
         <!-- <article class="mt-4">
             <h2>Unit Testing with PHPUnit</h2>
             <p>
                 Extensive tests can be run using PHPUnit. Create your own html requests and assert if your pages give the output you want with any scenario.
             </p>
         </article> -->
-
-        <br/>
         <article>
             <h2>Laravel Eloquent</h2>
-
             <p>
                 SQL, what is that? With laravel eloquent you will never have to manually create SQL queries to insert, update or delete data from your database. Laravel makes use of the Models that correspond with a table in the database. Via this model you can easily
                 interact with all the records to retrieve or update data. Simply use laravel's default compact object-relational mapper (OMR) functionalities to handle the queries for you.
             </p>
-
             <table class="features__table-small" id="code_table">
                 <caption class="text-bold text-larger">Some examples of Laravel code</caption>
                 <thead>
@@ -154,7 +133,6 @@
                             <div class="code-block">
                                 <code><span class="text-code-semantics">-></span><span class="text-code-function">first</span><span class="text-code-semantics">()</span></code>
                             </div>
-
                         </td>
                         <td>
                             gets the first item from a model
@@ -197,14 +175,11 @@
                         <td>
                             <div class="code-block">
                                 <code>
-                                    <span class="text-code-semantics">-></span><span class="text-code-function">whereHas</span>(<span class="text-code-string">'foreign_key'</span><span class="text-code-semantics">, </span> <span class="text-code-statement">function</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) </span><span class="text-code-statement">use</span> <span class="text-code-variable">$value</span> <span class="text-code-semantics"> { </span>
-                                    <br/>
-                                    <span class="text-code-variable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$query</span><span class="text-code-semantics">-></span><span class="text-code-function">where</span>(<span class="text-code-string">'attribute'</span>, <span class="text-code-variable">$value</span>);
-                                    <br/>
+                                    <span class="text-code-semantics">-></span><span class="text-code-function">whereHas</span>(<span class="text-code-string">'foreign_key'</span><span class="text-code-semantics">, </span> <span class="text-code-statement">function</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) </span><span class="text-code-statement">use</span> <span class="text-code-variable">$value</span> <span class="text-code-semantics"> { </span><br>
+                                    <span class="text-code-variable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$query</span><span class="text-code-semantics">-></span><span class="text-code-function">where</span>(<span class="text-code-string">'attribute'</span>, <span class="text-code-variable">$value</span>);<br>
                                     <span class="text-code-semantics">});</span>
                                 </code>
                             </div>
-
                         </td>
                         <td>
                             With this you can use advanced logic within other models by using foreign_keys
@@ -212,28 +187,25 @@
                     </tr>
                 </tbody>
             </table>
-
             <p>And if that isn't enough, on top of all this, you can also introduce your own query functions, theres are refered to as Scopes. First you create a function in the model with camelcase and 'scope' in the beginning. Then put the parameters with <span class="text-code-variable">$query</span> always as first parameter, and finally you need to return your own customly defined query.</p>
-                <div class="code-block">
-                    <code>
-                        <span class="text-code-comment">// This will return the last saved record from your table.</span>
-                        <br/><span class="text-code-function">scopeLast</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) {</span>
-                        <br/><span class="text-code-expression">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return </span> <span class="text-code-variable">$query</span><span class="text-code-semantics">-></span><span class="text-code-function">orderBy</span><span class="text-code-semantics">(</span><span class="text-code-string">'created_at'</span>
-                        <span class="text-code-semantics">, </span><span class="text-code-string">'ASC'</span><span class="text-code-semantics">)-></span><span class="text-code-function">first</span><span class="text-code-semantics">();</span>
-                        <br/><span class="text-code-semantics">}</span>
-                    </code>
-                </div>
+            <div class="code-block">
+                <code>
+                    <span class="text-code-comment">// This will return the last saved record from your table.</span><br>
+                    <span class="text-code-function">scopeLast</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) {</span><br>
+                    <span class="text-code-expression">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return </span> <span class="text-code-variable">$query</span><span class="text-code-semantics">-></span><span class="text-code-function">orderBy</span><span class="text-code-semantics">(</span><span class="text-code-string">'created_at'</span>
+                    <span class="text-code-semantics">, </span><span class="text-code-string">'ASC'</span><span class="text-code-semantics">)-></span><span class="text-code-function">first</span><span class="text-code-semantics">();</span><br>
+                    <span class="text-code-semantics">}</span>
+                </code>
+            </div>
         </article>
     </main>
-
     <!-- Include the footer -->
     <footer>
         <div class="row">
             <div class="col-12 footer__upper">
                 <p>
                     <span>The Framework - <a rel="external" target="_blank" class="text-link-silent" href="https://laravel.com/">Laravel</a></span>
-                    <br />
-                    <small>Laravel is a web application framework with expressive, elegant syntax.</small>
+                    <br><small>Laravel is a web application framework with expressive, elegant syntax.</small>
                 </p>
             </div>
             <div class="col-12 footer__lower">
