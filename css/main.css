@@ -25,6 +25,17 @@ footer {
     text-align: center;
 }
 
+footer .footer__upper {
+    height: 75px;
+    top: 50%;
+    vertical-align: middle;
+    background-color: #facfcc;
+}
+
+footer .footer__upper div {
+    float: left;
+}
+
 footer .footer__upper p {
     color: #c58e8a;
     font: 1em Lucida, sans-serif;
@@ -40,11 +51,10 @@ footer .footer__upper p small {
     font-weight: normal;
 }
 
-footer .footer__upper {
-    height: 75px;
-    top: 50%;
-    vertical-align: middle;
-    background-color: #facfcc;
+footer .footer__lower {
+    padding-top: 8px;
+    height: 55px;
+    background-color: #f8a8a4;
 }
 
 footer .footer__lower p {
@@ -55,12 +65,6 @@ footer .footer__lower p {
 
 footer .footer__lower p a {
     color: rgb(101, 150, 207);
-}
-
-footer .footer__lower {
-    padding-top: 8px;
-    height: 55px;
-    background-color: #f8a8a4;
 }
 
 /* Navbar and Menu */
