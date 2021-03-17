@@ -96,6 +96,19 @@ textarea {
     border: 2px solid #3a3a3a;
 }
 
+.hidden {
+    display: none;
+}
+
+.highlight {
+    border: rgba(199, 199, 25, 0.75) 5px dashed;
+    cursor: pointer;
+}
+
+.highlight--selected {
+    border: rgba(199, 199, 25, 0.75) 5px solid;
+}
+
 
 /* Header and Footer */
 
