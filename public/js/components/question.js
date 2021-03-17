@@ -1,9 +1,9 @@
 class Question {
     problemStart = "";
-    constructor(ititle, iproblem, iawnser) {
-        this.title = ititle.toString();
-        this.problem = this.problemStart + iproblem;
-        this.awnser = iawnser;
+    constructor(title, problem, answer) {
+        this.title = title.toString();
+        this.problem = this.problemStart + problem;
+        this.answer = answer;
     }
 }
 Question.prototype.display = function() {
@@ -15,22 +15,22 @@ Question.prototype.display = function() {
     questionProblem.removeChild(questionProblem.childNodes[0]);
     questionProblem.appendChild(document.createTextNode(this.problem));
 
-    var main = document.getElementsByTagName("main")[0];
-    while (main.children.length > 3) {
-        main.removeChild(main.childNodes[2])
+    var form = document.getElementsByTagName("form")[0];
+    while (form.children.length > 1) {
+        form.removeChild(form.childNodes[0]);
     }
 }
 Question.prototype.check = function(input) {
-    if (input == this.awnser) {
+    if (input == this.answer) {
         correct();
     } else {
         incorrect();
     }
 }
 class multipleChoice extends Question {
-    problemStart = "Pick the right awnser: ";
-    constructor(title, problem, awnser, options) {
-        super(title, problem, awnser);
+    problemStart = "Pick the right answer: ";
+    constructor(title, problem, answer, options) {
+        super(title, problem, answer);
         this.options = options;
     }
     display() {
@@ -67,12 +67,35 @@ class multipleChoice extends Question {
 
 class fillInTheBlank extends Question {
     problemStart = "Fill in the black: "
+    constructor(title, answer, firsthalf, secondhalf){
+        super(title, "Fill in the blank:", answer);
+        this.firsthalf = firsthalf;
+        this.secondhalf = secondhalf;
+    }
     display() {
         super.display();
+        var form = document.getElementsByTagName("form")[0];
+        let paragraph = document.createElement("p");
+        let input = document.createElement("input");
+        input.id = "question__blank"
+        input.setAttribute("type", "text");
+        paragraph.appendChild(document.createTextNode(this.firsthalf));
+        paragraph.appendChild(input);
+        paragraph.appendChild(document.createTextNode(this.secondhalf));
+        form.insertBefore(paragraph, document.getElementById("question__check"));
+    }
+    check(){
+        let input = document.getElementById("question__blank");
+        super.check(input.value.toLowerCase());
     }
 }
 
-var questions = [new multipleChoice("Creator", "Who created laravel:", "Taylor Otwell", ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"])];
+var questions = [
+new multipleChoice("Creator", "Who created laravel:", "Taylor Otwell", ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]),
+new multipleChoice("Seeding", "When is database seeding applicable?", "For putting test data in the database", ["For putting test data in the database", "For updating database records, for example creating a new user", "For creating new tables and columns in your database", "For retrieving database data to put in a view"]),
+new fillInTheBlank("Interactions", "eloquent", "Laravel ", " is used for interacting with database records, through models.")
+
+];
 var currentquestion = 0;
 
 var initialDisplay = function() {
@@ -96,8 +119,8 @@ var initialDisplay = function() {
     checkButton.setAttribute("value", "Check");
     checkButton.classList.add('btn');
     checkButton.classList.add('btn-red');
+    checkButton.addEventListener("click", () => questions[currentquestion].check())
     checkButton.id = "question__check";
-    checkButton.addEventListener("click", questions[currentquestion].check);
     question.appendChild(checkButton);
 
     //create navigation buttons
@@ -107,8 +130,8 @@ var initialDisplay = function() {
     nextButton.setAttribute("type", "button");
     backButton.setAttribute("value", "Back");
     nextButton.setAttribute("value", "Next");
-    backButton.addEventListener("click", function(){if(currentquestion>0)currentquestion--;});
-    nextButton.addEventListener("click", function(){if(currentquestion<questions.length-1)currentquestion++;});
+    backButton.addEventListener("click", function(){if(currentquestion>0)currentquestion--; questions[currentquestion].display();});
+    nextButton.addEventListener("click", function(){if(currentquestion<questions.length-1)currentquestion++;questions[currentquestion].display();});
 
     //add all elements to document
     main.appendChild(questionTitle);
