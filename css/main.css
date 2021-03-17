@@ -54,6 +54,7 @@ textarea {
     transition-duration: 0.4s;
     cursor: pointer;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.09);
+    font-weight: bold;
 }
 
 .btn-lg {
@@ -72,6 +73,18 @@ textarea {
     border: 1px solid #686868;
 }
 
+.btn-red {
+    border: solid #b44343 2px;
+    background-color: #D84949;
+    color: white;
+}
+
+.btn-red:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    border: 2px solid #D84949;
+}
+
 .btn-dark {
     background-color: #3a3a3a;
     color: white;
@@ -80,7 +93,7 @@ textarea {
 .btn-dark:hover {
     background-color: rgba(255, 255, 255, 0.5);
     color: black;
-    border: 1px solid #3a3a3a;
+    border: 2px solid #3a3a3a;
 }
 
 
