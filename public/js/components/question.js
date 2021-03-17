@@ -79,7 +79,7 @@ class fillInTheBlank extends Question {
         var form = document.getElementsByTagName("form")[0];
         let paragraph = document.createElement("p");
         let input = document.createElement("input");
-        input.id = "question__blank"
+        input.id = "question__blank";
         input.setAttribute("type", "text");
         paragraph.appendChild(document.createTextNode(this.firsthalf));
         paragraph.appendChild(input);
@@ -121,7 +121,7 @@ var initialDisplay = function() {
     checkButton.setAttribute("value", "Check");
     checkButton.classList.add('btn');
     checkButton.classList.add('btn-red');
-    checkButton.addEventListener("click", () => questions[currentquestion].check())
+    checkButton.addEventListener("click", () => questions[currentquestion].check());
     checkButton.id = "question__check";
     question.appendChild(checkButton);
 
