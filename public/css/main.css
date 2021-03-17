@@ -1,13 +1,75 @@
+:root {
+    --footer__upper-ub-size: 75px;
+    --footer__upper-lb-size: 45px;
+}
+
 body {
     margin: 0;
 }
 
 main {
     /* Pushes footer to the bottom. */
-    min-height: calc(100vh - 259px);
+    min-height: calc(100vh - (218px + var(--footer__upper-lb-size)));
     margin: 0px 10% 10px 10%;
     font: 8px Arial, sans-serif;
     color: #313131;
+}
+
+textarea {
+    resize: none;
+}
+
+
+/* hidden */
+
+.hidden {
+    display: none;
+}
+
+
+/* button */
+
+.btn {
+    background-color: #E5F1FB;
+    border: solid #686868 1px;
+    border-radius: 7px;
+    color: black;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.09);
+}
+
+.btn-lg {
+    padding: 16px 32px;
+    font-size: 16px;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    border: 1px solid #686868;
+}
+
+.btn-dark {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.btn-dark:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    border: 1px solid #3a3a3a;
 }
 
 
@@ -28,10 +90,19 @@ footer {
 }
 
 footer .footer__upper {
-    height: 75px;
-    top: 50%;
-    vertical-align: middle;
+    height: var(--footer__upper-lb-size);
+    transition-duration: 0.4s;
+    /* top: 50%; */
+    /* vertical-align: middle; */
     background-color: #facfcc;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+footer .footer__upper menu .row {
+    display: flex;
+    justify-content: space-around;
 }
 
 footer .footer__upper div {
@@ -51,25 +122,6 @@ footer .footer__upper p a {
 footer .footer__upper p small {
     font-size: 0.7em;
     font-weight: normal;
-}
-
-footer .footer__upper {
-    height: 75px;
-    top: 50%;
-    vertical-align: middle;
-    background-color: #facfcc;
-}
-
-footer button {
-    /* right: 200px; */
-    /* border: solid black 2px;  */
-    /* border-radius: 30%; */
-    float: right;
-    display: flex;
-    right: 20px;
-    align-items: baseline;
-    justify-content: end;
-    /* display: absolute; */
 }
 
 footer .footer__lower {
