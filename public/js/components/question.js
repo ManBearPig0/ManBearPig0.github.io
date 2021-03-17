@@ -54,11 +54,11 @@ class multipleChoice extends Question {
             form.insertBefore(paragraph, document.getElementById("question__check"));
         }
     }
-    check(){
+    check() {
         let boxes = document.getElementsByTagName("input");
         let attempt = "";
-        for(let box of boxes){
-            if(box.checked){
+        for (let box of boxes) {
+            if (box.checked) {
                 attempt = box.getAttribute("value");
             }
         }
@@ -69,7 +69,7 @@ class multipleChoice extends Question {
 
 class fillInTheBlank extends Question {
     problemStart = "Fill in the black: "
-    constructor(title, answer, firsthalf, secondhalf){
+    constructor(title, answer, firsthalf, secondhalf) {
         super(title, "Fill in the blank:", answer);
         this.firsthalf = firsthalf;
         this.secondhalf = secondhalf;
@@ -86,17 +86,17 @@ class fillInTheBlank extends Question {
         paragraph.appendChild(document.createTextNode(this.secondhalf));
         form.insertBefore(paragraph, document.getElementById("question__check"));
     }
-    check(){
+    check() {
         let input = document.getElementById("question__blank");
         super.check(input.value.toLowerCase());
     }
 }
 
 var questions = [
-new multipleChoice("Creator", "Who created laravel:", "Taylor Otwell", ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]),
-new multipleChoice("Seeding", "When is database seeding applicable?", "For putting test data in the database", ["For putting test data in the database", "For updating database records, for example creating a new user", "For creating new tables and columns in your database", "For retrieving database data to put in a view"]),
-new fillInTheBlank("Interactions", "eloquent", "Laravel ", " is used for interacting with database records, through models."),
-new fillInTheBlank("Syntax", "blade", "Laravel ", ".html files uses a special syntax that allows you to  add logic into the html itseld. This is a PHP based logic that can also utilize authentication logic.")
+    new multipleChoice("Creator", "Who created laravel:", "Taylor Otwell", ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]),
+    new multipleChoice("Seeding", "When is database seeding applicable?", "For putting test data in the database", ["For putting test data in the database", "For updating database records, for example creating a new user", "For creating new tables and columns in your database", "For retrieving database data to put in a view"]),
+    new fillInTheBlank("Interactions", "eloquent", "Laravel ", " is used for interacting with database records, through models."),
+    new fillInTheBlank("Syntax", "blade", "Laravel ", ".html files uses a special syntax that allows you to  add logic into the html itseld. This is a PHP based logic that can also utilize authentication logic.")
 ];
 var currentquestion = 0;
 
@@ -132,8 +132,14 @@ var initialDisplay = function() {
     nextButton.setAttribute("type", "button");
     backButton.setAttribute("value", "Back");
     nextButton.setAttribute("value", "Next");
-    backButton.addEventListener("click", function(){if(currentquestion>0)currentquestion--; questions[currentquestion].display();});
-    nextButton.addEventListener("click", function(){if(currentquestion<questions.length-1)currentquestion++;questions[currentquestion].display();});
+    backButton.addEventListener("click", function() {
+        if (currentquestion > 0) currentquestion--;
+        questions[currentquestion].display();
+    });
+    nextButton.addEventListener("click", function() {
+        if (currentquestion < questions.length - 1) currentquestion++;
+        questions[currentquestion].display();
+    });
 
     //add all elements to document
     main.appendChild(questionTitle);
@@ -145,13 +151,13 @@ var initialDisplay = function() {
     //display the first question
     questions[0].display();
 }
-var correct =  function(){ 
+var correct = function() {
     var questionTitle = document.getElementById("question__title");
     questionTitle.removeChild(questionTitle.childNodes[0]);
     questionTitle.appendChild(document.createTextNode(questions[currentquestion].title + ":\t" + "correct"));
     questionTitle.classList = ["correct"];
 }
-var incorrect = function(){
+var incorrect = function() {
     var questionTitle = document.getElementById("question__title");
     questionTitle.removeChild(questionTitle.childNodes[0]);
     questionTitle.appendChild(document.createTextNode(questions[currentquestion].title + ":\t" + "incorrect"));

@@ -56,12 +56,26 @@ class ElementEditor {
         }
 
         this.selectedElementType = Object.keys(this.editableElements)[0];
-        this.selectedStyle = Array.from(this.styleSelect.children).find(e => { return true; }).value;
+        this.selectedStyle = Array.from(this.styleSelect.children).find(e => {
+            return true;
+        }).value;
 
         this.styleInputData = {
-            "font-size": { type: 'text', placeholder: 'Press Enter to Set font-size', value: null },
-            "background-color": { type: 'color', placeholder: 'Set background color', value: null },
-            "color": { type: 'color', placeholder: 'Set text color', value: null }
+            "font-size": {
+                type: 'text',
+                placeholder: 'Press Enter to Set font-size',
+                value: null
+            },
+            "background-color": {
+                type: 'color',
+                placeholder: 'Set background color',
+                value: null
+            },
+            "color": {
+                type: 'color',
+                placeholder: 'Set text color',
+                value: null
+            }
         };
         this.selectedElement = null;
         this.elementSelect.addEventListener("change", (e) => this.toggleEnabledElements(this, e.target.value));
