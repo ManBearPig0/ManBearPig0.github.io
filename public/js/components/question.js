@@ -1,3 +1,4 @@
+//parent class Question
 class Question {
     problemStart = "";
     constructor(title, problem, answer) {
@@ -10,6 +11,7 @@ Question.prototype.display = function() {
     var questionTitle = document.getElementById("question__title");
     questionTitle.removeChild(questionTitle.childNodes[0]);
     questionTitle.appendChild(document.createTextNode(this.title));
+    questionTitle.classList = [];
 
     var questionProblem = document.getElementById("question__problem");
     questionProblem.removeChild(questionProblem.childNodes[0]);
@@ -93,8 +95,8 @@ class fillInTheBlank extends Question {
 var questions = [
 new multipleChoice("Creator", "Who created laravel:", "Taylor Otwell", ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]),
 new multipleChoice("Seeding", "When is database seeding applicable?", "For putting test data in the database", ["For putting test data in the database", "For updating database records, for example creating a new user", "For creating new tables and columns in your database", "For retrieving database data to put in a view"]),
-new fillInTheBlank("Interactions", "eloquent", "Laravel ", " is used for interacting with database records, through models.")
-
+new fillInTheBlank("Interactions", "eloquent", "Laravel ", " is used for interacting with database records, through models."),
+new fillInTheBlank("Syntax", "blade", "Laravel ", ".html files uses a special syntax that allows you to  add logic into the html itseld. This is a PHP based logic that can also utilize authentication logic.")
 ];
 var currentquestion = 0;
 
@@ -144,8 +146,14 @@ var initialDisplay = function() {
     questions[0].display();
 }
 var correct =  function(){ 
-    console.log("correct");
+    var questionTitle = document.getElementById("question__title");
+    questionTitle.removeChild(questionTitle.childNodes[0]);
+    questionTitle.appendChild(document.createTextNode(questions[currentquestion].title + ":\t" + "correct"));
+    questionTitle.classList = ["correct"];
 }
 var incorrect = function(){
-    console.log("incorrect");
+    var questionTitle = document.getElementById("question__title");
+    questionTitle.removeChild(questionTitle.childNodes[0]);
+    questionTitle.appendChild(document.createTextNode(questions[currentquestion].title + ":\t" + "incorrect"));
+    questionTitle.classList = ["incorrect"];
 }
