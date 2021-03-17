@@ -19,6 +19,15 @@ textarea {
     resize: none;
 }
 
+.highlight {
+    border: rgba(199, 199, 25, 0.75) 5px dashed;
+    cursor: pointer;
+}
+
+.highlight--selected {
+    border: rgba(199, 199, 25, 0.75) 5px solid;
+}
+
 
 /* hidden */
 

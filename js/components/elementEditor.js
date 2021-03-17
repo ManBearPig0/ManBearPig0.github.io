@@ -3,6 +3,7 @@ class ElementEditor {
         this.text = {
             editorDisableText: "Return to View Mode",
             editorEnableText: "Enable Editor Mode",
+
         }
 
 
@@ -27,11 +28,20 @@ class ElementEditor {
         this.editableElements = {};
         this.elementSelect = document.getElementById('element-select');
 
-        Array.from(this.elementSelect.options).map(option => {
+        Array.from(this.elementSelect.options).forEach(option => {
             let tagName = option.value;
             let elements = document.getElementsByTagName(tagName);
 
-            this.editableElements[tagName] = elements;
+            if (elements.length <= 0) {
+                // Can be changed to adding options to empty select.
+                option.remove();
+            } else {
+                let elementObjects = Array.from(elements).map(element => {
+                    return new EditableElement(element);
+                });
+
+                this.editableElements[tagName] = elementObjects;
+            }
         });
 
         this.selectedElement = Object.keys(this.editableElements)[0];
@@ -41,28 +51,17 @@ class ElementEditor {
 
             this.selectedElement = e.target.value;
 
-            Array.from(previous_elems).forEach(element => {
-                element.removeEventListener('mouseenter', this.elementMouseEnter);
-                element.removeEventListener('mouseleave', this.elementMouseLeave);
-
+            Array.from(previous_elems).forEach(elem => {
+                elem.disable(elem);
             });
 
-            Array.from(selected_elems).forEach(element => {
-                element.addEventListener('mouseenter', this.elementMouseEnter);
-                element.addEventListener('mouseleave', this.elementMouseLeave);
+            Array.from(selected_elems).forEach(elem => {
+                elem.enable(elem);
             });
 
         });
 
         console.log(this.editableElements);
-    }
-
-    elementMouseEnter(e) {
-        console.log("entered", e.target);
-    }
-
-    elementMouseLeave(e) {
-        console.log("left", e.target);
     }
 
     handleSelectElement(e, editor) {
@@ -92,10 +91,64 @@ class ElementEditor {
         }
     }
 
-
-
     test() {
         console.log("test editor");
+    }
+}
+
+
+class EditableElement {
+    constructor(element) {
+        this.element = element;
+        this.editEnabled = false;
+        this.selected = false;
+
+        this.element.addEventListener('mouseenter', (e) => this.elementMouseEnter(e, this));
+        this.element.addEventListener('mouseleave', (e) => this.elementMouseLeave(e, this));
+        this.element.addEventListener('click', (e) => this.elementMouseClick(e, this))
+    }
+
+    disable(_this) {
+        _this.editEnabled = false;
+        this.selected = false;
+        _this.removeElementHighlight(_this);
+        _this.element.classList.remove('highlight--selected');
+        // Remove event listener doesnt work
+        // _this.element.removeEventListener('mouseenter', (e) => _this.elementMouseEnter(e, _this));
+        // _this.element.removeEventListener('mouseleave', (e) => _this.elementMouseLeave(e, _this));
+    }
+
+    enable(_this) {
+        _this.editEnabled = true;
+        // Remove event listener doesnt work
+        // _this.element.addEventListener('mouseenter', (e) => _this.elementMouseEnter(e, _this));
+        // _this.element.addEventListener('mouseleave', (e) => _this.elementMouseLeave(e, _this));
+    }
+
+    elementMouseEnter(e, _this) {
+        if (_this.editEnabled) {
+            _this.setElementHighlight(_this);
+        }
+    }
+
+    elementMouseLeave(e, _this) {
+        _this.removeElementHighlight(_this);
+    }
+
+    elementMouseClick(e, _this) {
+        if (this.editEnabled) {
+            this.selected = true;
+            _this.element.classList.remove('highlight');
+            _this.element.classList.add('highlight--selected');
+        }
+    }
+
+    setElementHighlight(_this) {
+        _this.element.classList.add('highlight');
+    }
+
+    removeElementHighlight(_this) {
+        _this.element.classList.remove('highlight');
     }
 }
 
