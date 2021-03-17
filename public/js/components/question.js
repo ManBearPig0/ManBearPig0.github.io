@@ -36,7 +36,7 @@ class multipleChoice extends Question{
     }
     display(){
         super.display();
-        var main = document.getElementsByTagName("main")[0];
+        var form = document.getElementsByTagName("form")[0];
         for(var option of this.options){
             let paragraph = document.createElement("p");
             let input = document.createElement("input");
@@ -50,8 +50,11 @@ class multipleChoice extends Question{
             label.setAttribute("for", option);
             label.appendChild(document.createTextNode(option));
             paragraph.appendChild(label);
-            main.insertBefore(paragraph, doceument.getElementById("question__check"));
+            form.insertBefore(paragraph, document.getElementById("question__check"));
         }
+    }
+    check(){
+        console.log("succes");
     }
 }
 
@@ -64,26 +67,34 @@ class fillInTheBlank extends Question{
 }
 
 var questions = [new multipleChoice("Creator", "Who created laravel:", "Taylor Otwell", ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"])];
+var currentquestion = 0;
 
 var initialDisplay = function(){
     var main = document.getElementsByTagName("main")[0];
     //create question heading
     var questionTitle = document.createElement("h1");
-    questionTitle.id =  "question__title";
+    questionTitle.id = "question__title";
     questionTitle.appendChild(document.createTextNode(""));
 
     //create question
     var questionProblem = document.createElement("h2");
-    questionProblem.id =  "question__problem";
+    questionProblem.id = "question__problem";
     questionProblem.appendChild(document.createTextNode(""));
 
-    //create submit button
-    var submitButton = document.createElement("button")
+    //create form
+    var question = document.createElement("form");
 
+    //create submit button
+    var checkButton = document.createElement("input");
+    checkButton.setAttribute("type", "button");
+    checkButton.setAttribute("value", "Check");
+    checkButton.id = "question__check";
+    question.appendChild(checkButton);
 
     //add all elements to document
     main.appendChild(questionTitle);
     main.appendChild(questionProblem);
+    main.appendChild(question);
 
     //display the first question
     questions[0].display();
