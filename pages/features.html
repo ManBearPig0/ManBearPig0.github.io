@@ -4,21 +4,24 @@
 <head>
     <!-- required meta tags -->
     <meta charset="utf-8">
-    <!-- using libraries -->
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
     <!-- Additional meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Listing of all the features of laravel as well as some code applications" />
     <meta name="author" content="Simon Oliehoek, Herman Rimm, Gust Verhees" />
     <meta name="keywords" content="laravel, php, framework, programming, website technology">
+
     <!-- No idea -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="icon" href="../assets/1200px-Laravel.png" />
-    <link rel="stylesheet" href="../css/main.css" />
-    <!-- <style type="text/css" href="/css/main.css"></style> -->
+
+    <!-- Title Icon -->
     <title>Features</title>
+    <link rel="icon" href="../assets/1200px-Laravel.png" />
+
+    <!-- Import css -->
+    <link rel="stylesheet" href="../css/main.css" />
+
+    <!-- js is imported at the end -->
 </head>
 
 <body>
@@ -204,28 +207,47 @@
     <!-- Include the footer -->
     <footer class="row">
         <div class="col-12 footer__upper">
-            <label for="element-select">Choose an element:</label>
-            <select name="elements" id="element-select">
-            </select>
-            <br>
-            <label for="style-select">Modify the style:</label>
-            <select name="styles" id="style-select">
-            </select>
-            <br>
-            <input type="text" id="style-input" name="style">
+            <button type="button" id="footer__editer-button--toggle" class="btn btn-sm btn-red">Enable Editor Mode</button>
+
+            <menu class="hidden">
+                <div class="row">
+                    <div class="col mx-4">
+                        <span class="flex">
+                            <label for="element-select">Choose an element:</label>
+                            <select name="elements" id="element-select"></select>
+                        </span>
+                        <span class="flex">
+                            <label for="element-select">Modify the Style:</label>
+                            <select name="styles" id="style-select"></select>
+                        </span>
+                    </div>
+
+                    <div class="col mx-4" id="style-input-field">
+                        <input type="text" placeholder="Set value of style" />
+                    </div>
+                </div>
+            </menu>
+
         </div>
         <div class="col-6 footer__lower">
             <p>
                 Copyright &copy; 2021 - <a rel="external" target="_blank" class="text-link-silent" href="https://github.com/ManBearPig0/laravel">source code</a>
             </p>
         </div>
-        <div class="col-6 footer__lower">
+        <div class="col footer__lower">
             <p>
                 <span>The Framework - <a rel="external" target="_blank" class="text-link-silent" href="https://laravel.com/">Laravel</a></span>
                 <br><small>Laravel is a web application framework with expressive, elegant syntax.</small>
             </p>
         </div>
     </footer>
+
+    <!-- Import js after loading html -->
+    <!-- <script src="../js/app.js"></script> -->
+
+    <!-- Only used for testing without using Browsify. Can be removed in final version -->
+    <script src="../js/components/elementEditor.js"></script>
+    <script src="../js/components/question.js"></script>
 </body>
 
 </html>

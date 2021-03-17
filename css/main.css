@@ -20,12 +20,14 @@ textarea {
 }
 
 .highlight {
-    border: rgba(199, 199, 25, 0.75) 5px dashed;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
+    /* border: rgba(199, 199, 25, 0.75) 5px dashed; */
     cursor: pointer;
 }
 
 .highlight--selected {
-    border: rgba(199, 199, 25, 0.75) 5px solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
+    border: rgba(255, 255, 179, 0.75) 4px solid;
 }
 
 
@@ -109,9 +111,31 @@ footer .footer__upper {
     align-items: center;
 }
 
+footer .footer__upper menu {
+    font: .8em Lucida, sans-serif;
+    color: #804f4c;
+    /* align-items: center; */
+}
+
 footer .footer__upper menu .row {
     display: flex;
     justify-content: space-around;
+}
+
+footer .footer__upper menu .flex {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    justify-content: left;
+    align-items: center;
+}
+
+footer .footer__upper menu #style-input-field {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    justify-content: left;
+    align-items: center;
 }
 
 footer .footer__upper div {
@@ -523,6 +547,11 @@ p {
 
 .order-first {
     order: -1
+}
+
+.mx-4 {
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 

@@ -26,6 +26,9 @@ class ElementEditor {
 
         // Should also contain body and children of main
         this.candidateElements = document.body.children;
+
+        console.log(this.candidateElements);
+
         this.editableElements = {};
         this.elementSelect = document.getElementById('element-select');
 
@@ -38,6 +41,7 @@ class ElementEditor {
                 case 'ASIDE':
                 case 'ARTICLE':
                 case 'SECTION':
+                case 'MAIN':
                     // if the option is not in the select
                     if (Object.values(this.elementSelect).indexOf(tagName) == -1) {
                         let option = document.createElement("option");
