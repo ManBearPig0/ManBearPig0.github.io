@@ -9,7 +9,7 @@ body {
 
 main {
     /* Pushes footer to the bottom. */
-    min-height: calc(100vh - (218px + var(--footer__upper-lb-size)));
+    min-height: calc(100vh - (215px + var(--footer__upper-lb-size)));
     margin: 0px 10% 10px 10%;
     font: 8px Arial, sans-serif;
     color: #313131;
@@ -185,7 +185,7 @@ footer .footer__upper p small {
 
 footer .footer__lower {
     padding-top: 8px;
-    height: 55px;
+    height: 58px;
     background-color: #f8a8a4;
 }
 

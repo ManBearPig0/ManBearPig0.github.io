@@ -3,37 +3,43 @@ class ElementEditor {
         this.text = {
             editorDisableText: "Return to View Mode",
             editorEnableText: "Enable Editor Mode",
-
         }
-
-
-        /* NOTE To-do:
-            Highlight all elements of selected type.
-            Highlight if hover over a specific element.
-            Highlight if element is selected.
-
-            get and show the style of selected element
-            update the style of selected element
-        */
-
 
         this.editorEnabled = false;
 
         // Initialize editor button
         this.editorButton = document.getElementById('footer__editer-button--toggle');
-        this.editorButton.addEventListener('click', (e) => this.handleToggleEditor(e, this.text));
+        this.editorButton.addEventListener('click', (e) => this.handleToggleEditor(e, this));
         this.editorButton.replaceChild(document.createTextNode(this.text.editorEnableText), this.editorButton.childNodes[0]);
-
-        // Should also contain body and children of main
-        this.candidateElements = document.body.children;
-
-        console.log(this.candidateElements);
 
         this.editableElements = {};
         this.elementSelect = document.getElementById('element-select');
+        this.styleSelect = document.getElementById('style-select');
+        this.styleInputFieldContainer = document.getElementById('style-input-field');
 
-        for (var i = 0; i < this.candidateElements.length; i++) {
-            let tagName = this.candidateElements[i].nodeName;
+        function addEditableElement(_this, elementName, candidateElements) {
+            // Create new option for Select element
+            let option = document.createElement("option");
+            let text = document.createTextNode(elementName);
+            option.value = elementName;
+            option.appendChild(text);
+            _this.elementSelect.appendChild(option);
+
+            // Add element to Editable Elements
+            let elements = document.getElementsByTagName(option.value);
+            let elementObjects = Array.from(candidateElements).filter(element => {
+                return (element.tagName == elementName);
+            }).map(element => {
+                return new EditableElement(element, _this);
+            });
+
+            _this.editableElements[option.value] = elementObjects;
+        }
+
+        let candidateElements = document.body.children;
+        addEditableElement(this, "BODY", document.getElementsByTagName("BODY"));
+        for (var i = 0; i < candidateElements.length; i++) {
+            let tagName = candidateElements[i].nodeName;
             switch (tagName) {
                 case 'BODY':
                 case 'HEADER':
@@ -43,48 +49,113 @@ class ElementEditor {
                 case 'SECTION':
                 case 'MAIN':
                     // if the option is not in the select
-                    if (Object.values(this.elementSelect).indexOf(tagName) == -1) {
-                        let option = document.createElement("option");
-                        option.value = tagName;
-                        let text = document.createTextNode(option.value);
-                        option.appendChild(text);
-                        this.elementSelect.appendChild(option);
-
-                        let elements = document.getElementsByTagName(option.value);
-                        let elementObjects = Array.from(elements).map(element => {
-                            return new EditableElement(element);
-                        });
-                        this.editableElements[option.value] = elementObjects;
+                    if (!this.editableElements[tagName]) {
+                        addEditableElement(this, tagName, candidateElements);
                     }
             }
         }
 
-        this.selectedElement = Object.keys(this.editableElements)[0];
-        this.elementSelect.addEventListener("change", (e) => {
-            let previous_elems = this.editableElements[this.selectedElement];
-            let selected_elems = this.editableElements[e.target.value];
+        this.selectedElementType = Object.keys(this.editableElements)[0];
+        this.selectedStyle = Array.from(this.styleSelect.children).find(e => { return true; }).value;
 
-            this.selectedElement = e.target.value;
+        this.styleInputData = {
+            "font-size": { type: 'text', placeholder: 'Press Enter to Set font-size', value: null },
+            "background-color": { type: 'color', placeholder: 'Set background color', value: null },
+            "color": { type: 'color', placeholder: 'Set text color', value: null }
+        };
+        this.selectedElement = null;
+        this.elementSelect.addEventListener("change", (e) => this.toggleEnabledElements(this, e.target.value));
+        this.styleSelect.addEventListener("change", (e) => this.toggleSelectStyle(e.target.value))
 
-            Array.from(previous_elems).forEach(elem => {
-                elem.disable(elem);
-            });
+    }
 
-            Array.from(selected_elems).forEach(elem => {
-                elem.enable(elem);
-            });
-
+    setSelectedElement(elem) {
+        // Deselect all elements
+        this.editableElements[this.selectedElementType].forEach(element => {
+            if (element.selected) {
+                element.deselect(element);
+            }
         });
 
-        console.log(this.editableElements);
+        // Set new selected element
+        this.selectedElement = elem;
+
+        if (elem) {
+
+            let currentStyle = window.getComputedStyle ? window.getComputedStyle(elem.element, null) : elem.element.currentStyle;
+
+            // Update style values
+            this.styleInputData["font-size"].value = currentStyle.fontSize;
+            this.styleInputData["background-color"].value = currentStyle.backgroundColor;
+            this.styleInputData["color"].value = currentStyle.color;
+
+            // update style field
+            this.changeInputField(this.styleInputData[this.selectedStyle]);
+        }
     }
 
-    handleSelectElement(e, editor) {
-        editor.selectedElement = e.target.value;
+    toggleEnabledElements(_this, newElement) {
+        let previous_elems = this.editableElements[this.selectedElementType];
+        let selected_elems = this.editableElements[newElement];
+        this.selectedElementType = newElement;
+
+        Array.from(previous_elems).forEach(elem => {
+            elem.disable(elem);
+        });
+
+        Array.from(selected_elems).forEach(elem => {
+            elem.enable(elem);
+        });
+
+        this.setSelectedElement(null);
     }
 
-    handleToggleEditor(e, text) {
-        console.log(this.selectedElement);
+    toggleSelectStyle(style) {
+        this.selectedStyle = style;
+        this.changeInputField(this.styleInputData[style]);
+    }
+
+    changeInputField(inputData) {
+        console.log("input data", inputData);
+
+        let _this = this;
+        let inputField = document.createElement('input');
+        inputField.type = inputData.type;
+        inputField.value = inputData.value;
+        inputField.placeholder = inputData.placeholder;
+        if (inputData.type == "color") {
+            inputField.addEventListener('change', function(e) {
+                _this.updateElementStyle(e);
+            });
+        } else {
+            inputField.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    _this.updateElementStyle(e);
+                }
+            });
+        }
+        inputField.addEventListener('keypress', function(e) {
+            console.log(e);
+            if (e.key === 'Enter' || inputData.type == "color") {
+                _this.updateElementStyle(e);
+            }
+        });
+
+        // Remove previous input field
+        if (this.styleInputFieldContainer.childNodes.length > 0) {
+            this.styleInputFieldContainer.removeChild(this.styleInputFieldContainer.childNodes[0])
+        }
+
+
+        // Add new input field with new data
+        this.styleInputFieldContainer.appendChild(inputField);
+    }
+
+    updateElementStyle(e) {
+        this.selectedElement.element.style[this.selectedStyle] = e.target.value;
+    }
+
+    handleToggleEditor(e, _this) {
         this.editorEnabled = !this.editorEnabled
 
         let footer__upper = document.querySelector('.footer__upper');
@@ -97,47 +168,45 @@ class ElementEditor {
         if (this.editorEnabled) {
             footer__upper.style.setProperty('height', rootStyle.getPropertyValue('--footer__upper-ub-size'));
             menu.classList.remove('hidden');
-            button.replaceChild(document.createTextNode(this.text.editorDisableText), button.childNodes[0]);
+            button.replaceChild(document.createTextNode(_this.text.editorDisableText), button.childNodes[0]);
+            this.toggleEnabledElements(this, this.selectedElementType);
 
         } else {
             footer__upper.style.setProperty('height', rootStyle.getPropertyValue('--footer__upper-lb-size'));
             menu.classList.add('hidden');
-            button.replaceChild(document.createTextNode(text.editorEnableText), button.childNodes[0]);
+            button.replaceChild(document.createTextNode(_this.text.editorEnableText), button.childNodes[0]);
+            this.toggleEnabledElements(this, null);
         }
-    }
-
-    test() {
-        console.log("test editor");
     }
 }
 
 
 class EditableElement {
-    constructor(element) {
+    constructor(element, parent) {
         this.element = element;
         this.editEnabled = false;
         this.selected = false;
+        this.setSelectedElement = () => parent.setSelectedElement(this);
 
         this.element.addEventListener('mouseenter', (e) => this.elementMouseEnter(e, this));
         this.element.addEventListener('mouseleave', (e) => this.elementMouseLeave(e, this));
-        this.element.addEventListener('click', (e) => this.elementMouseClick(e, this))
+        this.element.addEventListener('click', (e) => this.elementMouseClick(e))
+    }
+
+    deselect(_this) {
+        _this.selected = false;
+        _this.removeElementHighlight(_this);
+        _this.element.classList.remove('highlight--selected');
     }
 
     disable(_this) {
         _this.editEnabled = false;
-        this.selected = false;
-        _this.removeElementHighlight(_this);
-        _this.element.classList.remove('highlight--selected');
-        // Remove event listener doesnt work
-        // _this.element.removeEventListener('mouseenter', (e) => _this.elementMouseEnter(e, _this));
-        // _this.element.removeEventListener('mouseleave', (e) => _this.elementMouseLeave(e, _this));
+        _this.deselect(_this);
+
     }
 
     enable(_this) {
         _this.editEnabled = true;
-        // Remove event listener doesnt work
-        // _this.element.addEventListener('mouseenter', (e) => _this.elementMouseEnter(e, _this));
-        // _this.element.addEventListener('mouseleave', (e) => _this.elementMouseLeave(e, _this));
     }
 
     elementMouseEnter(e, _this) {
@@ -150,11 +219,12 @@ class EditableElement {
         _this.removeElementHighlight(_this);
     }
 
-    elementMouseClick(e, _this) {
-        if (this.editEnabled) {
+    elementMouseClick(e) {
+        if (this.editEnabled && this.selected == false) {
+            this.setSelectedElement(this);
             this.selected = true;
-            _this.element.classList.remove('highlight');
-            _this.element.classList.add('highlight--selected');
+            this.element.classList.remove('highlight');
+            this.element.classList.add('highlight--selected');
         }
     }
 
@@ -169,8 +239,6 @@ class EditableElement {
 
 const Editor = new ElementEditor();
 
-// Test code
-Editor.test();
 
 // Export Module to be able to require() this file.
 // module.exports = Editor;
