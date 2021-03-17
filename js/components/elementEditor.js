@@ -24,25 +24,40 @@ class ElementEditor {
         this.editorButton.addEventListener('click', (e) => this.handleToggleEditor(e, this.text));
         this.editorButton.replaceChild(document.createTextNode(this.text.editorEnableText), this.editorButton.childNodes[0]);
 
-        // Initialize elements to edit
+        // Should also contain body and children of main
+        this.candidateElements = document.body.children;
+
+        console.log(this.candidateElements);
+
         this.editableElements = {};
         this.elementSelect = document.getElementById('element-select');
 
-        Array.from(this.elementSelect.options).forEach(option => {
-            let tagName = option.value;
-            let elements = document.getElementsByTagName(tagName);
+        for (var i = 0; i < this.candidateElements.length; i++) {
+            let tagName = this.candidateElements[i].nodeName;
+            switch (tagName) {
+                case 'BODY':
+                case 'HEADER':
+                case 'FOOTER':
+                case 'ASIDE':
+                case 'ARTICLE':
+                case 'SECTION':
+                case 'MAIN':
+                    // if the option is not in the select
+                    if (Object.values(this.elementSelect).indexOf(tagName) == -1) {
+                        let option = document.createElement("option");
+                        option.value = tagName;
+                        let text = document.createTextNode(option.value);
+                        option.appendChild(text);
+                        this.elementSelect.appendChild(option);
 
-            if (elements.length <= 0) {
-                // Can be changed to adding options to empty select.
-                option.remove();
-            } else {
-                let elementObjects = Array.from(elements).map(element => {
-                    return new EditableElement(element);
-                });
-
-                this.editableElements[tagName] = elementObjects;
+                        let elements = document.getElementsByTagName(option.value);
+                        let elementObjects = Array.from(elements).map(element => {
+                            return new EditableElement(element);
+                        });
+                        this.editableElements[option.value] = elementObjects;
+                    }
             }
-        });
+        }
 
         this.selectedElement = Object.keys(this.editableElements)[0];
         this.elementSelect.addEventListener("change", (e) => {
