@@ -15,6 +15,13 @@ if (document.getElementById("test")) {
     });
 }
 
+if (document.getElementById("module-footer")) {
+    Array.from(document.querySelectorAll("#module-footer")).forEach((domContainer) => {
+        const newFooter = document.createElement('footer');
+        // newFooter.innerHTML = "" //Set to footer includes, but doesnt work. 
+    });
+}
+
 // Import modules
 const ElementEditor = require('../js/components/elementEditor');
 const Question = require('../js/components/question');
