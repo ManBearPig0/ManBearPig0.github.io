@@ -12,3 +12,8 @@ class Question {
 
     }
 }
+
+const questionClass = new Question();
+
+// Export Module to be able to require() this file.
+module.exports = questionClass;
