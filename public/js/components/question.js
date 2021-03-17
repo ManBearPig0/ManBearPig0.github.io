@@ -1,9 +1,9 @@
 class Question {
     problemStart = "";
-    constructor(ititle, problem, awnser) {
+    constructor(ititle, iproblem, iawnser) {
         this.title = ititle.toString();
-        this.problem = this.problemStart + problem;
-        this.awnser = awnser;
+        this.problem = this.problemStart + iproblem;
+        this.awnser = iawnser;
     }
 }
 Question.prototype.display = function(){
@@ -54,7 +54,14 @@ class multipleChoice extends Question{
         }
     }
     check(){
-        console.log("succes");
+        let boxes = document.getElementsByTagName("input");
+        let attempt = "";
+        for(let box of boxes){
+            if(box.checked){
+                attempt = box.getAttribute("value");
+            }
+        }
+        super.check(attempt);
     }
 }
 
@@ -84,24 +91,37 @@ var initialDisplay = function(){
     //create form
     var question = document.createElement("form");
 
-    //create submit button
+    //create check button
     var checkButton = document.createElement("input");
     checkButton.setAttribute("type", "button");
     checkButton.setAttribute("value", "Check");
     checkButton.id = "question__check";
+    checkButton.addEventListener("click", questions[currentquestion].check);
     question.appendChild(checkButton);
+
+    //create navigation buttons
+    var backButton = document.createElement("input");
+    var nextButton = document.createElement("input");
+    backButton.setAttribute("type", "button");
+    nextButton.setAttribute("type", "button");
+    backButton.setAttribute("value", "Back");
+    nextButton.setAttribute("value", "Next");
+    backButton.addEventListener("click", function(){if(currentquestion>0)currentquestion--;});
+    nextButton.addEventListener("click", function(){if(currentquestion<questions.length-1)currentquestion++;});
 
     //add all elements to document
     main.appendChild(questionTitle);
     main.appendChild(questionProblem);
     main.appendChild(question);
+    main.appendChild(backButton);
+    main.appendChild(nextButton);
 
     //display the first question
     questions[0].display();
 }
 var correct =  function(){ 
-
+    console.log("correct");
 }
 var incorrect = function(){
-
+    console.log("incorrect");
 }
