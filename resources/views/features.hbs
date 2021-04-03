@@ -1,0 +1,181 @@
+{{#> layout title="features" header_name="Laravel Featuresssz" }}
+<h1>Laravel Features</h1>
+<article>
+    <h2>Laravel code</h2>
+    <p>
+        Laravel has many features that we will discuss on this page, you will also find <a
+            href="features.html#code_table" target="_top" class="active"> code applications</a> of laravel here.
+    </p>
+</article>
+<article>
+    <h2>Database migration</h2>
+    <p>
+        A simple way for creating your database structure is by using the migration system of laravel. By creating
+        migrations that can either insert, update or delete table and columns, laravel will keep track of each new
+        update to your database template. In
+        essence, this will provide you with a version control like system for keeping track of your database structure.
+        You will be able to migrate or rollback from and to any migration in the list.
+    </p>
+</article>
+<article>
+    <h2>Seeding</h2>
+    <p>
+        Seeders are classes that make it easier to fill your database with data, seeding your database with either test
+        or pre-defined data. With existing models and if your database connection has been correctly set-up. After
+        migrating the tables, you can run
+        the command:
+    </p>
+    <div class="code-block"><code>php artisan make:seeder SeederName</code></div>
+    <p>
+        to create a new seeder class. Then add this seeder to be called within the <span
+            class="code-block text-code-expression">DatabaseSeeder</span> class. Then use the command:
+    </p>
+    <div class="code-block"><code>php artisan db:seed</code></div>
+    <p>
+        to run, and easily fill your database with the data you want.
+    </p>
+</article>
+<article>
+    <h2>Html Blade Syntax</h2>
+    <p>
+        Laravel's php syntax for easy to use logic within php, for authenticating, loops, sections and more! Within your
+        pages html files you can define different statements that imitate a simple programming language, for example the
+        'if' statement:
+    </p>
+    <div class="code-block">
+        <code>
+                    <span class="text-code-semantics">@if(</span><span class="text-code-variable">$condition</span><span class="text-code-semantics"> == </span><span class="text-code-expression">true</span><span class="text-code-semantics">)</span>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&GT; Your HTML here! &lt;/p&GT;<br>
+                    <span class="text-code-semantics">@endif</span>
+                </code>
+    </div>
+    <p>
+        These statements are identical to PHP's own code structure. In addition, to use regular PHP inline Laravel Blade
+        uses
+        <span class="code-block"><span class="text-code-semantics">{ { </span><span
+                class="text-code-variable">$php_var</span><span class="text-code-semantics"> }}</span></span> as escape
+        characters. Laravel Blade automatically recognizes and places
+        the content of the variable as text. But if your PHP variable is an array, this won't work. For that you can use
+        Blade's 'for' loop syntax:
+    </p>
+    <div class="code-block">
+        <code>
+                    <span class="text-code-semantics">@for(</span><span class="text-code-variable">$i</span><span class="text-code-semantics"> = </span><span class="text-code-expression">0</span><span class="text-code-semantics">; </span><span class="text-code-variable">$i</span><span class="text-code-semantics"> &lt; </span><span class="text-code-expression">10</span><span class="text-code-semantics">; </span><span class="text-code-variable">$i</span><span class="text-code-semantics">++)</span>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&GT; Creating <span class="text-code-semantics">{ { </span><span class="text-code-variable">$i</span><span class="text-code-semantics"> }}</span> of 10 text fields! &lt;/p&GT;<br>
+                    <span class="text-code-semantics">@endfor</span>
+                </code>
+    </div>
+    <p>
+        Or alternatively, similar to PHP's easy way to loop through objects, the 'foreach' statement:
+    </p>
+    <div class="code-block">
+        <code>
+                    <span class="text-code-semantics">@foreach(</span><span class="text-code-variable">$array</span><span class="text-code-expression"> as </span><span class="text-code-variable">$item</span><span class="text-code-semantics">)</span>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&GT; Placing each <span class="text-code-semantics">{ { </span><span class="text-code-variable">$item</span><span class="text-code-semantics"> }}</span> in this list! &lt;/p&GT;<br>
+                    <span class="text-code-semantics">@endforeach</span>
+                </code>
+    </div>
+</article>
+<!-- <article class="mt-4">
+            <h2>Unit Testing with PHPUnit</h2>
+            <p>
+                Extensive tests can be run using PHPUnit. Create your own html requests and assert if your pages give the output you want with any scenario.
+            </p>
+        </article> -->
+<article>
+    <h2>Laravel Eloquent</h2>
+    <p>
+        SQL, what is that? With laravel eloquent you will never have to manually create SQL queries to insert, update or
+        delete data from your database. Laravel makes use of the Models that correspond with a table in the database.
+        Via this model you can easily
+        interact with all the records to retrieve or update data. Simply use laravel's default compact object-relational
+        mapper (OMR) functionalities to handle the queries for you.
+    </p>
+    <table class="features__table-small" id="code_table">
+        <caption class="text-bold text-larger">Some examples of Laravel code</caption>
+        <thead>
+            <tr>
+                <th>code</th>
+                <th>explanation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="2">basic uses</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="code-block">
+                        <code><span class="text-code-semantics">-></span><span class="text-code-function">first</span><span class="text-code-semantics">()</span></code>
+                    </div>
+                </td>
+                <td>
+                    gets the first item from a model
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="code-block">
+                        <code><span class="text-code-semantics">-></span><span class="text-code-function">where</span><span class="text-code-semantics">(</span><span class="text-code-string">'attribute'</span><span class="text-code-semantics">, </span><span class="text-code-variable">$value</span><span class="text-code-semantics">)</span></code>
+                    </div>
+                </td>
+                <td>
+                    search for specific values, you can also use logic as a second parameter like '>' and '!='
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="code-block">
+                        <code><span class="text-code-semantics">-></span><span class="text-code-function">orderBy</span><span class="text-code-semantics">(</span><span class="text-code-string">'attribute'</span><span class="text-code-semantics">)</span> </code>
+                    </div>
+                </td>
+                <td>
+                    order the querie by a certain attribute
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="code-block">
+                        <code><span class="text-code-semantics">-></span><span class="text-code-function">get</span><span class="text-code-semantics">()</span></code>
+                    </div>
+                </td>
+                <td>
+                    for retrieving multiple records from a model
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">complex uses</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="code-block">
+                        <code>
+                                    <span class="text-code-semantics">-></span><span class="text-code-function">whereHas</span>(<span class="text-code-string">'foreign_key'</span><span class="text-code-semantics">, </span> <span class="text-code-statement">function</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) </span><span class="text-code-statement">use</span> <span class="text-code-variable">$value</span> <span class="text-code-semantics"> { </span><br>
+                                    <span class="text-code-variable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$query</span><span class="text-code-semantics">-></span><span class="text-code-function">where</span>(<span class="text-code-string">'attribute'</span>, <span class="text-code-variable">$value</span>);<br>
+                                    <span class="text-code-semantics">});</span>
+                                </code>
+                    </div>
+                </td>
+                <td>
+                    With this you can use advanced logic within other models by using foreign_keys
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>And if that isn't enough, on top of all this, you can also introduce your own query functions, theres are refered
+        to as Scopes. First you create a function in the model with camelcase and 'scope' in the beginning. Then put the
+        parameters with
+        <span class="text-code-variable">$query</span> always as first parameter, and finally you need to return your
+        own customly defined query.
+    </p>
+    <div class="code-block">
+        <code>
+                    <span class="text-code-comment">// This will return the last saved record from your table.</span><br>
+                    <span class="text-code-function">scopeLast</span><span class="text-code-semantics">(</span><span class="text-code-variable">$query</span><span class="text-code-semantics">) {</span><br>
+                    <span class="text-code-expression">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return </span> <span class="text-code-variable">$query</span><span class="text-code-semantics">-></span><span class="text-code-function">orderBy</span><span class="text-code-semantics">(</span><span class="text-code-string">'created_at'</span>
+                    <span class="text-code-semantics">, </span><span class="text-code-string">'ASC'</span><span class="text-code-semantics">)-></span><span class="text-code-function">first</span><span class="text-code-semantics">();</span><br>
+                    <span class="text-code-semantics">}</span>
+                </code>
+    </div>
+</article>
+{{/layout}}

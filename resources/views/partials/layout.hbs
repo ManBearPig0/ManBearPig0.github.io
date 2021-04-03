@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- required meta tags -->
+    <meta charset="utf-8">
+
+    <!-- Additional meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{{> @partial-block }}" />
+    <meta name="author" content="Simon Oliehoek, Herman Rimm, Gust Verhees" />
+    <meta name="keywords" content="laravel, php, framework, programming, website technology">
+
+    <!-- No idea -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Title Icon -->
+    <title>
+        {{title}}
+    </title>
+    <link rel="icon" href="../../assets/1200px-Laravel.png" />
+
+    <!-- Import css -->
+    <link rel="stylesheet" href="../../css/main.css" />
+
+    <!-- js is imported at the end -->
+</head>
+
+<body>
+    <!-- Include the header -->
+    <header>
+        <nav>
+            <label for="menu-dropdown" class="menu-dropdown--toggle">Menu</label>
+            <input type="checkbox" id="menu-dropdown" />
+            <ul class="menu">
+                <li><a href="/" target="_top">Home</a></li>
+                <li><a href="/history" target="_top">History</a></li>
+                <li><a href="/features" target="_top" class="active">Features</a></li>
+                <li><a href="/installation" target="_top">Installation</a></li>
+                <li><a href="/contact" target="_top">Contact</a></li>
+                <li><a href="/assessment" target="_top">Assessment</a></li>
+            </ul>
+        </nav>
+        <div id="title-logo">
+            <h1>{{header_name}}</h1>
+            <img src="../../assets/1200px-Laravel-white.png" alt="Laravel Logo">
+        </div>
+    </header>
+
+    <main>
+        {{> @partial-block }}
+    </main>
+
+    <!-- Include the footer -->
+    <footer class="row">
+        <div class="col-12 footer__upper">
+            <button type="button" id="footer__editer-button--toggle" class="btn btn-sm btn-red">Enable Editor Mode</button>
+
+            <menu class="hidden">
+                <div class="row">
+                    <div class="col mx-4">
+                        <span class="flex">
+                            <label for="element-select">Choose an element:</label>
+                            <select name="elements" id="element-select"></select>
+                        </span>
+                        <span class="flex">
+                            <label for="element-select">Modify the Style:</label>
+                            <select name="styles" id="style-select">
+                                <option value="font-size">Font Size</option>
+                                <option value="background-color">Background Color</option>
+                                <option value="color">Text Color</option>
+                            </select>
+                        </span>
+                    </div>
+
+                    <div class="col mx-4" id="style-input-field">
+
+                    </div>
+                </div>
+            </menu>
+
+        </div>
+        <div class="col-6 footer__lower">
+            <p>
+                Copyright &copy; 2021 - <a rel="external" target="_blank" class="text-link-silent" href="https://github.com/ManBearPig0/laravel">source code</a>
+            </p>
+        </div>
+        <div class="col footer__lower">
+            <p>
+                <span>The Framework - <a rel="external" target="_blank" class="text-link-silent" href="https://laravel.com/">Laravel</a></span>
+                <br><small>Laravel is a web application framework with expressive, elegant syntax.</small>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Import js after loading html -->
+    <!-- <script src="../js/app.js"></script> -->
+
+    <!-- Only used for testing without using Browsify. Can be removed in final version -->
+    <script src="../../js/components/elementEditor.js"></script>
+    <script src="../../js/components/question.js"></script>
+</body>
+
+</html>
