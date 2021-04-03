@@ -14,7 +14,7 @@ let __dirname = path.resolve(path.dirname(''));
 app.use(cors());
 
 // Set public folder as static html website
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.set('views', path.join(__dirname, 'resources/views'));
