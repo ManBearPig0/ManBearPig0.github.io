@@ -1,0 +1,53 @@
+
+05-04-21 00:18:45 GET request on 127.0.0.1/contact
+    params={}
+    content={}
+    
+05-04-21 00:38:00 GET request on 127.0.0.1/
+    params={}
+    content={}
+    
+05-04-21 00:38:06 GET request on 127.0.0.1/index.html
+    params={}
+    content={}
+    
+05-04-21 00:38:11 GET request on 127.0.0.1/installation
+    params={}
+    content={}
+    
+05-04-21 00:39:09 GET request on 127.0.0.1/installation
+    params={}
+    content={}
+    
+05-04-21 00:39:11 GET request on 127.0.0.1/assessment
+    params={}
+    content={}
+    
+05-04-21 00:39:32 GET request on 127.0.0.1/contact
+    params={}
+    content={}
+    
+05-04-21 00:39:34 GET request on 127.0.0.1/history
+    params={}
+    content={}
+    
+05-04-21 00:39:35 GET request on 127.0.0.1/installation
+    params={}
+    content={}
+    
+05-04-21 00:39:36 GET request on 127.0.0.1/installation
+    params={}
+    content={}
+    
+05-04-21 00:39:38 GET request on 127.0.0.1/
+    params={}
+    content={}
+    
+05-04-21 00:39:40 GET request on 127.0.0.1/assessment
+    params={}
+    content={}
+    
+05-04-21 00:39:48 GET request on 127.0.0.1/assessment
+    params={}
+    content={}
+    

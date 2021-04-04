@@ -1,0 +1,48 @@
+<% extend('./partials/layout', {title: "Home", header: "Home", description: "This is the Home page"}) %>
+    <main>
+        <h1>Homepage</h1>
+        <!-- General intro. -->
+        <article>
+            <p>
+                <span class="text-laravel">Laravel</span> is an easy to use, hard to master framework based on PHP. This framework can serve as a tutorial for learning proper website coding structures and all the features that come with it.
+            </p>
+        </article>
+        <!-- But what is a framework and how does it work? -->
+        <article>
+            <h2>What is a framework?</h2>
+            <p>
+                Frameworks provide software developers a foundation to build their programs on. This can be predefined classes and functions, managing hardware devices and interacting with system software. <span class="text-laravel">Laravel</span> is
+                an example of a framework that provides a foundation ontop of PHP with a predefined structure, classes en functions to make coding websites a lot quicker, less error prone, safer and with more functionalities.
+            </p>
+        </article>
+        <!-- Laravels framework -->
+        <article>
+            <h2><span class="text-laravel">Laravel's</span> Framework</h2>
+            <p>
+                <span class="text-laravel">Laravel</span> is still growing and one of the best choices for full-stack development using PHP. For if you are starting out or are experienced in web development, <span class="text-laravel">Laravel</span> is
+                a progressive framework: meaning it grows with you. <span class="text-laravel">Laravel</span> has a ton of useful features, but you only need to know about 1/8th or less of it to start creating modern professional websites. With
+                <span class="text-laravel">Laravel's</span> help, while developing, you will eventually learn of the capabilities of websites. Any addition you would want, <span class="text-laravel">Laravel</span> almost certainly has something that could
+                help you, with easy to follow tutorials to guide you. With neatly structured directories, <span class="text-laravel">Laravel</span> has a separate, easy to find, place for each feature.
+            </p>
+        </article>
+        <!-- Laravel's MVC architecture -->
+        <article>
+            <h2>Model View Controller</h2>
+            <div class="row">
+                <div class="col-8">
+                    <p>
+                        <span class="text-laravel">Laravel's</span> provides a standard MVC software architecture, which stands for Model-View-Controller. This architecture separates the application logic and rest of the user interface into three parts:
+                        the model, the view and the controller. The model is a representation of a real-life instance or object that holds or retrieves the data from a certain database table. The controller is the bridge between the model and view. It
+                        should handle logic to request data from a model to be send to a view and converts user action into different actions like routing or saving data in the a table via a model. The controller is also used for validating and sanitizing
+                        user posts. The view is essentially the front-end side. It builds the user interface, possibly with extra data retrieved from the back-end controller. Here you will render data into user-friendly html webpages.
+                    </p>
+                </div>
+                <div class="col-4">
+                    <img src="../assets/mvc-diagram-501x300.png" alt="Picture of the scematics of the Model, View, Controller layout: three ellipses with the names 'model', 'controller', 'view' all pointing arrows at eachother except between model and view.">
+                </div>
+            </div>
+        </article>
+        <div class="iframe-container iframe-lg-center">
+            <iframe class="shadow-lg" width="790" height="474" src="https://laracasts.com/series/laravel-6-from-scratch/episodes/1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </main>

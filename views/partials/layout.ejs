@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- required meta tags -->
+    <meta charset="utf-8">
+
+    <!-- Additional meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{{description}}" />
+    <meta name="author" content="Simon Oliehoek, Herman Rimm, Gust Verhees" />
+    <meta name="keywords" content="laravel, php, framework, programming, website technology">
+
+    <!-- No idea -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Title Icon -->
+    <title>
+        <%= title %>
+    </title>
+    <link rel="icon" href="/assets/1200px-Laravel.png" />
+
+    <!-- Import css -->
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <!-- js is imported at the end -->
+</head>
+
+<body>
+    <!-- Include the header -->
+    <%- include('./header', {name: header}) -%>
+
+
+        <%- content -%>
+
+            <!-- Include the footer -->
+            <%- include('./footer') -%>
+
+                <!-- Import js after loading html -->
+                <!-- <script src="../js/app.js"></script> -->
+
+                <!-- Only used for testing without using Browsify. Can be removed in final version -->
+                <script src="../js/components/elementEditor.js"></script>
+                <script src="../js/components/question.js"></script>
+</body>
+
+</html>

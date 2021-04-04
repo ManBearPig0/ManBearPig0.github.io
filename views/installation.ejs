@@ -1,0 +1,79 @@
+<% extend('./partials/layout', {title: "installation", header: "How to Install", description: "A guide to installing laravel"}) %>
+    <main>
+        <h1>Getting Started!</h1>
+        <article>
+            <h2>Composer</h2>
+            <p>Composer is a Dependency management tool for PHP. You can use it to easily install and keep track of 'packages', like Laravel. To install composer, first visit <a rel="external" target="_blank" href="https://getcomposer.org/download/">Download Composer</a>                and install the program on your computer. Either use the windows installer from <a rel="external" target="_blank" href="https://getcomposer.org/Composer-Setup.exe">here</a> or install it manually.
+            </p>
+        </article>
+        <article>
+            <h2>Installing laravel with Composer</h2>
+            <p>
+                We can now use Composer to automatically install laravel for us. Open a console panel and go the the directory where you wish to install Laravel. This can be done using the
+                <span class="code-block">cd</span> command. Then execute these commands for creating your first Laravel project:
+            </p>
+            <p class="code-block">
+                composer create-project laravel/laravel [project name]<br> cd [project name]
+            </p>
+            <p>
+                Now that your project has been created, you can use the
+                <span class="code-block text-code-expression">serve</span> command to start Laravel's local development server.
+            </p>
+            <p class="code-block">
+                php artisan serve
+            </p>
+            <p class="text-larger text-center">
+                Further information can be found at Laravel's own installation page:<br>
+                <a class="text-bold" rel="external" target="_blank" href="https://laravel.com/docs/8.x/installation">Laravel
+            Installation</a>
+            </p>
+        </article>
+        <article class="text-center">
+            <h2 class="text-larger">Tutorials for Laravel</h2>
+            <p style="margin-left: 30%; margin-right: 30%;">Laravel is a widely known framework with many people having resources to help you learn the framework. The best tutorials that we can recommend are from <a class="text-bold" rel="external" target="_blank" href="https://laracasts.com/topics/laravel">Laracast</a>
+            </p>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="iframe-container">
+                        <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube-nocookie.com/embed/3uYXAcit_Sg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="hcenter">
+                        <h3 class="text-bold">Installation Tutorial</h3>
+                        <p>You can find this playlist <a class="text-bold" rel="external" target="_blank" href="https://youtube.com/playlist?list=PL3VM-unCzF8iPERY07XRw0JXG_c50CapR">here</a>.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="iframe-container">
+                        <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/kqMiT8DsJjc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="hcenter">
+                        <h3 class="text-bold">Basics of Routing and Views</h3>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                </div>
+                <div class="col-12 col-md-6">
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="iframe-container">
+                        <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/0NeGELwdD9k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="hcenter">
+                        <h3 class="text-bold">Sending data to your Views</h3>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="iframe-container">
+                        <iframe class="shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/Gemrp2EULOk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="hcenter">
+                        <h3 class="text-bold">Learning Eloquent 101</h3>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                </div>
+            </div>
+        </article>
+    </main>
