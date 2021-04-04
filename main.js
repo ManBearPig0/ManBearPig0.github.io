@@ -1,13 +1,16 @@
 // Import modules
-import http from 'http';
 import cors from 'cors';
 import path from 'path';
 import express from 'express';
-import ejs from 'ejs';
 import ejsextend from 'express-ejs-extend';
 import fs from 'fs';
 
 import { convertDate } from './public/js/helpers/convertDate.js';
+
+import { pageRoutes } from './routes/pageRoutes.js';
+import { authRoutes } from './routes/pageRoutes.js';
+import { userRoutes } from './routes/pageRoutes.js';
+import { quizRoutes } from './routes/pageRoutes.js';
 
 // import { routes } from './routes.js';
 
@@ -48,52 +51,18 @@ app.use((req, res, next) => {
 });
 
 
+// Define routes
+app.use(pageRoutes);
+app.use(authRoutes);
+app.use(userRoutes);
+app.use(quizRoutes);
 
 
-// Set public folder as static html website
-// app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.get('/', (req, res, next) => {
-    let data = { someData: "what?" };
-
-    res.render("index", data);
-});
-
-app.get('/assessment', (req, res, next) => {
-
-    res.render("assessment");
-});
-
-app.post('/assessment/save-question', (req, res, next) => {
-
-});
-
-app.get('/contact', (req, res, next) => {
-
-    res.render("contact");
-});
-
-app.get('/features', (req, res, next) => {
-
-    res.render("features");
-});
-
-app.get('/history', (req, res, next) => {
-
-
-    res.render("history");
-});
-
-app.get('/installation', (req, res, next) => {
-
-    res.render("installation");
-});
-
+// If no route found, return 404 error
 app.use((req, res, next) => {
-    res.status(404).sendFile('./views/errors/404.html', { root: __dirname });
+    console.log("Errors!?!?");
+    res.status(404).render('errors/404', { path: req.path });
 });
-
 
 // Start application
 app.listen(port, () => console.log(`Application listening on virtual host: http://127.0.0.1:${port}/`));
