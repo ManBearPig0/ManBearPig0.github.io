@@ -16,12 +16,23 @@ CREATE TABLE IF NOT EXISTS "attempt" (
 	"index"	INTEGER NOT NULL,
 	"user_id"	INTEGER NOT NULL,
 	"quiz_id"	INTEGER NOT NULL,
-	"started"	INTEGER NOT NULL UNIQUE,
-	"ended"	INTEGER NOT NULL UNIQUE,
+	"started"	INTEGER NOT NULL,
+	"ended"	INTEGER NOT NULL,
 	PRIMARY KEY("index","user_id","quiz_id"),
 	FOREIGN KEY("user_id") REFERENCES "user"("id") ON DELETE CASCADE,
-	FOREIGN KEY("quiz_id") REFERENCES "quiz"("id") ON DELETE CASCADE
+	FOREIGN KEY("quiz_id") REFERENCES "quiz"("id") ON DELETE CASCADE,
+	CHECK("started"<"ended")
 );
+CREATE TRIGGER "attempt_temporal_overlap"
+BEFORE INSERT ON "attempt"
+WHEN (EXISTS (SELECT * FROM "attempt"
+WHERE "index" < NEW."index"
+AND "user_id" = NEW."user_id"
+AND "quiz_id" = NEW."quiz_id"
+AND "ended" > NEW."started"))
+BEGIN
+	SELECT RAISE(ABORT, 'Cannot start next attempt before previous ones have ended.');
+END;
 CREATE TABLE IF NOT EXISTS "topic" (
 	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	"title"	TEXT NOT NULL UNIQUE,
@@ -46,7 +57,8 @@ CREATE TABLE IF NOT EXISTS "question" (
 	"answer"	TEXT NOT NULL,
 	"type"	TEXT NOT NULL,
 	"quiz_id"	INTEGER NOT NULL,
-	FOREIGN KEY("quiz_id") REFERENCES "quiz"("id") ON DELETE CASCADE,
 	PRIMARY KEY("index","quiz_id")
+	FOREIGN KEY("quiz_id") REFERENCES "quiz"("id") ON DELETE CASCADE,
+	CHECK ("type" IN ('multiple_choice', 'fill_in_the_blank'))
 );
 COMMIT;
