@@ -9,4 +9,4 @@ router.post('/auth', (req, res, next) => {
 
 
 
-export const quizRoutes = router;
+export const userRoutes = router;
