@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS "user" (
 );
 CREATE TABLE IF NOT EXISTS "question" (
 	"index"	INTEGER NOT NULL,
-	"title"	TEXT NOT NULL UNIQUE,
+	"title"	TEXT NOT NULL,
 	"statement"	TEXT NOT NULL UNIQUE,
 	"answer"	TEXT NOT NULL,
 	"type"	TEXT NOT NULL,
