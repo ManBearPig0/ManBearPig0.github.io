@@ -92,6 +92,20 @@ textarea {
     border: 2px solid #D84949;
 }
 
+.btn-outline-red {
+    border: solid #D84949 2px;
+    background-color: #fff;
+    color: #D84949;
+}
+
+.btn-outline-red:hover {
+    background-color: #D84949;
+    color: white;
+    border: 2px solid #b44343;
+}
+
+
+
 .btn-dark {
     background-color: #3a3a3a;
     color: white;
@@ -243,7 +257,8 @@ nav a {
     display: block;
     padding: 0px 15px;
     color: rgb(40, 40, 40);
-    font-size: 16px;
+    font-size: 12px;
+    font-weight: bold;
     line-height: 40px;
 }
 
@@ -367,6 +382,11 @@ h1 {
     font-family: 'Helvetica', 'Arial', 'Sans-Serif';
 }
 
+h2 {
+    font-size: 2em;
+    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
+}
+
 main img {
     margin: 8px;
     max-width: 100%;
@@ -401,7 +421,15 @@ p {
 #title-logo h1 {
     color: white;
     align-self: center;
-    margin: 0;
+    margin: 0; 
+}
+
+#title-logo h2 {
+    font-size: 12px;
+    font-weight: normal;
+    color: white;
+    align-self: center;
+    margin: 0 0 0 50px;
 }
 
 #taylor-headshot {
@@ -601,7 +629,8 @@ p {
         font-size: 12px;
     }
     nav a {
-        font-size: 24px;
+        font-size: 18px;
+        font-weight: bold;
         line-height: 60px;
     }
     nav ul {

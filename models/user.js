@@ -1,13 +1,16 @@
 import sql from 'sqlite3';
+import Model from './base/model.js';
 
-class UserModel {
-    attributes = ["id", "name", "password", "login"];
+export default class UserModel extends Model {
 
-    selectSQL = "";
-    insertSQL = "";
-    
-    select() {
-
+    constructor() {
+        super(["id", "name", "password", "login"], "user", ["id"]);
+        
     }
+    
+    
+
+
+
 
 }
