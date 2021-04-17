@@ -4,7 +4,6 @@ import path from 'path';
 import express from 'express';
 import ejsextend from 'express-ejs-extend';
 import fs from 'fs';
-import UserModel from './models/user.js';
 
 
 import { convertDate } from './public/js/helpers/convertDate.js';
@@ -13,9 +12,6 @@ import { pageRoutes } from './routes/pageRoutes.js';
 import { authRoutes } from './routes/authRoutes.js';
 import { userRoutes } from './routes/userRoutes.js';
 import { quizRoutes } from './routes/quizRoutes.js';
-
-let userModel = new UserModel();
-userModel.where(['id', '>', '2']).select(['name', 'password']).first();
 
 
 /** Initialize with Express*/
