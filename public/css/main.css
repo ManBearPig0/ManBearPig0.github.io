@@ -22,11 +22,11 @@ main {
     color: #313131;
 }
 
-.questionwindow{
+#questionwindow{
     /*needs tuning*/
     margin-left: 200px;
 }
-.topicselection{
+#topicselection{
     height: auto;
     width: 160px;
     top: 120px;
