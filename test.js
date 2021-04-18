@@ -34,7 +34,7 @@ import QuestionModel from './models/question.js';
 
 // new TopicModel().where(['title', 'Code']).quiz().orderBy('title', 'asc').get(showResult);
 
-new QuestionModel().create({index: "1", quiz_id: "1", title:"Creator", statement: JSON.stringify({options: ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]}), answer: "Taylor Otwell", type: "multiple_choice"});
+//new QuestionModel().create({index: "1", quiz_id: "1", title:"Creator", statement: JSON.stringify({options: ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]}), answer: "Taylor Otwell", type: "multiple_choice"});
 
 // router.get("/getTopics", (req, res, next) => {
 
@@ -50,7 +50,7 @@ new QuestionModel().create({index: "1", quiz_id: "1", title:"Creator", statement
 // });
 
 
-new QuizModel().where(["title", "Blade"]).question().where(["index", 1]).first(showResult);
+//new QuizModel().where(["title", "Blade"]).question().where(["index", 1]).first(showResult);
 
 
 
@@ -69,3 +69,5 @@ new QuizModel().where(["title", "Blade"]).question().where(["index", 1]).first(s
 
 // Running Query:   SELECT * FROM question WHERE "quiz_id" IN (SELECT "id" FROM (SELECT * FROM quiz WHERE "title" = ? )) WHERE "index" = ?  
 // With values:     [ 'Bladequestion=1', undefined ]
+
+new QuestionModel().create({index: "1", quiz_id: "1", title:"Creator", statement: JSON.stringify({problem: "Who created laravel?", options: ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]}), answer: "Taylor Otwell", type: "multiple_choice"});

@@ -5,10 +5,7 @@ import express from 'express';
 import ejsextend from 'express-ejs-extend';
 import fs from 'fs';
 import BodyParser from 'body-parser';
-import random from 'random';
-import bcrypt from 'bcrypt';
 
-bcrypt.random();
 
 import { convertDate } from './helpers/convertDate.js';
 

@@ -26,7 +26,12 @@ router.get("/getQuizes", (req, res, next) => {
 
 router.get("/getQuestion", (req, res, next) => {
     function getResult(result) {
-        var question = {title: result.title, problem: "test", options: JSON.parse(result.statement).options, type : result.type};
+        if(result.type == "multiple_choice"){
+            var question = {title: result.title, problem: JSON.parse(result.statement).problem, options: JSON.parse(result.statement).options, type : result.type};
+        }
+        else if(result.type == "fill_in_the_blank"){
+            var question = {title: result.title, problem: JSON.parse(result.statement).problem, firsthalf: JSON.parse(result.statement).firsthalf, secondhalf: JSON.parse(result.statement).secondhalf, type : result.type};
+        }
         var text = JSON.stringify(question);
         res.send(text);
     }
