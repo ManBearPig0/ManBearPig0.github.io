@@ -33,18 +33,30 @@ main {
     color: #313131;
 }
 
-#questionwindow {
-    /*needs tuning*/
-    margin-left: 200px;
+#assessment {
+    display: flex;
+    margin: 0px 0px 10px 0px;
 }
 
-#topicselection {
-    height: auto;
-    width: 160px;
-    top: 120px;
-    position: fixed;
+#topic-selection {
+    width: 110px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
-    margin: 10px 25px 0px 25px
+}
+
+#topic-selection li, #question-window ul li {
+    margin: 10px auto;
+}
+
+#topic-selection, #question-window ul {
+    height: fit-content;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    display: grid;
+}
+
+#question-window {
+    margin: 0px 5%; 
 }
 
 textarea {
@@ -469,6 +481,7 @@ p {
 #login {
     display: grid;
     align-self: center;
+    margin-right: 10px;
 }
 
 #login p {
@@ -960,8 +973,9 @@ p {
     }
     .menu-dropdown--toggle {
         display: block;
-        padding: 0px 30px;
+        width: 110px;
         font-size: 20px;
+	text-align: center;
         line-height: 80px;
     }
     .menu-dropdown--toggle:hover {
