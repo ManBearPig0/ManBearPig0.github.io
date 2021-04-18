@@ -51,7 +51,7 @@ Question.prototype.display = function() {
     question.appendChild(backButton);
     question.appendChild(nextButton);
 
-    document.getElementById("questionwindow").appendChild(question);
+    document.getElementById("question-window").appendChild(question);
 }
 class multipleChoice extends Question {
     problemStart = "Pick the right answer: ";
@@ -138,7 +138,7 @@ function loadQuestion(quiz, questionnumber){
             else if(values.type == "fill_in_the_blank"){
                 currentquestion = new fillInTheBlank(values.title, values.firsthalf, values.secondhalf, quiz, questionnumber);
             }
-            var frame = document.getElementById("questionwindow");
+            var frame = document.getElementById("question-window");
             while (frame.children.length > 0) {
                 frame.removeChild(frame.childNodes[0]);
             }
@@ -154,19 +154,22 @@ function loadQuizes(topic){
         if(req.readyState == 4 && req.status == 200)
         {
             var quizes = JSON.parse(req.responseText);
-            var frame = document.getElementById("questionwindow");
+            var frame = document.getElementById("question-window");
             while (frame.children.length > 0) {
                 frame.removeChild(frame.childNodes[0]);
             }
+	    var ul = document.createElement("ul");
             for(var i = 0; i < quizes.length; i++){
-                var p = document.createElement("p");
+                var li = document.createElement("li");
                 var button = document.createElement("input");
+		button.className = "btn btn-red";
                 button.setAttribute("type", "button");
                 button.setAttribute("value", quizes[i]);
                 button.setAttribute("onclick", "loadQuestion(value, 1)")
-                p.appendChild(button);
-                frame.appendChild(p);
+                li.appendChild(button);
+                ul.appendChild(li);
             }
+	    frame.appendChild(ul);
         }
     }
     req.send();
@@ -219,15 +222,16 @@ req.onreadystatechange = function(){
     if(req.readyState == 4 && req.status == 200)
     {
         var topics = JSON.parse(req.responseText);
-        var frame = document.getElementById("topicselection");
+        var frame = document.getElementById("topic-selection");
         for(var i = 0; i < topics.length; i++){
-            var p = document.createElement("p");
+            var li = document.createElement("li");
             var button = document.createElement("input");
+	    button.className = "btn btn-red";
             button.setAttribute("type", "button");
             button.setAttribute("value", topics[i]);
             button.setAttribute("onclick", "loadQuizes(value)")
-            p.appendChild(button);
-            frame.appendChild(p);
+            li.appendChild(button);
+            frame.appendChild(li);
         }
     }
 }
