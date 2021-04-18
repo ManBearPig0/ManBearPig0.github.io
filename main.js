@@ -83,13 +83,8 @@ app.use((req, res, next) => {
     next();
 });
 
-// // Check if logged in.
+// Check if logged in.
 app.use((req, res, next) => {
-
-    console.log(req.session, req.sessionID);
-
-
-
     if (typeof req.session.loggedIn === 'undefined') {
         req.session.loggedIn = false;
     } 

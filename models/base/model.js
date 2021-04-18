@@ -18,7 +18,7 @@ export default class Model {
         this.result = false;
     }
 
-    #database_path = path.resolve(path.dirname('')) + "/storage/db/laravel.db";
+    _database_path = path.resolve(path.dirname('')) + "/storage/db/laravel.db";
 
     /**
      * Customly set the SELECT query, vulnerable against SQL injections
@@ -41,7 +41,7 @@ export default class Model {
      * @returns {Model} Returns self
      */
     _hasMany(model, foreign_key, key) {
-        model.select_query = `SELECT * FROM (SELECT * FROM ${model.table} WHERE ${this.#createNameID(foreign_key)} IN (SELECT ${this.#createNameID(key)} FROM (${this.select_query})))`;
+        model.select_query = `SELECT * FROM (SELECT * FROM ${model.table} WHERE ${this._createNameID(foreign_key)} IN (SELECT ${this._createNameID(key)} FROM (${this.select_query})))`;
         model.input_data = this.input_data;
         model.input_names = this.input_names;
         return model;
@@ -55,7 +55,7 @@ export default class Model {
      * @returns {Model} Returns self
      */
     _belongsTo(model, foreign_key, key) {
-        model.select_query = `SELECT * FROM (SELECT * FROM ${model.table} WHERE ${this.#createNameID(foreign_key)} IN (SELECT ${this.#createNameID(key)} FROM (${this.select_query})))`;
+        model.select_query = `SELECT * FROM (SELECT * FROM ${model.table} WHERE ${this._createNameID(foreign_key)} IN (SELECT ${this._createNameID(key)} FROM (${this.select_query})))`;
         model.input_data = this.input_data;
         model.input_names = this.input_names;
         return model;
@@ -89,7 +89,7 @@ export default class Model {
 
             // Add multiple conditions while validating input
             conditional_query = conditionList.filter((condition) => (this.attributes.indexOf(condition[0]) != -1 && this.sql_logic_operators.indexOf(condition[1]) != -1))
-                .map((condition) => `${this.#createNameID(condition[0])} ${condition[1]} ${this.#createDataID(condition[2])}`)
+                .map((condition) => `${this._createNameID(condition[0])} ${condition[1]} ${this._createDataID(condition[2])}`)
                 .join(" AND ");
         } else if (this.attributes.indexOf(conditionList[0]) != -1) {
             // Add the '=' operator to if didn't specify an operator
@@ -99,12 +99,12 @@ export default class Model {
 
             // single condition while validating inputs
             if ((this.attributes.indexOf(conditionList[0]) != -1 && this.sql_logic_operators.indexOf(conditionList[1]) != -1)) {
-                conditional_query = `${this.#createNameID(conditionList[0])} ${conditionList[1]} ${this.#createDataID(conditionList[2])}`;
+                conditional_query = `${this._createNameID(conditionList[0])} ${conditionList[1]} ${this._createDataID(conditionList[2])}`;
             }
         }
 
         if (conditional_query) {
-            this.select_query = this.#appendAfterQueryStatement(this.select_query, conditional_query, "WHERE", (orWhere) ? "OR" : null)
+            this.select_query = this._appendAfterQueryStatement(this.select_query, conditional_query, "WHERE", (orWhere) ? "OR" : null)
         }
 
         return this;
@@ -118,11 +118,11 @@ export default class Model {
             attributes = [attributes];
         }
 
-        let order_query = attributes.filter((name) => this.attributes.indexOf(name) != -1).map((attribute) => this.#createNameID(attribute)).join(` ${direction}, `);
+        let order_query = attributes.filter((name) => this.attributes.indexOf(name) != -1).map((attribute) => this._createNameID(attribute)).join(` ${direction}, `);
             order_query += ` ${direction}`;
 
         if (order_query) {
-            this.select_query = this.#appendAfterQueryStatement(this.select_query, order_query, "ORDER BY");
+            this.select_query = this._appendAfterQueryStatement(this.select_query, order_query, "ORDER BY");
         }
 
         return this;
@@ -139,7 +139,7 @@ export default class Model {
         if (Array.isArray(attributes[0])) {
             // Select each attribute with optional SQL function
             select_str = attributes.filter((arr) => this.attributes.indexOf(arr[0]) != -1).map((arr) => {
-                let name = `${this.#createNameID(arr[0])}`;
+                let name = `${this._createNameID(arr[0])}`;
                 arr.splice(0, 1).filter((func) => this.sql_functions.indexOf(func) != -1).forEach((func) => {
                     name = `${func}(${name})`;
                 });
@@ -147,7 +147,7 @@ export default class Model {
             }).join(", ");
         } else {
             // Select each attribute.
-            select_str = attributes.filter((name) => this.attributes.indexOf(name) != -1).map((attribute) => this.#createNameID(attribute)).join(", ");
+            select_str = attributes.filter((name) => this.attributes.indexOf(name) != -1).map((attribute) => this._createNameID(attribute)).join(", ");
         }
 
         let leftPos = this.select_query.indexOf("SELECT");
@@ -165,7 +165,7 @@ export default class Model {
      * @param {*} additional 
      * @returns 
      */
-    #appendAfterQueryStatement(queryString, appendString, statement, additional = null) {
+    _appendAfterQueryStatement(queryString, appendString, statement, additional = null) {
         const statementOrderList = ["WHERE", "ORDER BY", "IN"];
         const statementOrderPos = statementOrderList.indexOf(statement);
         if (statementOrderPos == -1) {
@@ -212,7 +212,7 @@ export default class Model {
      * @param {string} dataString 
      * @returns 
      */
-    #createDataID(dataString) {
+    _createDataID(dataString) {
         const dataID = Object.keys(this.input_data).length;
         this.input_data[dataID] = dataString;
         return `"${dataID}"`;
@@ -223,7 +223,7 @@ export default class Model {
      * @param {string} dataString 
      * @returns 
      */
-    #createNameID(nameString) {
+    _createNameID(nameString) {
         const nameID = Object.keys(this.input_names).length;
         this.input_names[nameID] = nameString;
         return `'${nameID}'`;
@@ -234,7 +234,7 @@ export default class Model {
      * @param {string} dataString 
      * @returns 
      */
-    #createAttributeID(dataString) {
+    _createAttributeID(dataString) {
         const dataID = Object.keys(this.input_data).length;
         this.input_attributes[dataID] = dataString;
         return dataID;
@@ -247,7 +247,7 @@ export default class Model {
      */
     first(callback) {
         let query = this.select_query;
-        this.#runQuery("get", query, callback);
+        this._runQuery("get", query, callback);
     }
 
     /**
@@ -257,7 +257,7 @@ export default class Model {
      */
     get(callback) {
         let query = this.select_query;
-        this.#runQuery("all", query, callback);
+        this._runQuery("all", query, callback);
     }
 
     /**
@@ -266,9 +266,9 @@ export default class Model {
      * @returns {array} returns a 2d array of records and their attribute values or undefined
      */
     delete() {
-        let query = `DELETE FROM ${this.table} WHERE (${this.key.map((attribute) => this.#createNameID(attribute)).join(', ')}) 
-            IN (SELECT (${this.key.map((attribute) => this.#createNameID(attribute)).join(', ')}) FROM (${this.select_query}))`;
-        this.#runQuery("run", query);
+        let query = `DELETE FROM ${this.table} WHERE (${this.key.map((attribute) => this._createNameID(attribute)).join(', ')}) 
+            IN (SELECT (${this.key.map((attribute) => this._createNameID(attribute)).join(', ')}) FROM (${this.select_query}))`;
+        this._runQuery("run", query);
     }
 
     /** 
@@ -284,16 +284,16 @@ export default class Model {
         for (const attribute in attributeValues) {
             if (this.attributes.indexOf(attribute) != -1) {
                 if (setQuery) {
-                    setQuery += `, ${this.#createNameID(attribute)} = ${this.#createDataID(attributeValues[attribute])}`;
+                    setQuery += `, ${this._createNameID(attribute)} = ${this._createDataID(attributeValues[attribute])}`;
                 } else {
-                    setQuery = `${this.#createNameID(attribute)} = ${this.#createDataID(attributeValues[attribute])}`;
+                    setQuery = `${this._createNameID(attribute)} = ${this._createDataID(attributeValues[attribute])}`;
                 }
             }
         }
 
-        let query = `UPDATE ${this.table} SET ${setQuery} WHERE ${this.key.map((attribute) => this.#createNameID(attribute)).join(', ')} 
-            IN (SELECT (${this.key.map((attribute) => this.#createNameID(attribute)).join(', ')}) FROM (${this.select_query}))`;
-        this.#runQuery("get", query);
+        let query = `UPDATE ${this.table} SET ${setQuery} WHERE ${this.key.map((attribute) => this._createNameID(attribute)).join(', ')} 
+            IN (SELECT (${this.key.map((attribute) => this._createNameID(attribute)).join(', ')}) FROM (${this.select_query}))`;
+        this._runQuery("get", query);
     }
 
 
@@ -311,8 +311,8 @@ export default class Model {
         }
 
         // Build sql query
-        const query = `INSERT INTO ${this.table}(${names.map((attribute) => this.#createNameID(attribute)).join(', ')}) VALUES (${values.map((val) => this.#createDataID(val)).join(', ')})`;
-        this.#runQuery("run", query);
+        const query = `INSERT INTO ${this.table}(${names.map((attribute) => this._createNameID(attribute)).join(', ')}) VALUES (${values.map((val) => this._createDataID(val)).join(', ')})`;
+        this._runQuery("run", query);
     }
 
 
@@ -323,9 +323,9 @@ export default class Model {
      * @param {*} callback A callback function that will run once the query has finished
      * @returns 
      */
-    #runQuery(functionName, query, callback = null) {
+    _runQuery(functionName, query, callback = null) {
         sqlite.verbose();
-        let db = new sqlite.Database(this.#database_path, sqlite.OPEN_READWRITE, (err) => {
+        let db = new sqlite.Database(this._database_path, sqlite.OPEN_READWRITE, (err) => {
             if (err) { return console.error(err.message); }
         });
 
