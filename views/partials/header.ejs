@@ -13,28 +13,16 @@
     </nav>
     <div id="title-logo">
         <img src="../../assets/1200px-Laravel-white.png" alt="Laravel Logo">
-        <h1>
-            <%= page_name %>
-        </h1>
-        <h2>
-            <% if (path !== "/login") { %>
-                <% if (logged_in) { %>
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <small>Logged in as:</small> <span style="font-weight: bold;"> <%= auth_user %> </span>
-                        </div>
-                        <div class="col-12 text-center">
-                            <a class="btn btn-sm btn-outline-red" href="/logout">Logout</a>
-                        </div>
-                    </div>
-                    <% } else { %>
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <a class="btn btn-outline-red" href="/login">Login</a>
-                            </div>
-                        </div>
-                        <% } %>
-                            <% } %>
-        </h2>
+        <h1><%= page_name %></h1>
+    </div>
+    <div id="login">
+        <% if (path !== "/login") { %>
+            <% if (logged_in) { %>
+                <p>Logged in as: <span><%= auth_user %></span></p>
+                <a class="btn btn-sm btn-outline-red" href="/logout">Logout</a>
+            <% } else { %>
+                <a class="btn btn-outline-red" href="/login">Login</a>
+                <% } %>
+            <% } %>
     </div>
 </header>
