@@ -37,7 +37,7 @@ Question.prototype.display = function() {
     backButton.setAttribute("value", "Back");
     nextButton.setAttribute("value", "Next");
     backButton.addEventListener("click", function() {
-        if(currentquestion.questionnumber >0){
+        if(currentquestion.questionnumber > 1){
             loadQuestion(currentquestion.quiz, currentquestion.questionnumber-1);
         }
     });
@@ -126,16 +126,16 @@ var questions = [
 
 function loadQuestion(quiz, questionnumber){
     var req = new XMLHttpRequest();
-    req.open("GET", "http://127.0.0.1:3000/getQuestion?quiz="+quiz+"question="+questionnumber, true)
+    req.open("GET", "http://127.0.0.1:3000/getQuestion?quiz="+quiz+"&question="+questionnumber, true)
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200)
         {
             var values = JSON.parse(req.responseText);
-            if(values.type == "multipleChoice")
+            if(values.type == "multiple_choice")
             {
                 currentquestion = new multipleChoice(values.title, values.problem, values.options, quiz, questionnumber);
             }
-            else if(values.type == "fillInTheBlank"){
+            else if(values.type == "fill_in_the_blank"){
                 currentquestion = new fillInTheBlank(values.title, values.firsthalf, values.secondhalf, quiz, questionnumber);
             }
             var frame = document.getElementById("questionwindow");
@@ -173,7 +173,7 @@ function loadQuizes(topic){
 }
 function checkquestion(e){
     e.preventDefault();
-    req.open("GET", "http://127.0.0.1:3000/checkQuestion?attempt="+currentquestion.check(), true);
+    req.open("GET", "http://127.0.0.1:3000/checkQuestion?attempt="+currentquestion.check()+"&quiz="+currentquestion.quiz+"&questionnumber="+currentquestion.index, true);
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200)
         {

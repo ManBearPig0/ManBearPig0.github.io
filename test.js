@@ -2,6 +2,7 @@
 import UserModel from './models/user.js';
 import QuizModel from './models/quiz.js';
 import TopicModel from './models/topic.js';
+import QuestionModel from './models/question.js';
 
 // let result = new UserModel().where([['id', '>', '2'], ['name', '=', 'john']]).orderBy('id').orWhere(['name', 'fat bat']).select(['name', 'password']).update({name: 'samuel'});
 
@@ -33,10 +34,7 @@ import TopicModel from './models/topic.js';
 
 // new TopicModel().where(['title', 'Code']).quiz().orderBy('title', 'asc').get(showResult);
 
-
-function showResult(result) {
-    console.log("Result: \t", result);
-}
+//new QuestionModel().create({index: "1", quiz_id: "1", title:"Creator", statement: JSON.stringify({options: ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]}), answer: "Taylor Otwell", type: "multiple_choice"});
 
 // router.get("/getTopics", (req, res, next) => {
 
@@ -52,7 +50,7 @@ function showResult(result) {
 // });
 
 
-new QuizModel().where(["title", "Blade"]).question().where(["index", 1]).first(showResult);
+//new QuizModel().where(["title", "Blade"]).question().where(["index", 1]).first(showResult);
 
 
 
@@ -71,3 +69,5 @@ new QuizModel().where(["title", "Blade"]).question().where(["index", 1]).first(s
 
 // Running Query:   SELECT * FROM question WHERE "quiz_id" IN (SELECT "id" FROM (SELECT * FROM quiz WHERE "title" = ? )) WHERE "index" = ?  
 // With values:     [ 'Bladequestion=1', undefined ]
+
+new QuestionModel().create({index: "1", quiz_id: "1", title:"Creator", statement: JSON.stringify({problem: "Who created laravel?", options: ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]}), answer: "Taylor Otwell", type: "multiple_choice"});
