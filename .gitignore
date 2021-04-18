@@ -1,3 +1,4 @@
 /node_modules
 /storage/logs/*
 /storage/db/laravel.db.*
+/sessions/*
