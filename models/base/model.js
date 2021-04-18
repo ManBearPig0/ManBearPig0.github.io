@@ -1,4 +1,5 @@
 import sqlite from 'sqlite3';
+import path from 'path';
 
 export default class Model {
     constructor(attributes, table, key) {
@@ -11,11 +12,12 @@ export default class Model {
 
         this.sql_functions = ['max', 'min', 'julianday'];
         this.sql_logic_operators = ['=', '>', '<', '>=', '<=', '<>'];
+
+        this.input_data = {};
+        this.result = false;
     }
 
-    #db;
-    #database_path = "../../storage/db/laravel.db";
-
+    #database_path = path.resolve(path.dirname('')) +"/storage/db/laravel.db";
 
     /**
      * Customly set the SELECT query, vulnerable against SQL injections
@@ -30,43 +32,86 @@ export default class Model {
         return this;
     }
 
-    hasMany(model, foreign_key, key) {
+    _hasMany(model, foreign_key, key) {
+        model.input_data = this.input_data;
         model.select_query = `SELECT * FROM ${model.table} WHERE ${foreign_key} IN (SELECT ${key} FROM (${this.select_query}))`;
         return model;
+    }
+
+    _belongsTo(model, foreign_key, key) {
+        model.input_data = this.input_data;
+        model.select_query = `SELECT * FROM ${model.table} WHERE ${foreign_key} IN (SELECT ${key} FROM (${this.select_query}))`;
+        return model;
+    }
+
+    /**
+     * Same as the 'where' function, but places an OR statement at where the previous 'where' ended.
+     */
+    orWhere(conditionList) {
+        return this.where(conditionList, true);
     }
 
     /**
      * Add a WHERE clause to the current query.
      * @param {array} attributes An array containing a condition or 2d array with multiple conditions. 
      * A condition consists of a column, optionally a custom operator and a value: ['name', 'John'] is equal to ['name', '=', 'John']
+     * @param {bool} orWhere Set if this query should place an OR instead of an AND.
      * @returns {Model} Returns self
      */
-    where(attributes) {
+    where(conditionList, orWhere = false) {
         let conditional_query = "";
 
-        function parseCondition(array) {
-            if (array.length == 2) {
-                // Default is checking if attribute is equal to a value
-                return `"${array[0]}" = ${array[1]}`;
-            } else if (array.length > 2) {
-                // With custom comparison operator
-                return `"${array[0]}" ${array[1]} ${array[2]}`;
+        if (Array.isArray(conditionList[0])) {
+            // Add the '=' operator to all conditions that didn't specify an operator
+            conditionList = conditionList.map((condition) => {
+                if (condition.length == 2) {
+                    return [condition.slice(0, 1), '=', condition.slice(1)]
+                }
+                return condition;
+            });
+    
+            // Add multiple conditions while validating input
+            conditional_query = conditionList.filter((condition) => (this.attributes.indexOf(condition[0]) != -1 && this.sql_logic_operators.indexOf(condition[1]) != -1 ))
+                .map((condition) => `${condition[0]} ${condition[1]} ${this.#createDataID(condition[2])}`)
+                .join(" AND ");
+        } else if (this.attributes.indexOf(conditionList[0]) != -1) {
+            // Add the '=' operator to if didn't specify an operator
+            if (conditionList.length == 2) {
+                conditionList = [conditionList[0], '=', conditionList[1]]
+            }
+
+            // single condition while validating inputs
+            if ((this.attributes.indexOf(conditionList[0]) != -1 && this.sql_logic_operators.indexOf(conditionList[1]) != -1 )) {
+                conditional_query = `${conditionList[0]} ${conditionList[1]} ${this.#createDataID(conditionList[2])}`;
             }
         }
-
-        if (Array.isArray(attributes[0])) {
-            // Add multiple conditions
-            conditional_query = " WHERE " + attributes.filter((condition) => this.attributes.indexOf(condition[0]) != -1)
-                .map((condition) => parseCondition(condition))
-                .join(" AND ");
-        } else if (this.attributes.indexOf(attributes[0]) != -1) {
-            // single condition
-            conditional_query = ` WHERE ${parseCondition(attributes)}`;
-        }
         
-        this.select_query = `SELECT * FROM (${this.select_query}) ${conditional_query}`;
+        if (conditional_query) {
+            this.select_query = this.#appendAfterQueryStatement(this.select_query, conditional_query, "WHERE", (orWhere) ? "OR" : null)
+        }
+
         return this;
     }
+
+    orderBy(attributes, direction = "DESC") {
+        direction = direction.toUpperCase();
+        direction = (direction == "ASC" || direction == "DESC") ? direction : "DESC";
+
+        if (Array.isArray(attributes) == false) {
+            attributes = [attributes];
+        }
+
+        let order_query = attributes.filter((name) => this.attributes.indexOf(name) != -1).join(` ${direction}, `);
+        order_query += ` ${direction}`;
+
+        if (order_query) {
+            this.select_query = this.#appendAfterQueryStatement(this.select_query, order_query, "ORDER BY");
+        }
+
+        return this;
+    }
+
+
 
     /**
      * Select any attributes with optional SQL functions from the current query.
@@ -77,10 +122,11 @@ export default class Model {
         if (Array.isArray(attributes[0])) {
             // Select each attribute with optional SQL function
             select_str =  attributes.filter((arr) => this.attributes.indexOf(arr[0]) != -1).map((arr) => {
-                let name = `"${arr[0]}"`;
+                let name = `${arr[0]}`;
                 arr.splice(0,1).filter((func) => this.sql_functions.indexOf(func) != -1).forEach((func) => {
                     name = `${func}(${name})`;
                 });
+                return name;
             }).join(", ");
         } else {
             // Select each attribute.
@@ -94,136 +140,216 @@ export default class Model {
     }
 
     /**
-     * Retrieves a single record using the query build with this class.
+     * Insert or append a new query string into the correct position.
      * 
+     * @param {string} queryString Main query string to add into 
+     * @param {string} appendString Query to append
+     * @param {string} statement Statement
+     * @param {*} additional 
+     * @returns 
+     */
+    #appendAfterQueryStatement(queryString, appendString, statement, additional = null) {
+        const statementOrderList = ["WHERE", "ORDER BY", "IN"];
+        const statementOrderPos = statementOrderList.indexOf(statement);
+        if (statementOrderPos == -1) { 
+            throw "unknown statement: " + statement;
+        }
+
+        // Only edit after the inner query, to not unclude inner query duplicate statements.
+        const posAfterInnerQuery = (this.select_query.lastIndexOf(")") == -1 ? 0 : this.select_query.lastIndexOf(")"));
+        let statementPos = queryString.length;
+        let statementExists = (queryString.indexOf(statement, posAfterInnerQuery) != -1);
+
+        // Get the position before at the end of the query before any other statement in the order after the current statement 
+        statementOrderList.splice(statementOrderPos + 1, statementOrderList.length - statementOrderPos).forEach((orderStatement, key) => {
+            if (queryString.indexOf(orderStatement, posAfterInnerQuery) != -1 && queryString.indexOf(orderStatement, posAfterInnerQuery) < statementPos) {
+                statementPos = queryString.indexOf(orderStatement, posAfterInnerQuery);
+            }
+        });
+
+        function addAtPos(string, substr, pos) {
+            return [string.slice(0, pos), substr, string.slice(pos)].join('');
+        }
+
+        switch(statement) {
+            case "WHERE":
+                if (statementExists) {
+                    let addStatement = (additional == "OR") ? "OR" : "AND";
+                    return addAtPos(queryString, ` ${addStatement} ${appendString} `, statementPos);
+                } else {
+                    return addAtPos(queryString, ` WHERE ${appendString} `, statementPos);
+                }
+            case "ORDER BY": 
+                if (statementExists) {
+                    return addAtPos(queryString, `, ${appendString} `, statementPos);
+                } else {
+                    return addAtPos(queryString, ` ORDER BY ${appendString} `, statementPos);
+                }
+            default:
+                return queryString;
+        }
+    }
+
+    /**
+     * Save all data values as ID's before executing the query. This is to avoid SQL injections and other errors
+     * @param {string} dataString 
+     * @returns 
+     */
+    #createDataID(dataString) {
+        const dataID = Object.keys(this.input_data).length;
+        this.input_data[dataID] = dataString;
+        return `"${dataID}"`;
+    }
+
+    /**
+     * Save all attribute values as ID's before executing the query. This is to avoid other errors
+     * @param {string} dataString 
+     * @returns 
+     */
+    #createAttributeID(dataString) {
+        const dataID = Object.keys(this.input_data).length;
+        this.input_attributes[dataID] = dataString;
+        return dataID;
+    }
+
+    /**
+     * Retrieves a single record using the query build with this class.
+     * @param {function} callback Function that receivers the result as an object parameter after it has been processed
      * @returns {array} an array of a single record attribute values or undefined
      */
-    first() {
+    first(callback) {
         let query = this.select_query;
-
-        if (true) {
-            console.log(query);
-        } else {
-            this.#runQuery(() => {
-                this.#db.get(query, (err, rows) => {
-                    if (err) { throw err; }
-                    return rows;
-                })
-            });
-        }
+        this.#runQuery("get", query, callback);
     }
 
     /**
      * Retrieves multiple records using the query build with this class.
-     * 
+     * @param {function} callback Function that receivers the result as an object parameter after it has been processed
      * @returns {array} returns a 2d array of records and their attribute values or undefined
      */
-     get() {
+    get(callback) {
         let query = this.select_query;
-
-        if (true) {
-            console.log(query);
-        } else {
-            this.#runQuery(() => {
-                this.#db.run(query, (err, rows) => {
-                    if (err) { throw err; }
-                    return rows;
-                })
-            });
-        }
+        this.#runQuery("all", query, callback);
     }
 
     /**
      * Delete existing database records with DELETE using the query build with this class.
-     * 
+     * @param {function} callback Function that receivers the result as an object parameter after it has been processed
      * @returns {array} returns a 2d array of records and their attribute values or undefined
      */
     delete() {
         let query = `DELETE FROM ${this.table} WHERE (${this.key.join(', ')}) IN (SELECT (${this.key.join(', ')}) FROM (${this.select_query}))`;
-
-        if (true) {
-            console.log(query);
-        } else {
-            this.#runQuery(() => {
-                this.#db.run(query, (err, rows) => {
-                    if (err) { throw err; }
-                    return rows;
-                })
-            });
-        }
+        this.#runQuery("run", query);
     }
 
     /** 
      * Update existing database records using the query build with this class.
-     * 
-     * @param {object} attributes An object with the attribute name as the key and it's value as the new value, e.g: {name: 'John', password: 'secret'}
+     * @param {object} attributeValues An object with the attribute name as the key and it's value as the new value, e.g: {name: 'John', password: 'secret'}
+     * @param {function} callback Function that receivers the result as an object parameter after it has been processed
      */
-    update(attributes) { // W.I.P
-        let query = this.select_query;
-        let values = attributes;
+    update(attributeValues) {
+        // let setQuery = attributeValues.filter((attribute) => this.attributes.indexOf(attribute) != -1)
+        //     .map((attribute, value) => `${attribute} = ${value}`).join(', ');
+        let setQuery = "";
 
-        this.#runQuery(() => {
-            this.#db.run(query, values, (err) => {
-                if (err) { throw err; }
-            });
-        });
+        for (const attribute in attributeValues) {
+            if (this.attributes.indexOf(attribute) != -1) {
+                if (setQuery) {
+                    setQuery += `, ${attribute} = ${this.#createDataID(attributeValues[attribute])}`;
+                } else {
+                    setQuery = `${attribute} = ${this.#createDataID(attributeValues[attribute])}`;
+                }
+            }
+        }
+
+        let query = `UPDATE ${this.table} SET ${setQuery} WHERE ${this.key.join(', ')} IN (SELECT (${this.key.join(', ')}) FROM (${this.select_query}))`;
+        this.#runQuery("get", query);
     }
 
 
     /**
      * Creates a single record using INSERT
-     * 
      * @param {object} attributes An object with the attribute name as the key and it's value as the new value, e.g: {name: 'John', password: 'secret'}
+     * @param {function} callback Function that receivers the result as an object parameter after it has been processed
      */
      create(attributes) {
-        const names = attributes.map((val, name) => name);
-        const values = attributes.map((val, name) => val);
+        const names = [];
+        const values = [];
+        for(const name in attributes) {
+            names.push(name);
+            values.push(attributes[name]);
+        }
         
         // Build sql query
-        const sql = `INSERT INTO ${table}(${names.join(', ')}) VALUES (${values.map((val) => '?').join(', ')})`;
-
-        this.#runQuery(() => {
-            this.#db.run(sql, values, (err) => {
-                if (err) { throw err; }
-            });
-        });
+        const query = `INSERT INTO ${this.table}(${names.join(', ')}) VALUES (${values.map((val) => this.#createDataID(val)).join(', ')})`;
+        this.#runQuery("run", query);
     }
+
+
+
 
     /**
      * Attempt executing database query request.
      * @param {*} func 
      */
-    #runQuery(func) {
-        this.#setupDB();
-        try {
-            func();
-        } finally {
-            this.#closeDB();
-        }
-    }
-
+    
     /**
-     * Sets up the database connection 
+     * Connect to the database, run a query and callback it's results.
+     * @param {string} functionName This should be 'get' or 'run', depending on what function has called it
+     * @param {string} query The query with dataID's instead of user input values. This will be parsed.
+     * @param {*} callback A callback function that will run once the query has finished
+     * @returns 
      */
-    #setupDB() {
+    #runQuery(functionName, query, callback = null) {
         sqlite.verbose();
-        this.#db = new sqlite.Database(this.#database_path, sqlite.OPEN_READWRITE, (err) => {
-            if (err) {
-                return console.error(err.message);
-            }
-            console.log('Connected to the laravel SQlite database file.');  
+        let db = new sqlite.Database(this.#database_path, sqlite.OPEN_READWRITE, (err) => {
+            if (err) { return console.error(err.message); }
         });
-    }
 
-    /**
-     * Closes the current database connection
-     */
-    #closeDB() {
-        this.#db.close((err) => {
-            if (err) {
-              return console.error(err.message);
+        function replaceAtPos(string, substr, pos, length) {
+            return [string.slice(0, pos), substr, string.slice(pos + length)].join('');
+        }
+
+        try {
+            // Replace all dataID's in query  with (?) and create an array in correct order to avoid SQL injections.
+            let values = [];
+            while(query.indexOf('"') != -1) {
+                const firstPos = query.indexOf('"');
+                const secondPos = query.indexOf('"', firstPos + 1);
+
+                if (secondPos === -1) { break; }
+
+                let dataID = query.substr(firstPos+1, secondPos-firstPos-1);
+                let data = this.input_data[dataID];
+
+                query = replaceAtPos(query, `?`, firstPos, secondPos-firstPos + 1);
+
+                values.push(data);
             }
-            console.log('Closed the database connection.');
-        });    
+
+            console.log("Running Query: \t", query, "\nWith values: \t", values);
+
+            if (functionName == "get") {
+                db.get(query, values, (err, rows) => {
+                    if (err) { throw err; }
+                    if (callback) {callback(rows); }
+                });
+            } else if (functionName == "run") {
+                db.run(query, values, (err, rows) => {
+                    if (err) { throw err; }
+                    if (callback) {callback(rows); }             
+                });
+            } else if (functionName == "all") {
+                db.all(query, values, (err, rows) => {
+                    if (err) { throw err; }
+                    if (callback) {callback(rows); }           
+                });
+            }
+
+        } finally {
+            db.close((err) => {
+                if (err) { return console.error(err.message); }
+            });  
+        }
     }
 }

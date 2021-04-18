@@ -1,17 +1,26 @@
 import sql from 'sqlite3';
 import Model from './base/model.js';
+import TopicModel from './topic.js';
+import AttemptModel from './attempt.js';
 
-class QuizModel extends Model {
+export default class QuizModel extends Model {
 
     constructor() {
-        const table = "quiz";
         const attributes = ["id", "topic_id", "title"];
+        const table = "quiz";
+        const key = ["id"]; 
 
-        super(this.attributes, this.table);
+        super(attributes, table, key);
     }
     
     
-    Select 
+    topic() {
+        return this._belongsTo(new TopicModel(), 'id', 'topic_id');
+    }
+
+    quiz() {
+        return this._hasMany(new AttemptModel(), 'quiz_id', 'id');
+    }
 
 
 }
