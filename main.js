@@ -96,6 +96,14 @@ app.use((req, res, next) => {
         };
     }
 
+    if (typeof req.session.currentAttempt === 'undefined') {
+        req.session.currentAttempt = {
+            quiz: null,
+            questionIndex: null
+        };
+    } 
+
+
     next();
 });
 

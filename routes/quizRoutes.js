@@ -35,10 +35,19 @@ router.get("/getQuestion", (req, res, next) => {
         var text = JSON.stringify(question);
         res.send(text);
     }
-    var quiz = req.query.quiz;
-    var questionnumber =  req.query.question;
+
+    res.cookie('currentQuiz', quiz, { expires: new Date(Date.now() + 365*24*60*60*1000), httpOnly: true})
+    res.cookie('currentQuestion', questionnumber, { expires: new Date(Date.now() + 365*24*60*60*1000), httpOnly: true})
+
     new QuizModel().where(["title", quiz]).question().where(["index", questionnumber]).first(getResult);
 })
+
+router.get("/currentQuestionCookie",  (req, res, next) => {
+    let currentAttempt = {quiz: req.cookies.currentQuiz, questionnumber: req.cookies.currentQuestion};
+
+    res.send(JSON.stringify(currentAttempt));
+});
+
 router.get("/checkQuestion", (req, res, next)=>{
     function getResult(result) {
         console.log(result.answer);

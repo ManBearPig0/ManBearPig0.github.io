@@ -5,7 +5,7 @@ import QuizModel from './quiz.js';
 export default class TopicModel extends Model {
 
     constructor() {
-        const attributes = ["id", "title", "description"];
+        const attributes = ["id", "title", "description", "information"];
         const table = "topic";
         const key = ["id"]; 
 
