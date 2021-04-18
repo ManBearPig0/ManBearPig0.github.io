@@ -46,12 +46,17 @@ router.get('/login', (req, res, next) => {
     res.render("login", { path: req.path, ...errored_fields, loggedIn: req.session.loggedIn, user: req.session.user });
 });
 
-router.get('/register', (req, res, next) => {
+router.get('/profile', (req, res, next) => {
 
-    let errored_fields = req.query;
+    if (!req.session.loggedIn) {
+        res.redirect('/');
+    } else {
+        let errored_fields = req.query;
 
-    res.render("register", { path: req.path, ...errored_fields, loggedIn: req.session.loggedIn, user: req.session.user });
+        res.render("profile", { path: req.path, ...errored_fields, loggedIn: req.session.loggedIn, user: req.session.user });
+    }
 });
+
 
 
 

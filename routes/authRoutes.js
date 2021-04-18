@@ -67,11 +67,83 @@ router.post('/login', (req, res, next) => {
 
         new UserModel().where(['name', value.username]).first(verifyUser);
     }
-
-
-   
 });
 
+
+router.post('/change-username', (req, res, next) => { 
+    // Validate input
+    const schema = Joi.object({
+        username:   Joi.string().required(),
+    });
+    
+    const options = {
+        abortEarly: false, // include all errors
+        allowUnknown: true, // ignore unknown props
+        stripUnknown: true // remove unknown props
+    };
+
+    // Validate request body against schema
+    const {error, value} = schema.validate(req.body, options);
+    let field_errors = {};
+
+    // Register user
+    if (error) {
+        // on fail return comma separated errors
+        error.details.forEach(field => {
+            field_errors[field.path[0]] = field.message;
+        });
+
+        res.redirect('/profile?' + querystring.stringify(field_errors));
+    } else {
+        // on success create user with hashed password
+        let userID = req.session.user.id;
+        new UserModel().where(['id', userID]).update({name: value.username});
+        req.session.user.name = value.username;
+
+        res.redirect('/profile');
+    }
+});
+
+router.post('/change-password', async (req, res, next) => { 
+    // Validate input
+    const schema = Joi.object({
+        password:   Joi.string().min(6).required(),
+        password_confirm: Joi.string().valid(Joi.ref('password')).required(),
+    });
+    
+    const options = {
+        abortEarly: false, // include all errors
+        allowUnknown: true, // ignore unknown props
+        stripUnknown: true // remove unknown props
+    };
+
+    // Validate request body against schema
+    const {error, value} = schema.validate(req.body, options);
+    let field_errors = {};
+
+    function parseMessage(message) {
+        return message.replace(`[ref:password]`, `same as "Password"`);
+    }
+
+    // Register user
+    if (error) {
+        // on fail return comma separated errors
+        error.details.forEach(field => {
+            field_errors[field.path[0]] = parseMessage(field.message);
+        });
+
+        res.redirect('/profile?' + querystring.stringify(field_errors));
+    } else {
+        // on success create user with hashed password
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(value.password, salt);
+
+        let userID = req.session.user.id;
+        new UserModel().where(['id', userID]).update({password: hashedPassword});
+
+        res.redirect('/profile');
+    }
+});
 
 router.post('/register', async (req, res, next) => {
     

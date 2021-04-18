@@ -1,35 +1,47 @@
-<% extend('./partials/layout', {title: "Authenticate", header: "User Login", description: "Authentication login page"}) %>
+<% extend('./partials/layout', {title: "Authenticate", header: "Profile", description: "Authentication login page"}) %>
 
-    <main id="login-page" class="hcenter text-center">
-        <form method="POST" action="/login" enctype="application/x-www-form-urlencoded">
+    <main id="profile-page" class="hcenter text-center">
 
-            <h1>Login</h1>
+        <h1>Profile of</h1>
+        <span><%= user.name %></span>
 
-            <div class="my-2 mt-4">
-                <label for="#username">Username</label>
-                <input id="username" name="username" placeholder="Username" type="text" class="form-control shadow-sm <% if(typeof username !== 'undefined') { %> is-invalid <% } %>" />
-                <% if(typeof username !== 'undefined') { %> 
-                    <span class="validation-error"><%= username %></span>    
-                <% } %>
+        <form method="POST" action="/change-username" enctype="application/x-www-form-urlencoded">
+            <div class="row my-2 mt-4">
+                <div class="col-6 my-auto">
+                    <label for="#username">Username</label>
+                    <input id="username" value="<%= user.name %>" name="username" placeholder="Username" type="text" class="form-control shadow-sm <% if(typeof username !== 'undefined') { %> is-invalid <% } %>" />
+                    <% if(typeof username !== 'undefined') { %> 
+                        <span class="validation-error"><%= username %></span>    
+                    <% } %>
+                </div>
+                <div class="col-6 my-auto">
+                    <button type="submit" class="btn btn-sm btn-red mx-auto">Change username</button>
+                </div>
             </div>
-
-            <div class="my-2 mt-3">
-                <label for="#password">Password</label>
-                <input id="password" name="password" placeholder="Password" type="password" class="form-control shadow-sm <% if(typeof password !== 'undefined') { %> is-invalid <% } %>" />
-                <% if(typeof password !== 'undefined') { %> 
-                    <span class="validation-error"><%= password %></span>    
-                <% } %>
-            </div>
-
-            <div class="mt-5">
-                <button type="submit" class="btn btn-red mx-auto">Login</button>
-                <a type="button" class="btn btn-outline-red btn-sm mx-auto" href="/register"><small>Register new User</small></a>
-            </div>
-
-            <!-- 
-            <div class="mt-auto">
-                Whaaaatt
-            </div> -->
-
         </form>
+
+        <form method="POST" action="/change-password" enctype="application/x-www-form-urlencoded">
+            <div class="row my-2 mt-4">
+                <div class="col-4 my-auto">
+                    <label for="#password">Password</label>
+                    <input id="password" name="password" placeholder="Password" type="password" class="form-control shadow-sm <% if(typeof password !== 'undefined') { %> is-invalid <% } %>" />
+                    <% if(typeof password !== 'undefined') { %> 
+                        <span class="validation-error"><%= password %></span>    
+                    <% } %>
+                </div>
+                <div class="col-4 my-auto">
+                    <label for="#password_confirm">Confirm Password</label>
+                    <input id="password_confirm" name="password_confirm" placeholder="Password" type="password" class="form-control shadow-sm <% if(typeof password_confirm !== 'undefined') { %> is-invalid <% } %>" />
+                    <% if(typeof password_confirm !== 'undefined') { %> 
+                        <span class="validation-error"><%= password_confirm %></span>    
+                    <% } %>
+                </div>
+                <div class="col-4 my-auto">
+                    <button type="submit" class="btn btn-sm btn-red mx-auto">Change password</button>
+                </div>
+            </div>
+        </form>
+
+
+
     </main>

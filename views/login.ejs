@@ -1,34 +1,35 @@
 <% extend('./partials/layout', {title: "Authenticate", header: "User Login", description: "Authentication login page"}) %>
 
-    <main id="profile-page" class="hcenter text-center">
+    <main id="login-page" class="hcenter text-center">
+        <form method="POST" action="/login" enctype="application/x-www-form-urlencoded">
 
-        <h1>Profile of</h1>
-        <p><%= user.name %></p>
+            <h1>Login</h1>
 
-        <!-- <div class="my-2 mt-4">
-            <label for="#username">Username</label>
-            <input id="username" name="username" placeholder="Username" type="text" class="form-control shadow-sm <% if(typeof username !== 'undefined') { %> is-invalid <% } %>" />
-            <% if(typeof username !== 'undefined') { %> 
-                <span class="validation-error"><%= username %></span>    
-            <% } %>
-        </div>
+            <div class="my-2 mt-4">
+                <label for="#username">Username</label>
+                <input id="username" name="username" placeholder="Username" type="text" class="form-control shadow-sm <% if(typeof username !== 'undefined') { %> is-invalid <% } %>" />
+                <% if(typeof username !== 'undefined') { %> 
+                    <span class="validation-error"><%= username %></span>    
+                <% } %>
+            </div>
 
-        <div class="my-2 mt-3">
-            <label for="#password">Password</label>
-            <input id="password" name="password" placeholder="Password" type="password" class="form-control shadow-sm <% if(typeof password !== 'undefined') { %> is-invalid <% } %>" />
-            <% if(typeof password !== 'undefined') { %> 
-                <span class="validation-error"><%= password %></span>    
-            <% } %>
-        </div>
+            <div class="my-2 mt-3">
+                <label for="#password">Password</label>
+                <input id="password" name="password" placeholder="Password" type="password" class="form-control shadow-sm <% if(typeof password !== 'undefined') { %> is-invalid <% } %>" />
+                <% if(typeof password !== 'undefined') { %> 
+                    <span class="validation-error"><%= password %></span>    
+                <% } %>
+            </div>
 
-        <div class="mt-5">
-            <button type="submit" class="btn btn-red mx-auto">Login</button>
-            <a type="button" class="btn btn-outline-red btn-sm mx-auto" href="/register"><small>Register new User</small></a>
-        </div> -->
+            <div class="mt-5">
+                <button type="submit" class="btn btn-red mx-auto">Login</button>
+                <a type="button" class="btn btn-outline-red btn-sm mx-auto" href="/register"><small>Register new User</small></a>
+            </div>
 
-        <!-- 
-        <div class="mt-auto">
-            Whaaaatt
-        </div> -->
+            <!-- 
+            <div class="mt-auto">
+                Whaaaatt
+            </div> -->
 
+        </form>
     </main>
