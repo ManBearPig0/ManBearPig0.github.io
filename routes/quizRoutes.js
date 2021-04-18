@@ -1,13 +1,20 @@
 import express from 'express';
+import TopicModel from '../models/topic.js'
 const router = express.Router();
 
 
 router.get("/getTopics", (req, res, next) => {
-    var Topiclist = ["test1", "test2"];
-    var text = JSON.stringify(Topiclist);
-    res.send(text);
-})
 
+    function showResult(result) {
+        Topiclist = result.map(obj => obj.title);
+        console.log("Result list: ", Topiclist);
+        var text = JSON.stringify(Topiclist);
+        res.send(text);
+    }
+    
+    console.log("Executing query...");
+    new TopicModel().select(["title"]).get(showResult);
+});
 router.get("/getQuizes", (req, res, next) => {
     var Questionlist = ["quiz1","quiz2"];
     var text = JSON.stringify(Questionlist);;
