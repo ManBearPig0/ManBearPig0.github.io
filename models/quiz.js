@@ -13,8 +13,8 @@ export default class QuizModel extends Model {
 
         super(attributes, table, key);
     }
-    
-    
+
+
     topic() {
         return this._belongsTo(new TopicModel(), 'id', 'topic_id');
     }

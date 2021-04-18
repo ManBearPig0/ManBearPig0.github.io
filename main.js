@@ -4,7 +4,11 @@ import path from 'path';
 import express from 'express';
 import ejsextend from 'express-ejs-extend';
 import fs from 'fs';
+import BodyParser from 'body-parser';
+import random from 'random';
+import bcrypt from 'bcrypt';
 
+bcrypt.random();
 
 import { convertDate } from './helpers/convertDate.js';
 
@@ -26,8 +30,23 @@ app.engine('ejs', ejsextend);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Initalize Session
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+    genid: function(req) {
+        return genuuid() // use UUIDs for session IDs
+    },
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true },
+  secret: 'sneaky keyboard cat', // NOTE: GET CONFIG DATA
+}))
+
 
 /** Set Middelware */
+// Parse HTML body values given with <input /> elements
+app.use(BodyParser.urlencoded({ extended: true })); 
+
 // Enable static files like css, javascript and assets.
 app.use(express.static('public'));
 
@@ -45,6 +64,21 @@ app.use((req, res, next) => {
 
     next();
 });
+
+// Check if logged in.
+app.use((req, res, next) => {
+    if (!req.session.loggedIn) {
+        req.session.loggedIn = false;
+    } 
+    
+    if (!req.session.user || !req.session.loggedIn) {
+        req.session.user = {
+            name: "",
+            id: null,
+        };
+    }
+});
+
 
 
 /** Set Routes */
