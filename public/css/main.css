@@ -5,6 +5,7 @@
 
 body {
     margin: 0;
+    font: 8px Arial, sans-serif;
 }
 
 label {
@@ -29,7 +30,6 @@ main {
     /* Pushes footer to the bottom. */
     min-height: calc(100vh - (158px + var(--footer__upper-lb-size)));
     margin: 0px 10% 10px 10%;
-    font: 8px Arial, sans-serif;
     color: #313131;
 }
 
@@ -162,7 +162,6 @@ header {
     position: sticky;
     top: 0;
     height: 80px;
-    font-size: 7px;
 }
 
 footer {
@@ -458,15 +457,24 @@ p {
 #title-logo h1 {
     color: white;
     align-self: center;
-    margin: 0;
 }
 
-#title-logo h2 {
-    font-size: 12px;
-    font-weight: normal;
-    color: white;
+#login {
+    display: grid;
     align-self: center;
-    margin: 0 0 0 50px;
+}
+
+#login p {
+    text-align: center;
+    color: white;
+}
+
+#login p span {
+    font-weight: bold;
+}
+
+#login a {
+    margin: auto;
 }
 
 #taylor-headshot {
@@ -847,12 +855,12 @@ p {
 /* Responsive Web Design */
 
 @media (min-width: 640px) {
-    main {
+    body {
         font-size: 10px;
     }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1080px) {
     #login-page input {
         width: 30%;
     }
@@ -875,7 +883,6 @@ p {
         margin: 0px 5px 0px 5px;
     }
     header {
-        font-size: 14px;
         height: 120px;
     }
     #title-logo img {
@@ -936,7 +943,7 @@ p {
     }
 }
 
-@media (max-width:899px) {
+@media (max-width:1079px) {
     .menu-dropdown--toggle+a,
     .menu {
         display: none;

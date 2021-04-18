@@ -1,18 +1,23 @@
 //parent class Question
+var currentquestion;
 class Question {
     problemStart = "";
-    constructor(title, problem, answer) {
+    constructor(title, problem, quiz, index) {
         this.title = title.toString();
-        this.problem = this.problemStart + problem;
-        this.answer = answer;
+        this.problem = this.problemStart + problem;;
+        this.quiz = quiz;
+        this.index = index
     }
 }
 Question.prototype.display = function() {
     var question = document.createElement("form");
     question.id = "questionForm";
+    question.addEventListener("submit", checkquestion);
 
     var questionTitle = document.createElement("h1");
+    questionTitle.id = "question__title";
     questionTitle.appendChild(document.createTextNode(this.title));
+    questionTitle.classList = [];
 
     var questionProblem = document.createElement("h2");
     questionProblem.appendChild(document.createTextNode(this.problem));
@@ -32,12 +37,12 @@ Question.prototype.display = function() {
     backButton.setAttribute("value", "Back");
     nextButton.setAttribute("value", "Next");
     backButton.addEventListener("click", function() {
-        if (currentquestion > 0) currentquestion--;
-        //last question
+        if(currentquestion.questionnumber >0){
+            loadQuestion(currentquestion.quiz, currentquestion.questionnumber-1);
+        }
     });
     nextButton.addEventListener("click", function() {
-        if (currentquestion < questions.length - 1) currentquestion++;
-        //next question
+        loadQuestion(currentquestion.quiz, currentquestion.questionnumber+1);
     });
 
     question.appendChild(questionTitle);
@@ -48,11 +53,10 @@ Question.prototype.display = function() {
 
     document.getElementById("questionwindow").appendChild(question);
 }
-
 class multipleChoice extends Question {
     problemStart = "Pick the right answer: ";
-    constructor(title, problem, answer, options) {
-        super(title, problem, answer);
+    constructor(title, problem, options, quiz, index) {
+        super(title, problem, quiz, index);
         this.options = options;
     }
     display(){
@@ -74,13 +78,23 @@ class multipleChoice extends Question {
             form.insertBefore(paragraph, document.getElementById("question__check"));
         }
     }
+    check() {
+        let boxes = document.getElementsByTagName("input");
+        let attempt = "";
+        for (let box of boxes) {
+            if (box.checked) {
+                attempt = box.getAttribute("value");
+            }
+        }
+        return attempt;
+    }
 }
 
 
 class fillInTheBlank extends Question {
     problemStart = "Fill in the black: "
-    constructor(title, answer, firsthalf, secondhalf) {
-        super(title, "Fill in the blank:", answer);
+    constructor(title, firsthalf, secondhalf, quiz, index) {
+        super(title, "Fill in the blank:", quiz, index);
         this.firsthalf = firsthalf;
         this.secondhalf = secondhalf;
     }
@@ -95,6 +109,10 @@ class fillInTheBlank extends Question {
         paragraph.appendChild(input);
         paragraph.appendChild(document.createTextNode(this.secondhalf));
         form.insertBefore(paragraph, document.getElementById("question__check"));
+    }
+    check() {
+        let input = document.getElementById("question__blank");
+        return input.value.toLowerCase();
     }
 }
 /*
@@ -113,12 +131,18 @@ function loadQuestion(quiz, questionnumber){
         if(req.readyState == 4 && req.status == 200)
         {
             var values = JSON.parse(req.responseText);
-            var question = new multipleChoice(values.title, values.problem, values.awnser, values.options);
+            if(values.type == "multipleChoice")
+            {
+                currentquestion = new multipleChoice(values.title, values.problem, values.options, quiz, questionnumber);
+            }
+            else if(values.type == "fillInTheBlank"){
+                currentquestion = new fillInTheBlank(values.title, values.firsthalf, values.secondhalf, quiz, questionnumber);
+            }
             var frame = document.getElementById("questionwindow");
             while (frame.children.length > 0) {
                 frame.removeChild(frame.childNodes[0]);
             }
-            question.display();
+            currentquestion.display();
         }
     }
     req.send();
@@ -147,8 +171,48 @@ function loadQuizes(topic){
     }
     req.send();
 }
-
-
+function checkquestion(e){
+    e.preventDefault();
+    req.open("GET", "http://127.0.0.1:3000/checkQuestion?attempt="+currentquestion.check(), true);
+    req.onreadystatechange = function(){
+        if(req.readyState == 4 && req.status == 200)
+        {
+            try{
+                var reaction = JSON.parse(req.responseText);
+                if(reaction.correct){
+                    var questionTitle = document.getElementById("question__title");
+                    questionTitle.removeChild(questionTitle.childNodes[0]);
+                    questionTitle.appendChild(document.createTextNode(currentquestion.title + ":\t" + "correct"));
+                    questionTitle.classList = ["correct"];
+                }
+                else{
+                    var questionTitle = document.getElementById("question__title");
+                    questionTitle.removeChild(questionTitle.childNodes[0]);
+                    questionTitle.appendChild(document.createTextNode(currentquestion.title + ":\t" + "incorrect"));
+                    questionTitle.classList = ["incorrect"];
+                    inputs = document.getElementsByTagName("input");
+                    if(inputs[0].getAttribute("type") == "text")
+                    {
+                        inputs[0].setAttribute("value", reaction.awnser);
+                    }
+                    else if(inputs[0].getAttribute("type") == "checkbox")
+                    {
+                        for(let input of inputs){
+                            input.checked = false;
+                            if(input.getAttribute("value") == reaction.awnser){
+                                input.checked = true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch{
+                console.log("user not registered");
+            }
+        }
+    }
+    req.send();
+}
 var req = new XMLHttpRequest();
 req.open("GET", "http://127.0.0.1:3000/getTopics", true);
 req.onreadystatechange = function(){
