@@ -7,33 +7,41 @@ body {
     margin: 0;
 }
 
-.correct{
+label {
+    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
+    font-size: 14px;
+}
+
+.correct {
     color: green;
 }
 
-.incorrect{
+.incorrect {
     color: red;
 }
+
 main {
     /* Pushes footer to the bottom. */
-    min-height: calc(100vh - (215px + var(--footer__upper-lb-size)));
+    min-height: calc(100vh - (158px + var(--footer__upper-lb-size)));
     margin: 0px 10% 10px 10%;
     font: 8px Arial, sans-serif;
     color: #313131;
 }
 
-#questionwindow{
+#questionwindow {
     /*needs tuning*/
     margin-left: 200px;
 }
-#topicselection{
+
+#topicselection {
     height: auto;
     width: 160px;
     top: 120px;
     position: fixed;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
-    margin: 10px 25px 0px 25px 
+    margin: 10px 25px 0px 25px
 }
+
 textarea {
     resize: none;
 }
@@ -115,8 +123,6 @@ textarea {
     color: white;
     border: 2px solid #b44343;
 }
-
-
 
 .btn-dark {
     background-color: #3a3a3a;
@@ -230,6 +236,20 @@ footer .footer__lower p {
 
 footer .footer__lower p a {
     color: rgb(101, 150, 207);
+}
+
+
+/* Login page */
+
+#login-page {
+    display: flex;
+    flex-direction: column;
+}
+
+#login-page input {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -433,7 +453,7 @@ p {
 #title-logo h1 {
     color: white;
     align-self: center;
-    margin: 0; 
+    margin: 0;
 }
 
 #title-logo h2 {
@@ -516,6 +536,76 @@ p {
     color: rgba(0, 0, 0, 0.8);
     margin-left: 4px;
     margin-right: 4px;
+}
+
+
+/* Form control */
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
+}
+
+.form-control::-ms-expand {
+    background-color: transparent;
+    border: 0
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25)
+}
+
+.form-control::-webkit-input-placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.form-control::-moz-placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.form-control:-ms-input-placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.form-control::-ms-input-placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 1
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545
+}
+
+.form-control.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .25)
 }
 
 
@@ -622,9 +712,130 @@ p {
     order: -1
 }
 
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mx-1 {
+    margin-left: .25rem;
+    margin-right: .25rem;
+}
+
+.mx-2 {
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.mx-3 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
 .mx-4 {
-    margin-left: 4px;
-    margin-right: 4px;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.mx-5 {
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.mx-6 {
+    margin-left: 6rem;
+    margin-right: 6rem;
+}
+
+.my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.my-1 {
+    margin-top: .25rem;
+    margin-bottom: .25rem;
+}
+
+.my-2 {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.my-3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.my-4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.my-5 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.my-6 {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+.mt-1 {
+    margin-top: .25rem;
+}
+
+.mt-2 {
+    margin-top: .5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.mt-6 {
+    margin-top: 6rem;
+}
+
+.mb-auto {
+    margin-bottom: auto;
+}
+
+.mb-1 {
+    margin-bottom: .25rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.mb-5 {
+    margin-bottom: 3rem;
+}
+
+.mb-6 {
+    margin-bottom: 6rem;
 }
 
 
@@ -637,7 +848,11 @@ p {
 }
 
 @media (min-width: 900px) {
+    #login-page input {
+        width: 30%;
+    }
     main {
+        min-height: calc(100vh - (198px + var(--footer__upper-lb-size)));
         font-size: 12px;
     }
     nav a {

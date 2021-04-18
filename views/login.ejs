@@ -1,13 +1,29 @@
 <% extend('./partials/layout', {title: "Authenticate", header: "User Login", description: "Authentication login page"}) %>
 
-<main>
-    <h1>Login</h1>
+    <main id="login-page" class="hcenter text-center">
+        <form method="POST" action="/login-register" enctype="multipart/form-data">
 
-    <br/><small>Username</small> <br/>
-    <input placeholder="Username" type="text">
+            <h1>Login</h1>
 
-    <br/><small>Password</small><br/>
-    <input placeholder="Password" type="text">
+            <div class="my-2 mt-4">
+                <label for="#username">Username</label>
+                <input id="username" name="username" placeholder="Username" type="text" class="form-control shadow-sm" />
+            </div>
 
-    <button type="submit" class="btn btn-dark ">Login</button>
-</main>
+            <div class="my-2 mt-3">
+                <label for="#password">Password</label>
+                <input id="password" name="password" placeholder="Password" type="password" class="form-control shadow-sm" />
+            </div>
+
+            <div class="mt-5">
+                <button type="submit" name="action" value="login" class="btn btn-red mx-auto">Login</button>
+                <button type="submit" name="action" value="register" class="btn btn-red mx-auto">Register</button>
+            </div>
+
+            <!-- 
+            <div class="mt-auto">
+                Whaaaatt
+            </div> -->
+
+        </form>
+    </main>
