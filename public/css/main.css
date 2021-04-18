@@ -20,6 +20,11 @@ label {
     color: red;
 }
 
+.validation-error {
+    color: darkred;
+    font-size: 11px;
+}
+
 main {
     /* Pushes footer to the bottom. */
     min-height: calc(100vh - (158px + var(--footer__upper-lb-size)));

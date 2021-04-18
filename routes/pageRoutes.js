@@ -13,10 +13,6 @@ router.get('/assessment', (req, res, next) => {
     res.render("assessment", { path: req.path });
 }); 
 
-router.post('/assessment/save-question', (req, res, next) => {
-
-});
-
 router.get('/contact', (req, res, next) => {
 
     res.render("contact", { path: req.path });
@@ -37,6 +33,21 @@ router.get('/installation', (req, res, next) => {
 
     res.render("installation", { path: req.path });
 });
+
+router.get('/login', (req, res, next) => {
+
+    let errored_fields = req.query;
+
+    res.render("login", { path: req.path, ...errored_fields });
+});
+
+router.get('/register', (req, res, next) => {
+
+    let errored_fields = req.query;
+
+    res.render("register", { path: req.path, ...errored_fields });
+});
+
 
 
 export const pageRoutes = router;
