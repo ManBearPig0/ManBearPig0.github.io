@@ -5,7 +5,8 @@ import express from 'express';
 import ejsextend from 'express-ejs-extend';
 import fs from 'fs';
 
-import { convertDate } from './public/js/helpers/convertDate.js';
+
+import { convertDate } from './helpers/convertDate.js';
 
 import { pageRoutes } from './routes/pageRoutes.js';
 import { authRoutes } from './routes/authRoutes.js';
