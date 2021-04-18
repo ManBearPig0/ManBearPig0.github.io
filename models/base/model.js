@@ -14,6 +14,7 @@ export default class Model {
         this.sql_logic_operators = ['=', '>', '<', '>=', '<=', '<>'];
 
         this.input_data = {};
+        this.input_names = {};
         this.result = false;
     }
 
@@ -40,8 +41,9 @@ export default class Model {
      * @returns {Model} Returns self
      */
     _hasMany(model, foreign_key, key) {
+        model.select_query = `SELECT * FROM (SELECT * FROM ${model.table} WHERE ${this.#createNameID(foreign_key)} IN (SELECT ${this.#createNameID(key)} FROM (${this.select_query})))`;
         model.input_data = this.input_data;
-        model.select_query = `SELECT * FROM ${model.table} WHERE ${foreign_key} IN (SELECT ${key} FROM (${this.select_query}))`;
+        model.input_names = this.input_names;
         return model;
     }
 
@@ -53,8 +55,9 @@ export default class Model {
      * @returns {Model} Returns self
      */
     _belongsTo(model, foreign_key, key) {
+        model.select_query = `SELECT * FROM (SELECT * FROM ${model.table} WHERE ${this.#createNameID(foreign_key)} IN (SELECT ${this.#createNameID(key)} FROM (${this.select_query})))`;
         model.input_data = this.input_data;
-        model.select_query = `SELECT * FROM ${model.table} WHERE ${foreign_key} IN (SELECT ${key} FROM (${this.select_query}))`;
+        model.input_names = this.input_names;
         return model;
     }
 
@@ -86,7 +89,7 @@ export default class Model {
 
             // Add multiple conditions while validating input
             conditional_query = conditionList.filter((condition) => (this.attributes.indexOf(condition[0]) != -1 && this.sql_logic_operators.indexOf(condition[1]) != -1))
-                .map((condition) => `${condition[0]} ${condition[1]} ${this.#createDataID(condition[2])}`)
+                .map((condition) => `${this.#createNameID(condition[0])} ${condition[1]} ${this.#createDataID(condition[2])}`)
                 .join(" AND ");
         } else if (this.attributes.indexOf(conditionList[0]) != -1) {
             // Add the '=' operator to if didn't specify an operator
@@ -96,7 +99,7 @@ export default class Model {
 
             // single condition while validating inputs
             if ((this.attributes.indexOf(conditionList[0]) != -1 && this.sql_logic_operators.indexOf(conditionList[1]) != -1)) {
-                conditional_query = `${conditionList[0]} ${conditionList[1]} ${this.#createDataID(conditionList[2])}`;
+                conditional_query = `${this.#createNameID(conditionList[0])} ${conditionList[1]} ${this.#createDataID(conditionList[2])}`;
             }
         }
 
@@ -115,8 +118,8 @@ export default class Model {
             attributes = [attributes];
         }
 
-        let order_query = attributes.filter((name) => this.attributes.indexOf(name) != -1).join(` ${direction}, `);
-        order_query += ` ${direction}`;
+        let order_query = attributes.filter((name) => this.attributes.indexOf(name) != -1).map((attribute) => this.#createNameID(attribute)).join(` ${direction}, `);
+            order_query += ` ${direction}`;
 
         if (order_query) {
             this.select_query = this.#appendAfterQueryStatement(this.select_query, order_query, "ORDER BY");
@@ -136,7 +139,7 @@ export default class Model {
         if (Array.isArray(attributes[0])) {
             // Select each attribute with optional SQL function
             select_str = attributes.filter((arr) => this.attributes.indexOf(arr[0]) != -1).map((arr) => {
-                let name = `${arr[0]}`;
+                let name = `${this.#createNameID(arr[0])}`;
                 arr.splice(0, 1).filter((func) => this.sql_functions.indexOf(func) != -1).forEach((func) => {
                     name = `${func}(${name})`;
                 });
@@ -144,7 +147,7 @@ export default class Model {
             }).join(", ");
         } else {
             // Select each attribute.
-            select_str = attributes.filter((name) => this.attributes.indexOf(name) != -1).join(", ");
+            select_str = attributes.filter((name) => this.attributes.indexOf(name) != -1).map((attribute) => this.#createNameID(attribute)).join(", ");
         }
 
         let leftPos = this.select_query.indexOf("SELECT");
@@ -216,6 +219,17 @@ export default class Model {
     }
 
     /**
+     * Save all data values as ID's before executing the query. This is to avoid SQL injections and other errors
+     * @param {string} dataString 
+     * @returns 
+     */
+    #createNameID(nameString) {
+        const nameID = Object.keys(this.input_names).length;
+        this.input_names[nameID] = nameString;
+        return `'${nameID}'`;
+    }
+
+    /**
      * Save all attribute values as ID's before executing the query. This is to avoid other errors
      * @param {string} dataString 
      * @returns 
@@ -252,7 +266,8 @@ export default class Model {
      * @returns {array} returns a 2d array of records and their attribute values or undefined
      */
     delete() {
-        let query = `DELETE FROM ${this.table} WHERE (${this.key.join(', ')}) IN (SELECT (${this.key.join(', ')}) FROM (${this.select_query}))`;
+        let query = `DELETE FROM ${this.table} WHERE (${this.key.map((attribute) => this.#createNameID(attribute)).join(', ')}) 
+            IN (SELECT (${this.key.map((attribute) => this.#createNameID(attribute)).join(', ')}) FROM (${this.select_query}))`;
         this.#runQuery("run", query);
     }
 
@@ -269,14 +284,15 @@ export default class Model {
         for (const attribute in attributeValues) {
             if (this.attributes.indexOf(attribute) != -1) {
                 if (setQuery) {
-                    setQuery += `, ${attribute} = ${this.#createDataID(attributeValues[attribute])}`;
+                    setQuery += `, ${this.#createNameID(attribute)} = ${this.#createDataID(attributeValues[attribute])}`;
                 } else {
-                    setQuery = `${attribute} = ${this.#createDataID(attributeValues[attribute])}`;
+                    setQuery = `${this.#createNameID(attribute)} = ${this.#createDataID(attributeValues[attribute])}`;
                 }
             }
         }
 
-        let query = `UPDATE ${this.table} SET ${setQuery} WHERE ${this.key.join(', ')} IN (SELECT (${this.key.join(', ')}) FROM (${this.select_query}))`;
+        let query = `UPDATE ${this.table} SET ${setQuery} WHERE ${this.key.map((attribute) => this.#createNameID(attribute)).join(', ')} 
+            IN (SELECT (${this.key.map((attribute) => this.#createNameID(attribute)).join(', ')}) FROM (${this.select_query}))`;
         this.#runQuery("get", query);
     }
 
@@ -295,7 +311,7 @@ export default class Model {
         }
 
         // Build sql query
-        const query = `INSERT INTO ${this.table}(${names.join(', ')}) VALUES (${values.map((val) => this.#createDataID(val)).join(', ')})`;
+        const query = `INSERT INTO ${this.table}(${names.map((attribute) => this.#createNameID(attribute)).join(', ')}) VALUES (${values.map((val) => this.#createDataID(val)).join(', ')})`;
         this.#runQuery("run", query);
     }
 
@@ -332,6 +348,21 @@ export default class Model {
                 query = replaceAtPos(query, `?`, firstPos, secondPos - firstPos + 1);
 
                 values.push(data);
+            }
+
+            let names = [];
+            while (query.indexOf("'") != -1) {
+                const firstPos = query.indexOf("'");
+                const secondPos = query.indexOf("'", firstPos + 1);
+
+                if (secondPos === -1) { break; }
+
+                let nameID = query.substr(firstPos + 1, secondPos - firstPos - 1);
+                let name = this.input_names[nameID];
+
+                query = replaceAtPos(query, `"${name}"`, firstPos, secondPos - firstPos + 1);
+
+                names.push(name);
             }
 
             console.log("Running Query: \t", query, "\nWith values: \t", values);

@@ -2,6 +2,7 @@
 import UserModel from './models/user.js';
 import QuizModel from './models/quiz.js';
 import TopicModel from './models/topic.js';
+import QuestionModel from './models/question.js';
 
 // let result = new UserModel().where([['id', '>', '2'], ['name', '=', 'john']]).orderBy('id').orWhere(['name', 'fat bat']).select(['name', 'password']).update({name: 'samuel'});
 
@@ -31,10 +32,7 @@ import TopicModel from './models/topic.js';
 // new QuizModel().create({topic_id: 2, title: "MVC"});
 // new QuizModel().create({topic_id: 2, title: "Composer"});
 
-new TopicModel().where(['title', 'Code']).quiz().orderBy('title', 'asc').get(showResult);
+//new TopicModel().where(['title', 'Code']).quiz().orderBy('title', 'asc').get(showResult);
 
-
-function showResult(result) {
-    console.log("Result: \t", result);
-}
+new QuestionModel().create({index: "1", quiz_id: "1", title:"Creator", statement: JSON.stringify({options: ["Sergey Sosnovsky", "Tim Berners-Lee", "Taylor Otwell", "Bill Gates"]}), answer: "Taylor Otwell", type: "multiple_choice"});
 
