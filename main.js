@@ -25,7 +25,7 @@ const {
     HTTPS = false,
     SESS_SECRET = "Sneaky keyboard cat",
     SESS_NAME = 'sid',
-    SESS_LIFETIME = 60*60*2,
+    SESS_LIFETIME = 60*60*2*1000,
 } = process.env;
 
 const IN_PROD = (NODE_ENV === 'production' && HTTPS);
