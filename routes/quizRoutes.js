@@ -36,6 +36,9 @@ router.get("/getQuestion", (req, res, next) => {
         res.send(text);
     }
 
+    var quiz = req.query.quiz;
+    var questionnumber =  req.query.question;
+
     res.cookie('currentQuiz', quiz, { expires: new Date(Date.now() + 365*24*60*60*1000), httpOnly: true})
     res.cookie('currentQuestion', questionnumber, { expires: new Date(Date.now() + 365*24*60*60*1000), httpOnly: true})
 
