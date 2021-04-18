@@ -17,7 +17,7 @@ export default class Model {
         this.result = false;
     }
 
-    #database_path = path.resolve(path.dirname('')) +"/storage/db/laravel.db";
+    #database_path = path.resolve(path.dirname('')) + "/storage/db/laravel.db";
 
     /**
      * Customly set the SELECT query, vulnerable against SQL injections
@@ -32,12 +32,26 @@ export default class Model {
         return this;
     }
 
+    /**
+     * A hasMany relation to get all the related Models of the currently queried Models.
+     * @param {Model} model A different model class which has a relation with this model class. 
+     * @param {string} foreign_key The name of the column for the foreign key in the other model
+     * @param {string} key The name of the column which the foreign key references in this model. 
+     * @returns {Model} Returns self
+     */
     _hasMany(model, foreign_key, key) {
         model.input_data = this.input_data;
         model.select_query = `SELECT * FROM ${model.table} WHERE ${foreign_key} IN (SELECT ${key} FROM (${this.select_query}))`;
         return model;
     }
 
+    /**
+     * A belongsTo relation to get all the related Models of the currently queried Models. (Is functionally the same as _hasMany, but serves a different meaning)
+     * @param {Model} model A different model class which has a relation with this model class. 
+     * @param {string} foreign_key The name of the column for the foreign key in the other model
+     * @param {string} key The name of the column which the foreign key references in this model. 
+     * @returns {Model} Returns self
+     */
     _belongsTo(model, foreign_key, key) {
         model.input_data = this.input_data;
         model.select_query = `SELECT * FROM ${model.table} WHERE ${foreign_key} IN (SELECT ${key} FROM (${this.select_query}))`;
@@ -69,9 +83,9 @@ export default class Model {
                 }
                 return condition;
             });
-    
+
             // Add multiple conditions while validating input
-            conditional_query = conditionList.filter((condition) => (this.attributes.indexOf(condition[0]) != -1 && this.sql_logic_operators.indexOf(condition[1]) != -1 ))
+            conditional_query = conditionList.filter((condition) => (this.attributes.indexOf(condition[0]) != -1 && this.sql_logic_operators.indexOf(condition[1]) != -1))
                 .map((condition) => `${condition[0]} ${condition[1]} ${this.#createDataID(condition[2])}`)
                 .join(" AND ");
         } else if (this.attributes.indexOf(conditionList[0]) != -1) {
@@ -81,11 +95,11 @@ export default class Model {
             }
 
             // single condition while validating inputs
-            if ((this.attributes.indexOf(conditionList[0]) != -1 && this.sql_logic_operators.indexOf(conditionList[1]) != -1 )) {
+            if ((this.attributes.indexOf(conditionList[0]) != -1 && this.sql_logic_operators.indexOf(conditionList[1]) != -1)) {
                 conditional_query = `${conditionList[0]} ${conditionList[1]} ${this.#createDataID(conditionList[2])}`;
             }
         }
-        
+
         if (conditional_query) {
             this.select_query = this.#appendAfterQueryStatement(this.select_query, conditional_query, "WHERE", (orWhere) ? "OR" : null)
         }
@@ -121,16 +135,16 @@ export default class Model {
         let select_str = "*";
         if (Array.isArray(attributes[0])) {
             // Select each attribute with optional SQL function
-            select_str =  attributes.filter((arr) => this.attributes.indexOf(arr[0]) != -1).map((arr) => {
+            select_str = attributes.filter((arr) => this.attributes.indexOf(arr[0]) != -1).map((arr) => {
                 let name = `${arr[0]}`;
-                arr.splice(0,1).filter((func) => this.sql_functions.indexOf(func) != -1).forEach((func) => {
+                arr.splice(0, 1).filter((func) => this.sql_functions.indexOf(func) != -1).forEach((func) => {
                     name = `${func}(${name})`;
                 });
                 return name;
             }).join(", ");
         } else {
             // Select each attribute.
-            select_str =  attributes.filter((name) => this.attributes.indexOf(name) != -1).join(", ");
+            select_str = attributes.filter((name) => this.attributes.indexOf(name) != -1).join(", ");
         }
 
         let leftPos = this.select_query.indexOf("SELECT");
@@ -151,7 +165,7 @@ export default class Model {
     #appendAfterQueryStatement(queryString, appendString, statement, additional = null) {
         const statementOrderList = ["WHERE", "ORDER BY", "IN"];
         const statementOrderPos = statementOrderList.indexOf(statement);
-        if (statementOrderPos == -1) { 
+        if (statementOrderPos == -1) {
             throw "unknown statement: " + statement;
         }
 
@@ -171,7 +185,7 @@ export default class Model {
             return [string.slice(0, pos), substr, string.slice(pos)].join('');
         }
 
-        switch(statement) {
+        switch (statement) {
             case "WHERE":
                 if (statementExists) {
                     let addStatement = (additional == "OR") ? "OR" : "AND";
@@ -179,7 +193,7 @@ export default class Model {
                 } else {
                     return addAtPos(queryString, ` WHERE ${appendString} `, statementPos);
                 }
-            case "ORDER BY": 
+            case "ORDER BY":
                 if (statementExists) {
                     return addAtPos(queryString, `, ${appendString} `, statementPos);
                 } else {
@@ -272,27 +286,20 @@ export default class Model {
      * @param {object} attributes An object with the attribute name as the key and it's value as the new value, e.g: {name: 'John', password: 'secret'}
      * @param {function} callback Function that receivers the result as an object parameter after it has been processed
      */
-     create(attributes) {
+    create(attributes) {
         const names = [];
         const values = [];
-        for(const name in attributes) {
+        for (const name in attributes) {
             names.push(name);
             values.push(attributes[name]);
         }
-        
+
         // Build sql query
         const query = `INSERT INTO ${this.table}(${names.join(', ')}) VALUES (${values.map((val) => this.#createDataID(val)).join(', ')})`;
         this.#runQuery("run", query);
     }
 
 
-
-
-    /**
-     * Attempt executing database query request.
-     * @param {*} func 
-     */
-    
     /**
      * Connect to the database, run a query and callback it's results.
      * @param {string} functionName This should be 'get' or 'run', depending on what function has called it
@@ -313,16 +320,16 @@ export default class Model {
         try {
             // Replace all dataID's in query  with (?) and create an array in correct order to avoid SQL injections.
             let values = [];
-            while(query.indexOf('"') != -1) {
+            while (query.indexOf('"') != -1) {
                 const firstPos = query.indexOf('"');
                 const secondPos = query.indexOf('"', firstPos + 1);
 
                 if (secondPos === -1) { break; }
 
-                let dataID = query.substr(firstPos+1, secondPos-firstPos-1);
+                let dataID = query.substr(firstPos + 1, secondPos - firstPos - 1);
                 let data = this.input_data[dataID];
 
-                query = replaceAtPos(query, `?`, firstPos, secondPos-firstPos + 1);
+                query = replaceAtPos(query, `?`, firstPos, secondPos - firstPos + 1);
 
                 values.push(data);
             }
@@ -332,24 +339,24 @@ export default class Model {
             if (functionName == "get") {
                 db.get(query, values, (err, rows) => {
                     if (err) { throw err; }
-                    if (callback) {callback(rows); }
+                    if (callback) { callback(rows); }
                 });
             } else if (functionName == "run") {
                 db.run(query, values, (err, rows) => {
                     if (err) { throw err; }
-                    if (callback) {callback(rows); }             
+                    if (callback) { callback(rows); }
                 });
             } else if (functionName == "all") {
                 db.all(query, values, (err, rows) => {
                     if (err) { throw err; }
-                    if (callback) {callback(rows); }           
+                    if (callback) { callback(rows); }
                 });
             }
 
         } finally {
             db.close((err) => {
                 if (err) { return console.error(err.message); }
-            });  
+            });
         }
     }
 }

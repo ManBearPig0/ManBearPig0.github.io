@@ -55,7 +55,6 @@ app.use(quizRoutes);
 
 // If no route found, return 404 error
 app.use((req, res, next) => {
-    console.log("Errors!?!?");
     res.status(404).render('errors/404', { path: req.path });
 });
 

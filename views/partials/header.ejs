@@ -17,22 +17,24 @@
             <%= page_name %>
         </h1>
         <h2>
-            <% if (logged_in) { %>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <small>Logged in as:</small> <span style="font-weight: bold;"> <%= auth_user %> </span>
+            <% if (path !== "/login") { %>
+                <% if (logged_in) { %>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <small>Logged in as:</small> <span style="font-weight: bold;"> <%= auth_user %> </span>
+                        </div>
+                        <div class="col-12 text-center">
+                            <a class="btn btn-sm btn-outline-red" href="/logout">Logout</a>
+                        </div>
                     </div>
-                    <div class="col-12 text-center">
-                        <a class="btn btn-sm btn-outline-red"  href="/logout">Logout</a>
-                    </div>
-                </div>
-            <% } else { %>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <a class="btn btn-outline-red"  href="/login">Login</a>
-                    </div>
-                </div>
-            <% } %>
+                    <% } else { %>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <a class="btn btn-outline-red" href="/login">Login</a>
+                            </div>
+                        </div>
+                        <% } %>
+                            <% } %>
         </h2>
     </div>
 </header>
