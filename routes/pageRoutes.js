@@ -1,4 +1,7 @@
 import express from 'express';
+import AnswerModel from '../models/answer.js';
+import QuizModel from '../models/quiz.js';
+
 
 const router = express.Router();
 
@@ -46,14 +49,31 @@ router.get('/login', (req, res, next) => {
     res.render("login", { path: req.path, ...errored_fields, loggedIn: req.session.loggedIn, user: req.session.user });
 });
 
+router.get('/register', (req, res, next) => {
+
+    let errored_fields = req.query;
+
+    res.render("register", { path: req.path, ...errored_fields, loggedIn: req.session.loggedIn, user: req.session.user });
+});
+
 router.get('/profile', (req, res, next) => {
 
     if (!req.session.loggedIn) {
         res.redirect('/');
     } else {
-        let errored_fields = req.query;
 
-        res.render("profile", { path: req.path, ...errored_fields, loggedIn: req.session.loggedIn, user: req.session.user });
+        new QuizModel().get(processQuiz);
+
+        function processQuiz(quizes) {
+            new AnswerModel().where(['user_id', req.session.user.id]).get(processAnswer);
+            function processAnswer(answers) {
+                let errored_fields = req.query;
+
+                console.log(quizes);
+        
+                res.render("profile", { path: req.path, ...errored_fields, loggedIn: req.session.loggedIn, user: req.session.user, quizes: quizes, answers: answers});
+            }
+        }
     }
 });
 

@@ -42,6 +42,28 @@
             </div>
         </form>
 
+        
 
+        
+        <% let correct_answers = 0;%>
+        <% let total_answers = 0;%>
+
+        <% for(let quiz in quizes) { %>
+        <%     let countCorrect = answers.filter((answer) => (answer.quiz_id == quiz && answer.correct)).length; console.log(quiz);%>
+        <%     correct_answers += countCorrect; %>
+        <%     total_answers += answers.filter((answer) => answer.quiz_id == quiz).length;%>
+        
+            <div>
+                <h2><%= quizes[quiz].title %></h2>
+                <p>Ammount correct: <%=  %></p>
+            </div>
+        <% } %>
+
+
+        <div>
+            <h2>Percentage correct:</h2>
+            <p><%= (correct_answers / total_answers) * 100%>%</p>
+        </div>
+        
 
     </main>

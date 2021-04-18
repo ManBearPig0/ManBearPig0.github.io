@@ -236,3 +236,16 @@ req.onreadystatechange = function(){
     }
 }
 req.send();
+
+
+var req = new XMLHttpRequest();
+req.open("GET", "http://127.0.0.1:3000/currentQuestionCookie", true);
+req.onreadystatechange = function(){
+    if(req.readyState == 4 && req.status == 200){
+        var reaction = JSON.parse(req.responseText);
+        if(reaction.quiz != null){
+            loadQuestion(reaction.quiz, reaction.questionnumber)
+        }
+    }
+}
+req.send()
