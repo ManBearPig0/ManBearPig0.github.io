@@ -2,13 +2,12 @@
 import cors from 'cors';
 import path from 'path';
 import express from 'express';
+import session from 'express-session';
 import ejsextend from 'express-ejs-extend';
 import fs from 'fs';
 import BodyParser from 'body-parser';
-import random from 'random';
-import bcrypt from 'bcrypt';
-
-bcrypt.random();
+import cookieParser from 'cookie-parser';
+import FileStore from 'session-file-store';
 
 import { convertDate } from './helpers/convertDate.js';
 
@@ -17,10 +16,22 @@ import { authRoutes } from './routes/authRoutes.js';
 import { userRoutes } from './routes/userRoutes.js';
 import { quizRoutes } from './routes/quizRoutes.js';
 
+/** Config */
+const {
+    
+    PORT = 3000,
+    NODE_ENV = 'development',
+    URL_BASE = "127.0.0.1",
+    HTTPS = false,
+    SESS_SECRET = "Sneaky keyboard cat",
+    SESS_NAME = 'sid',
+    SESS_LIFETIME = 60*60*2,
+} = process.env;
+
+const IN_PROD = (NODE_ENV === 'production' && HTTPS);
 
 /** Initialize with Express*/
 const app = express()
-const port = 3000
 let __dirname = path.resolve(path.dirname(''));
 
 //  NOTE: What does cors do?
@@ -30,17 +41,24 @@ app.engine('ejs', ejsextend);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Cookie
+let SesFileStore = FileStore(session);
+app.use(cookieParser());
+
 // Initalize Session
-app.set('trust proxy', 1) // trust first proxy
+// app.set('trust proxy', 1) // trust first proxy
 app.use(session({
-    genid: function(req) {
-        return genuuid() // use UUIDs for session IDs
-    },
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true },
-  secret: 'sneaky keyboard cat', // NOTE: GET CONFIG DATA
-}))
+    name: SESS_NAME,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+        secure: IN_PROD, 
+        sameSite: true,
+        maxAge: SESS_LIFETIME 
+        },
+    secret: SESS_SECRET, // NOTE: GET CONFIG DATA
+    store: new SesFileStore()
+}));
 
 
 /** Set Middelware */
@@ -65,18 +83,25 @@ app.use((req, res, next) => {
     next();
 });
 
-// Check if logged in.
+// // Check if logged in.
 app.use((req, res, next) => {
-    if (!req.session.loggedIn) {
+
+    console.log(req.session, req.sessionID);
+
+
+
+    if (typeof req.session.loggedIn === 'undefined') {
         req.session.loggedIn = false;
     } 
-    
-    if (!req.session.user || !req.session.loggedIn) {
+
+    if (typeof req.session.user === 'undefined' || typeof req.session.loggedIn === 'undefined') {
         req.session.user = {
             name: "",
             id: null,
         };
     }
+
+    next();
 });
 
 
@@ -95,4 +120,4 @@ app.use((req, res, next) => {
 
 
 /** Start Application */
-app.listen(port, () => console.log(`Application listening on virtual host: http://127.0.0.1:${port}/`));
+app.listen(PORT, () => console.log(`Application listening on virtual host: http://${URL_BASE}:${PORT}/`));

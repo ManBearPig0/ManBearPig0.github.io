@@ -15,10 +15,10 @@
         <img src="../../assets/1200px-Laravel-white.png" alt="Laravel Logo">
         <h1><%= page_name %></h1>
     </div>
-    <div id="login">
+    <div id="login" class="mr-4">
         <% if (path !== "/login") { %>
-            <% if (logged_in) { %>
-                <p>Logged in as: <span><%= auth_user %></span></p>
+            <% if (loggedIn) { %>
+                <p>Logged in as: <span><%= user.name %></span></p>
                 <a class="btn btn-sm btn-outline-red" href="/logout">Logout</a>
             <% } else { %>
                 <a class="btn btn-outline-red" href="/login">Login</a>

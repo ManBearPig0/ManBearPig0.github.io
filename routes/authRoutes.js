@@ -10,8 +10,11 @@ import querystring from 'querystring';
 const router = express.Router();
 
 router.get('/logout', (req, res, next) => {
-    // Log current user out.
 
+    // Log current user out.
+    req.session.destroy(function(err) {
+        // cannot access session here
+    });
 
     // Redirect to login
     res.redirect("/login");
@@ -48,19 +51,18 @@ router.post('/login', (req, res, next) => {
 
         async function verifyUser(user) {
             // Check if user exists
-            if (user) {
-                if (await bcrypt.compare(value.password, user.password))  {
-                    // Validated user! Login allowed
-                    console.log("Success!");
-                    req.session.loggedIn = true;
-                    req.session.user = {
-                        name: user.name,
-                        id: user.id
-                    };
-                }
-            } 
-
-            res.redirect('/login?' + querystring.stringify({username: `Unknown username or password`}));
+            if (user && await bcrypt.compare(value.password, user.password)) {
+                // Validated user! Login allowed
+                // console.log("Success!");
+                req.session.loggedIn = true;
+                req.session.user = {
+                    name: user.name,
+                    id: user.id
+                };
+                res.redirect('/');
+            }  else {
+                res.redirect('/login?' + querystring.stringify({username: `Unknown username or password`}));
+            }
         }
 
         new UserModel().where(['name', value.username]).first(verifyUser);
@@ -101,9 +103,7 @@ router.post('/register', async (req, res, next) => {
             field_errors[field.path[0]] = parseMessage(field.message);
         });
 
-        console.log(field_errors);
-
-
+        res.redirect('/register?' + querystring.stringify(field_errors));
     } else {
         // on success create user with hashed password
         const salt = await bcrypt.genSalt();
@@ -113,8 +113,6 @@ router.post('/register', async (req, res, next) => {
 
         res.redirect('/login');
     }
-
-    res.redirect('/register?' + querystring.stringify(field_errors));
 });
 
 
